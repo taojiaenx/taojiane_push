@@ -16,7 +16,6 @@ public class DateTimeUtil {
 	} 
     
 	/**
-	 * 
 	 * 当前时间
 	 * @param pattern
 	 * @return
