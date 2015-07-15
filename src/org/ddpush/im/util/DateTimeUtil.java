@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class DateTimeUtil {
 	
+	
 	public static String DEFAULTFORMAT = "yyyy-MM-dd HH:mm:ss";
 	
 	public static String getCurDateTime() {
