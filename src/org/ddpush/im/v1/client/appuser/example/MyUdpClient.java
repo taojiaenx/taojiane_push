@@ -19,6 +19,8 @@ limitations under the License.
 */
 package org.ddpush.im.v1.client.appuser.example;
 
+import java.util.concurrent.TimeUnit;
+
 import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.client.appuser.Message;
 import org.ddpush.im.v1.client.appuser.UDPClientBase;
@@ -58,10 +60,20 @@ public class MyUdpClient extends UDPClientBase {
 	
 	public static void main(String[] args){
 		try{
+			final String ip = "10.0.0.65";
+			final int port = 9966;
+			final int pushPort = 9999;
 			byte[] uuid = StringUtil.md5Byte("0");
-			MyUdpClient myUdpClient = new MyUdpClient(uuid,1,"192.168.2.111",9966);
+			MyUdpClient myUdpClient = new MyUdpClient(uuid,3,ip,port);
 			myUdpClient.setHeartbeatInterval(50);
 			myUdpClient.start();
+
+			final byte[] clientUUID = StringUtil.md5Byte("陶加恩");
+			for (int i = 0; i < 10; ++i) {
+				new Thread(new send0x20Task(ip,pushPort,clientUUID, ("test " + i).getBytes("utf-8"))).start();
+				System.out.println("test " + i);
+				TimeUnit.SECONDS.sleep(1);
+			}
 			synchronized(myUdpClient){
 				myUdpClient.wait();
 			}
