@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/netty-all-4.0.27.Final.jar" sourcepath="D:/netty/netty-4.0.27.Final/netty-4.0.27.Final/jar/all-in-one/netty-all-4.0.27.Final.jar">
+	<classpathentry kind="lib" path="lib/netty-all-4.0.27.Final.jar" sourcepath="D:/netty/netty-4.0.27.Final/netty-4.0.27.Final/jar/all-in-one/netty-all-4.0.27.Final-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/D:/netty/netty-4.0.27.Final/netty-4.0.27.Final/javadoc/netty-all-4.0.27.Final-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/E:/netty/netty-4.0.27.Final/netty-4.0.27.Final/javadoc/netty-all-4.0.27.Final-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
