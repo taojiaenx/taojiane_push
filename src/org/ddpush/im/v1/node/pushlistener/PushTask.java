@@ -65,7 +65,11 @@ public class PushTask implements Runnable {
         };
         listener.addEvent(r);
     }
-	
+	/**
+	 * 现在buffer总存储了读信息的处理结果
+	 * @param key
+	 * @param needWrite
+	 */
 	private void registerForWrite(final SelectionKey key, final boolean needWrite) {
 		if(key == null || key.isValid() == false){
 			return;
@@ -239,7 +243,7 @@ public class PushTask implements Runnable {
 		//this.writePending = false;//important
 		PushMessage pm = new PushMessage(data);
 		NodeStatus nodeStat = NodeStatus.getInstance();
-		String uuid = pm.getUuidHexString(); 
+		String uuid = pm.getUuidHexString();
 		ClientStatMachine csm = nodeStat.getClientStat(uuid);
 		if(csm == null){//
 			csm = ClientStatMachine.newByPushReq(pm);

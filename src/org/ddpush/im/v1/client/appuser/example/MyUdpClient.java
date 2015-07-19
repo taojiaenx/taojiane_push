@@ -68,12 +68,6 @@ public class MyUdpClient extends UDPClientBase {
 			myUdpClient.setHeartbeatInterval(50);
 			myUdpClient.start();
 
-			final byte[] clientUUID = StringUtil.md5Byte("陶加恩");
-			for (int i = 0; i < 10; ++i) {
-				new Thread(new send0x20Task(ip,pushPort,clientUUID, ("test " + i).getBytes("utf-8"))).start();
-				System.out.println("test " + i);
-				TimeUnit.SECONDS.sleep(1);
-			}
 			synchronized(myUdpClient){
 				myUdpClient.wait();
 			}
