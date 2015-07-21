@@ -20,6 +20,7 @@ limitations under the License.
 package org.ddpush.im.v1.node.pushlistener;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
@@ -36,6 +37,7 @@ import java.nio.channels.CancelledKeyException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -62,7 +64,6 @@ public class NIOPushListener implements Runnable {
 	EventLoopGroup workerGroup = null;
 	private Selector selector = null;
 
-	private ExecutorService executor;
 
 	private int minThreads = PropertyUtil
 			.getPropertyInt("PUSH_LISTENER_MIN_THREAD");
@@ -82,7 +83,7 @@ public class NIOPushListener implements Runnable {
 		workerGroup = new NioEventLoopGroup();
 		serverBootstarp = new ServerBootstrap().group(bossGroup, workerGroup)
 				.channel(NioServerSocketChannel.class)
-				.option(ChannelOption.SO_BACKLOG, BACK_LOG)
+				.option(ChannelOption.SO_TIMEOUT, sockTimout)
 				.childHandler(new ChannelInitializer<SocketChannel>() {
 
 					@Override
@@ -106,16 +107,7 @@ public class NIOPushListener implements Runnable {
 	}
 
 	public void addEvent(Runnable event) {
-		if (selector == null) {
-			return;
-		}
-
-		events.add(event);
-
-		if (stoped == false && selector != null) {
-			selector.wakeup();
-		}
-
+		workerGroup.execute(event);
 	}
 
 	@Override
@@ -130,7 +122,6 @@ public class NIOPushListener implements Runnable {
 
 		while (!stoped && selector != null) {
 			try {
-				handleEvent();
 				handleTimeout();
 				handleChannel();
 			} catch (java.nio.channels.ClosedSelectorException cse) {

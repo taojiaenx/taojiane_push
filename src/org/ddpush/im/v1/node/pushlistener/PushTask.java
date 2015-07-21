@@ -19,6 +19,8 @@ limitations under the License.
 */
 package org.ddpush.im.v1.node.pushlistener;
 
+import io.netty.channel.ChannelHandlerContext;
+
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
@@ -31,7 +33,7 @@ import org.ddpush.im.v1.node.PushMessage;
 
 public class PushTask implements Runnable {
 	
-	private NIOPushListener listener;
+	private NIOPushListener listener = null;
 	private SocketChannel channel;
 	private SelectionKey key;
 	private long lastActive;
@@ -39,12 +41,14 @@ public class PushTask implements Runnable {
 	
 	private boolean writePending = false;
 	private int maxContentLength;
+	private final ChannelHandlerContext ctx;
 	private byte[] bufferArray;
 	private ByteBuffer buffer;
 	
-	public PushTask(NIOPushListener listener, SocketChannel channel){
+	
+	public  PushTask(ChannelHandlerContext ctx){
 		this.listener = listener;
-		this.channel = channel;
+		this.ctx = ctx;
 		maxContentLength = PropertyUtil.getPropertyInt("PUSH_MSG_MAX_CONTENT_LEN");
 		bufferArray = new byte[Constant.PUSH_MSG_HEADER_LEN+maxContentLength];
 		buffer = ByteBuffer.wrap(bufferArray);
@@ -52,9 +56,6 @@ public class PushTask implements Runnable {
 		lastActive = System.currentTimeMillis();
 	}
 	
-	public void setKey(SelectionKey key){
-		this.key = key;
-	}
 	
 	private void cancelKey(final SelectionKey key) {
 
