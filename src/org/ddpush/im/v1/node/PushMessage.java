@@ -70,6 +70,7 @@ public final class PushMessage{
 		if(getVersionNum() != Constant.VERSION_NUM){
 			return false;
 		}
+		
 
 		int cmd = getCmd();
 		if(cmd != ClientStatMachine.CMD_0x10

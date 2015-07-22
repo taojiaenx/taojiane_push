@@ -93,6 +93,7 @@ class ProcessDataCallable implements Callable<Integer>{
 				;
 			}
 		} catch(Throwable e){
+			e.printStackTrace();
 			throw e;
 		}finally {
 			pm = null;

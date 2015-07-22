@@ -24,18 +24,16 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 			maxThreads, 30, TimeUnit.SECONDS,
 			new LinkedBlockingQueue<Runnable>());
 
-
 	@Override
 	protected void channelRead0(final ChannelHandlerContext ctx, ByteBuf msg)
 			throws Exception {
-		try {
-			final FutureTask<Integer> f = new PushTask(ctx, msg.array());
-			executor.execute(f);
-			ctx.executor().schedule(new TaskTimeoutSolver(ctx, f),
-					NettyPushListener.sockTimout, TimeUnit.MILLISECONDS);
-		} finally {
-			msg.release();
-		}
+		byte[] data = new byte[msg.readableBytes()];
+		final int readerIndex = msg.readerIndex();
+		msg.getBytes(readerIndex, data);
+		final FutureTask<Integer> f = new PushTask(ctx, data);
+		executor.execute(f);
+		ctx.executor().schedule(new TaskTimeoutSolver(ctx, f),
+				NettyPushListener.sockTimout, TimeUnit.MILLISECONDS);
 	}
 
 }
