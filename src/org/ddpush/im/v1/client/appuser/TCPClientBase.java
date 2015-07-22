@@ -19,15 +19,11 @@ limitations under the License.
 */
 package org.ddpush.im.v1.client.appuser;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
-
-import org.ddpush.im.v1.client.appuser.UDPClientBase.Worker;
 
 public abstract class TCPClientBase implements Runnable {
 	protected static int connectTimeout = 10;

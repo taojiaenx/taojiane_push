@@ -16,246 +16,88 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-*/
+ */
 package org.ddpush.im.v1.node.pushlistener;
 
 import io.netty.channel.ChannelHandlerContext;
 
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
-import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.ClientStatMachine;
-import org.ddpush.im.v1.node.Constant;
 import org.ddpush.im.v1.node.NodeStatus;
 import org.ddpush.im.v1.node.PushMessage;
 
-public class PushTask implements Runnable {
-	
-	private NIOPushListener listener = null;
-	private SocketChannel channel;
-	private SelectionKey key;
-	private long lastActive;
-	private boolean isCancel = false;
-	
-	private boolean writePending = false;
-	private int maxContentLength;
-	private final ChannelHandlerContext ctx;
-	private byte[] bufferArray;
-	private ByteBuffer buffer;
-	
-	
-	public  PushTask(ChannelHandlerContext ctx){
-		this.listener = listener;
-		this.ctx = ctx;
-		maxContentLength = PropertyUtil.getPropertyInt("PUSH_MSG_MAX_CONTENT_LEN");
-		bufferArray = new byte[Constant.PUSH_MSG_HEADER_LEN+maxContentLength];
-		buffer = ByteBuffer.wrap(bufferArray);
-		buffer.limit(Constant.PUSH_MSG_HEADER_LEN);
-		lastActive = System.currentTimeMillis();
-	}
-	
-	
-	private void cancelKey(final SelectionKey key) {
+/**
+ * 修改过的pushTask
+ * 
+ * @author taojiaen
+ *
+ */
 
-        Runnable r = new Runnable() {
-            public void run() {
-            	listener.cancelKey(key);
-            }
-        };
-        listener.addEvent(r);
-    }
-	/**
-	 * 现在buffer总存储了读信息的处理结果
-	 * @param key
-	 * @param needWrite
-	 */
-	private void registerForWrite(final SelectionKey key, final boolean needWrite) {
-		if(key == null || key.isValid() == false){
-			return;
+public class PushTask extends FutureTask<Integer> {
+	private final ChannelHandlerContext ctx;
+	public  PushTask(ChannelHandlerContext ctx, byte[] data) {
+		super(new ProcessDataCallable(ctx, data));
+		this.ctx = ctx;
+	}
+
+
+	@Override
+	protected void done() {
+		byte res = 0;
+		try {
+			get();
+		} catch (Exception e) {
+			res = 1;
+		} catch (Throwable t) {
+			res = -1;
 		}
-		
-		if(needWrite == true){
-			if((key.interestOps() & SelectionKey.OP_WRITE) > 0){
-				return;
-			}
-		}else{
-			if((key.interestOps() & SelectionKey.OP_WRITE) == 0){
-				return;
-			}
-		}
-		
-		Runnable r = new Runnable() {
-            public void run() {
-            	if(key == null || !key.isValid()){
-            		return;
-            	}
-            	key.selector().wakeup();
-            	if(needWrite == true){
-            		key.interestOps(key.interestOps()  & (~SelectionKey.OP_READ) | SelectionKey.OP_WRITE);
-            	}else{
-            		key.interestOps(key.interestOps() & (~SelectionKey.OP_WRITE) | SelectionKey.OP_READ);
-            	}
-            }
-        };
-        listener.addEvent(r);
-        try{
-        	key.selector().wakeup();
-        }catch(Exception e){
-        	e.printStackTrace();
-        }
+		ctx.writeAndFlush(res);
+	}
+}
+
+class ProcessDataCallable implements Callable<Integer>{
+	
+	private final ChannelHandlerContext ctx;
+	private final byte[] data;
+	public ProcessDataCallable(final ChannelHandlerContext ctx, final byte[] data){
+		this.ctx = ctx;
+		this.data = data;
 	}
 
 	@Override
-	public synchronized void run() {
-		if(listener == null || channel == null){
-			return;
-		}
-		
-		if(key == null){
-			return;
-		}
-		if(isCancel == true){
-			return;
-		}
-		try{
-			if(writePending == false){
-				
-				if(key.isReadable()){
-					//read pkg
-					readReq();
-				}else{
-					// do nothing
+	public Integer call() throws Exception {
+		processReq();
+		return 0;
+	}
+	
+	private void processReq() throws Exception {
+		PushMessage pm = null;
+		try {
+			pm = new PushMessage(data);
+			NodeStatus nodeStat = NodeStatus.getInstance();
+			String uuid = pm.getUuidHexString();
+			ClientStatMachine csm = nodeStat.getClientStat(uuid);
+			if (csm == null) {//
+				csm = ClientStatMachine.newByPushReq(pm);
+				if (csm == null) {
+					throw new Exception("can not new state machine");
 				}
-			}else{//has package
-				
-				// try send pkg and place hasPkg=false
-				//
-				//register write ops if not enough buffer
-				//if(key.isWritable()){
-					writeRes();
-				//}
-			}
-		}catch(Exception e){
-			cancelKey(key);
-			isCancel = true;
-		}catch(Throwable t){
-			cancelKey(key);
-			isCancel = true;
-		}
-		
-		key = null;
-
-	}
-	
-	private void readReq() throws Exception{
-		if(this.writePending == true){
-			return;
-		}
-		
-		if(channel.read(buffer) < 0){
-			throw new Exception("end of stream");
-		}
-		if(this.calcWritePending() == false){
-			return;
-		}else{
-			byte res = 0;
-			try{
-				processReq();
-			}catch(Exception e){
-				res = 1;
-			}
-			catch(Throwable t){
-				res = -1;
-			}
-			
-			buffer.clear();
-			buffer.limit(1);
-			buffer.put(res);
-			buffer.flip();
-			
-			registerForWrite(key, true);
-			
-		}
-			
-
-		lastActive = System.currentTimeMillis();
-	}
-	
-	private void writeRes() throws Exception{
-		if(buffer.hasRemaining()){
-			channel.write(buffer);
-		}else{
-			buffer.clear();
-			buffer.limit(Constant.PUSH_MSG_HEADER_LEN);
-			this.writePending = false;
-			registerForWrite(key, false);
-		}
-		lastActive = System.currentTimeMillis();
-	}
-	
-	public long getLastActive(){
-		return lastActive;
-	}
-	
-	public boolean isWritePending(){
-		return writePending;
-	}
-	
-	private synchronized boolean calcWritePending() throws Exception{
-		if(this.writePending == false){
-			if(buffer.position() < Constant.PUSH_MSG_HEADER_LEN){
-				this.writePending = false;
-			}else{
-				int bodyLen = (int)ByteBuffer.wrap(bufferArray, Constant.PUSH_MSG_HEADER_LEN - 2, 2).getChar();
-				if(bodyLen > maxContentLength){
-					throw new java.lang.IllegalArgumentException("content length "+bodyLen+" larger than max "+maxContentLength);
+				nodeStat.putClientStat(uuid, csm);
+			} else {
+				try {
+					csm.onPushMessage(pm);
+				} catch (Exception e) {
 				}
-				if(bodyLen == 0){
-					this.writePending = true;
-				}else{
-					if(buffer.limit() != Constant.PUSH_MSG_HEADER_LEN + bodyLen){
-						buffer.limit(Constant.PUSH_MSG_HEADER_LEN + bodyLen);
-					}else{
-						if(buffer.position() == Constant.PUSH_MSG_HEADER_LEN + bodyLen){
-							this.writePending = true;
-						}
-					}
-				}
+				;
 			}
-		}else{//this.writePending == true
-			if(buffer.hasRemaining()){
-				this.writePending = true;
-			}else{
-				this.writePending = false;
-			}
+		} catch(Throwable e){
+			throw e;
+		}finally {
+			pm = null;
 		}
 
-		return this.writePending;
 	}
 	
-	private void processReq() throws Exception{
-		//check and put data into nodeStat
-		buffer.flip();
-		byte[] data = new byte[buffer.limit()];
-		System.arraycopy(bufferArray, 0, data, 0, buffer.limit());
-		buffer.clear();
-		//this.writePending = false;//important
-		PushMessage pm = new PushMessage(data);
-		NodeStatus nodeStat = NodeStatus.getInstance();
-		String uuid = pm.getUuidHexString();
-		ClientStatMachine csm = nodeStat.getClientStat(uuid);
-		if(csm == null){//
-			csm = ClientStatMachine.newByPushReq(pm);
-			if(csm == null){
-				throw new Exception("can not new state machine");
-			}
-			nodeStat.putClientStat(uuid, csm);
-		}else{
-			try{csm.onPushMessage(pm);}catch(Exception e){};
-		}
-
-	}
-
 }

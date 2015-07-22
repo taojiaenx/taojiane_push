@@ -1,6 +1,5 @@
 package org.ddpush.im.v1.node.udpconnector;
 
-import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
@@ -8,9 +7,6 @@ import java.nio.channels.DatagramChannel;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-
-import org.ddpush.im.util.DateTimeUtil;
-import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.node.ClientMessage;
 
 public class Receiver implements Runnable{

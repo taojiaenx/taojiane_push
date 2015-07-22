@@ -21,8 +21,6 @@ package org.ddpush.im.v1.node;
 
 import java.util.ArrayList;
 
-import org.ddpush.im.v1.node.ClientMessage;
-import org.ddpush.im.v1.node.ServerMessage;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
 
 public class Messenger implements Runnable {

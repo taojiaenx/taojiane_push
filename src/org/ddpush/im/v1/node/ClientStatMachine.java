@@ -25,9 +25,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import org.ddpush.im.util.PropertyUtil;
-import org.ddpush.im.v1.node.ClientMessage;
-import org.ddpush.im.v1.node.Constant;
-import org.ddpush.im.v1.node.ServerMessage;
 import org.ddpush.im.v1.node.tcpconnector.MessengerTask;
 /*
  * uuid终端状态机

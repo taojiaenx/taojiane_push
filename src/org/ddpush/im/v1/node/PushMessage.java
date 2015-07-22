@@ -22,7 +22,6 @@ package org.ddpush.im.v1.node;
 import java.nio.ByteBuffer;
 
 import org.ddpush.im.util.StringUtil;
-import org.ddpush.im.v1.node.ClientStatMachine;
 
 public final class PushMessage{
 	

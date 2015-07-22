@@ -19,8 +19,6 @@ limitations under the License.
 */
 package org.ddpush.im.v1.client.appuser.example;
 
-import java.util.concurrent.TimeUnit;
-
 import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.client.appuser.Message;
 import org.ddpush.im.v1.client.appuser.UDPClientBase;

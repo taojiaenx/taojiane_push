@@ -24,7 +24,7 @@ import java.util.Date;
 
 import org.ddpush.im.util.DateTimeUtil;
 import org.ddpush.im.util.PropertyUtil;
-import org.ddpush.im.v1.node.pushlistener.NIOPushListener;
+import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.ddpush.im.v1.node.tcpconnector.NIOTcpConnector;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
 
@@ -52,7 +52,7 @@ public class IMServer {
 	private IMServerConsole console = null;
 	
 	private Thread pushThread = null;
-	private NIOPushListener pushListener = null;
+	private NettyPushListener pushListener = null;
 	
 	private long startTime;
 	
@@ -125,7 +125,7 @@ public class IMServer {
 	}
 	
 	public void initPushListener() throws Exception{
-		pushListener = new NIOPushListener();
+		pushListener = new NettyPushListener();
 		pushThread =  new Thread(pushListener,"IMServer-push-listener");
 		pushThread.start();
 	}
