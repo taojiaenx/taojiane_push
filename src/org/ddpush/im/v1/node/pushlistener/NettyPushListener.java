@@ -49,11 +49,6 @@ public class NettyPushListener implements Runnable {
 	EventLoopGroup bossGroup = null;
 	EventLoopGroup workerGroup = null;
 
-	private int minThreads = PropertyUtil
-			.getPropertyInt("PUSH_LISTENER_MIN_THREAD");
-	private int maxThreads = PropertyUtil
-			.getPropertyInt("PUSH_LISTENER_MAX_THREAD");
-
 	protected ConcurrentLinkedQueue<Runnable> events = new ConcurrentLinkedQueue<Runnable>();
 
 	public void init() throws Exception {
