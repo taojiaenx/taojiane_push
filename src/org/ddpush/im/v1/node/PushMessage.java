@@ -24,6 +24,8 @@ import java.nio.ByteBuffer;
 import org.ddpush.im.util.StringUtil;
 
 public final class PushMessage{
+	public static final int DATA_LENGTH_OFFET = 19;
+	public static final int DATA_LENGTH_LENGTH = 2;
 	
 	protected byte[] data;
 	

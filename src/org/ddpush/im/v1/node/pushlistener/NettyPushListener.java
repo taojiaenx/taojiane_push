@@ -43,6 +43,8 @@ public class NettyPushListener implements Runnable {
 			.getPropertyInt("PUSH_LISTENER_SOCKET_TIMEOUT");
 	static int port = PropertyUtil.getPropertyInt("PUSH_LISTENER_PORT");
 	static int BACK_LOG = PropertyUtil.getPropertyInt("BACK_LOG");
+	
+	private int minThreads = PropertyUtil.getPropertyInt("PUSH_LISTENER_MIN_THREAD");
 
 	ServerSocketChannel channel = null;
 	ServerBootstrap serverBootstarp = null;
@@ -58,7 +60,7 @@ public class NettyPushListener implements Runnable {
 
 	public void initChannel() throws Exception {
 		bossGroup = new NioEventLoopGroup();
-		workerGroup = new NioEventLoopGroup();
+		workerGroup = new NioEventLoopGroup(minThreads);
 		serverBootstarp = new ServerBootstrap().group(bossGroup, workerGroup)
 				.channel(NioServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
@@ -67,6 +69,7 @@ public class NettyPushListener implements Runnable {
 					@Override
 					protected void initChannel(SocketChannel ch)
 							throws Exception {
+						ch.pipeline().addLast("PushMessageDecoder-" + ch.hashCode(), new PushMessageDecoder());
 						ch.pipeline().addLast(
 								"processPushTask-" + ch.hashCode(),
 								new PushTaskHandler());
@@ -97,7 +100,7 @@ public class NettyPushListener implements Runnable {
 	}
 
 	private void stopExecutor() {
-		PushTaskHandler.executor.shutdownNow();
+
 	}
 
 	private void closeSelector() {

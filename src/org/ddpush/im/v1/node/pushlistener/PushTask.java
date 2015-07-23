@@ -19,6 +19,7 @@ limitations under the License.
  */
 package org.ddpush.im.v1.node.pushlistener;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.concurrent.Callable;
@@ -37,9 +38,11 @@ import org.ddpush.im.v1.node.PushMessage;
 
 public class PushTask extends FutureTask<Integer> {
 	private final ChannelHandlerContext ctx;
-	public  PushTask(ChannelHandlerContext ctx, byte[] data) {
-		super(new ProcessDataCallable(ctx, data));
+	private final ByteBuf data;
+	public  PushTask(ChannelHandlerContext ctx, ByteBuf data) {
+		super(new ProcessDataCallable(data));
 		this.ctx = ctx;
+		this.data = data;
 	}
 
 
@@ -52,6 +55,10 @@ public class PushTask extends FutureTask<Integer> {
 			res = 1;
 		} catch (Throwable t) {
 			res = -1;
+		}finally {
+			if (data != null) {
+				data.release();
+			}
 		}
 		ctx.writeAndFlush(res);
 	}
@@ -59,10 +66,8 @@ public class PushTask extends FutureTask<Integer> {
 
 class ProcessDataCallable implements Callable<Integer>{
 	
-	private final ChannelHandlerContext ctx;
-	private final byte[] data;
-	public ProcessDataCallable(final ChannelHandlerContext ctx, final byte[] data){
-		this.ctx = ctx;
+	private final ByteBuf data;
+	public ProcessDataCallable(final ByteBuf data){
 		this.data = data;
 	}
 
@@ -75,7 +80,10 @@ class ProcessDataCallable implements Callable<Integer>{
 	private void processReq() throws Exception {
 		PushMessage pm = null;
 		try {
-			pm = new PushMessage(data);
+			byte[] byteData = new byte[data.readableBytes()];
+			final int readerIndex = data.readerIndex();
+		    data.getBytes(readerIndex, byteData);
+			pm = new PushMessage(byteData);
 			NodeStatus nodeStat = NodeStatus.getInstance();
 			String uuid = pm.getUuidHexString();
 			ClientStatMachine csm = nodeStat.getClientStat(uuid);
@@ -93,7 +101,6 @@ class ProcessDataCallable implements Callable<Integer>{
 				;
 			}
 		} catch(Throwable e){
-			e.printStackTrace();
 			throw e;
 		}finally {
 			pm = null;
