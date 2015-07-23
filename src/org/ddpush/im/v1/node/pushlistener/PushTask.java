@@ -39,12 +39,12 @@ import org.ddpush.im.v1.node.PushMessage;
 public class PushTask extends FutureTask<Integer> {
 	private final ChannelHandlerContext ctx;
 	private final ByteBuf data;
-	public  PushTask(ChannelHandlerContext ctx, ByteBuf data) {
+
+	public PushTask(ChannelHandlerContext ctx, ByteBuf data) {
 		super(new ProcessDataCallable(data));
 		this.ctx = ctx;
 		this.data = data;
 	}
-
 
 	@Override
 	protected void done() {
@@ -55,7 +55,7 @@ public class PushTask extends FutureTask<Integer> {
 			res = 1;
 		} catch (Throwable t) {
 			res = -1;
-		}finally {
+		} finally {
 			if (data != null) {
 				data.release();
 			}
@@ -64,10 +64,11 @@ public class PushTask extends FutureTask<Integer> {
 	}
 }
 
-class ProcessDataCallable implements Callable<Integer>{
-	
+class ProcessDataCallable implements Callable<Integer> {
+
 	private final ByteBuf data;
-	public ProcessDataCallable(final ByteBuf data){
+
+	public ProcessDataCallable(final ByteBuf data) {
 		this.data = data;
 	}
 
@@ -76,13 +77,14 @@ class ProcessDataCallable implements Callable<Integer>{
 		processReq();
 		return 0;
 	}
-	
+
 	private void processReq() throws Exception {
 		PushMessage pm = null;
+		byte[] byteData = null;
 		try {
-			byte[] byteData = new byte[data.readableBytes()];
+			byteData = new byte[data.readableBytes()];
 			final int readerIndex = data.readerIndex();
-		    data.getBytes(readerIndex, byteData);
+			data.getBytes(readerIndex, byteData);
 			pm = new PushMessage(byteData);
 			NodeStatus nodeStat = NodeStatus.getInstance();
 			String uuid = pm.getUuidHexString();
@@ -100,12 +102,13 @@ class ProcessDataCallable implements Callable<Integer>{
 				}
 				;
 			}
-		} catch(Throwable e){
+		} catch (Throwable e) {
 			throw e;
-		}finally {
+		} finally {
 			pm = null;
+			byteData = null;
 		}
 
 	}
-	
+
 }
