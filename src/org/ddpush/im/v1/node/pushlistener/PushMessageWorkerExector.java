@@ -17,86 +17,20 @@ import org.ddpush.im.util.PropertyUtil;
  * @author taojiaen
  *
  */
-public class PushMessageWorkerExector extends AbstractExecutorService {
-	
-	private AbstractExecutorService[] executorServices;
-	private final int workerNum;
-	private final int idmask;
+public class PushMessageWorkerExector  extends ThreadPoolExecutor {
+	private static ExcectorQueuePolicy defaultRejectionHandler = new ExcectorQueuePolicy();
+	private static ExcectorQueueThreadFactory defaultThreadFactory = new ExcectorQueueThreadFactory();
+	private static int MAX_QUEUE_LENGTH = PropertyUtil
+			.getPropertyInt("EXECTOR_QUEUE_LIMIT");
+	private static int minThread = PropertyUtil
+			.getPropertyInt("EXECTOR_CORE_THREAD");
+	private static int maxThread =PropertyUtil
+			.getPropertyInt("EXECTOR_MAX_THREAD");
 
-	public PushMessageWorkerExector(final int workerNum) {
-		executorServices = new AbstractExecutorService[workerNum];
-		for (int i = 0; i < executorServices.length; ++i) {
-			executorServices[i] = new ExcectorQueue();
-		}
-		this.workerNum = workerNum;
-		this.idmask = workerNum - 1;
+	public PushMessageWorkerExector () {
+		super(minThread, maxThread, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(
+				MAX_QUEUE_LENGTH), defaultThreadFactory, defaultRejectionHandler);
 	}
-
-	@Override
-	public void shutdown() {
-		for (final AbstractExecutorService executor : executorServices) {
-			executor.shutdown();
-		}
-	}
-
-	@Override
-	public List<Runnable> shutdownNow() {
-		final List ret = new ArrayList<Runnable>();
-		for (final AbstractExecutorService executor : executorServices) {
-			ret.addAll(executor.shutdownNow());
-		}
-		return ret;
-	}
-
-	@Override
-	public boolean isShutdown() {
-		return false;
-	}
-
-	@Override
-	public boolean isTerminated() {
-		return false;
-	}
-
-	@Override
-	public boolean awaitTermination(long timeout, TimeUnit unit)
-			throws InterruptedException {
-		return false;
-	}
-
-	@Override
-	public void execute(Runnable command) {
-		try {
-			execute(command, getQueueId(command));
-		} catch (Exception ignore) {
-			// do something
-		}
-	}
-	
-	/**
-	 * 
-	 * @param command
-	 * @param attr 配置队列ID的对象
-	 */
-	public void execute(Runnable command, Object attr) {
-			execute(command, getQueueId(attr));
-	}
-
-	/**
-	 * 队列ID生成器
-	 * @param command
-	 * @param queueId
-	 * @throws Exception
-	 */
-	public void execute(final Runnable command, final int queueId){
-		executorServices[queueId & idmask].execute(command);
-	}
-
-	private int getQueueId(final Object command) {
-		return command.hashCode() & idmask;
-	}
-
-
 }
 
 /**
@@ -104,7 +38,7 @@ public class PushMessageWorkerExector extends AbstractExecutorService {
  * @author taojiaen
  *
  */
-class ExcectorQueue extends ThreadPoolExecutor {
+/*class ExcectorQueue extends ThreadPoolExecutor {
 	private static ExcectorQueuePolicy defaultRejectionHandler = new ExcectorQueuePolicy();
 	private static ExcectorQueueThreadFactory defaultThreadFactory = new ExcectorQueueThreadFactory();
 	private static int MAX_QUEUE_LENGTH = PropertyUtil
@@ -114,7 +48,7 @@ class ExcectorQueue extends ThreadPoolExecutor {
 		super(1, 1, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(
 				MAX_QUEUE_LENGTH), defaultThreadFactory, defaultRejectionHandler);
 	}
-}
+}*/
 
 class ExcectorQueueThreadFactory implements ThreadFactory {
 

@@ -27,7 +27,7 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		msg.retain();
 		final FutureTask<Integer> f = new PushTask(ctx, msg);
 	    listener.solveTimeout(new TaskTimeoutSolver(f));
-		listener.execInqueue(f, ctx.channel());
+		listener.execInqueue(f);
 	}
 
 }

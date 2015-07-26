@@ -68,15 +68,15 @@ public class MyUdpClient extends UDPClientBase {
 			myUdpClient.setHeartbeatInterval(50);
 			myUdpClient.start();
 			System.out.println("start");
-			//TimeUnit.SECONDS.sleep(30);
+			TimeUnit.SECONDS.sleep(30);
 			
 			final byte[] clientUUID = StringUtil.md5Byte("0");
-			/*for(int j = 0; j < 10; ++j) {
-             for(int i = 0; i < 10000; ++i) {*/
+			for(int j = 0; j < 10; ++j) {
+             for(int i = 0; i < 10000; ++i) {
 				new Thread(new send0x20Task(ip,pushPort,clientUUID, ("testfewfwefewfewfewfewfewfewfwefwe " + 1).getBytes("utf-8"))).start();
-         /*    }
+             }
              TimeUnit.SECONDS.sleep(60);
-			}*/
+			}
 
 			synchronized(myUdpClient){
 				myUdpClient.wait();
