@@ -38,7 +38,6 @@ class TaskTimeoutSolver implements Runnable {
 	private void solveTimeout() {
 		
 		if (!taskFuture.isDone()) {
-			System.out.println("it work");
 			taskFuture.cancel(false);
 			ctx.close();
 		}
