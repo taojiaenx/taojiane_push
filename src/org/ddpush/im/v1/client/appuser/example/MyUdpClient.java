@@ -71,11 +71,11 @@ public class MyUdpClient extends UDPClientBase {
 			TimeUnit.SECONDS.sleep(30);
 			
 			final byte[] clientUUID = StringUtil.md5Byte("0");
-			for(int j = 0; j < 10; ++j) {
-             for(int i = 0; i < 10000; ++i) {
+			for(int j = 0; j < 30; ++j) {
+             for(int i = 0; i < 5000; ++i) {
 				new Thread(new send0x20Task(ip,pushPort,clientUUID, ("testfewfwefewfewfewfewfewfewfwefwe " + 1).getBytes("utf-8"))).start();
              }
-             TimeUnit.SECONDS.sleep(60);
+             TimeUnit.SECONDS.sleep(10);
 			}
 
 			synchronized(myUdpClient){

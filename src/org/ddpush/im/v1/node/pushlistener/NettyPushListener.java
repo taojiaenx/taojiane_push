@@ -44,7 +44,7 @@ public class NettyPushListener implements Runnable {
 	
 	private int pushListenerWorkerNum = PropertyUtil.getPropertyInt("PUSH_LISTENER_WORKER_THREAD");
 	private int minTimeoutThread = PropertyUtil.getPropertyInt("MIN_TIMEOUT_ThREAD");
-	private int queue_num = QUEUE_MASK + 1;
+//	private int queue_num = QUEUE_MASK + 1;
 	
 
 	ServerSocketChannel channel = null;
