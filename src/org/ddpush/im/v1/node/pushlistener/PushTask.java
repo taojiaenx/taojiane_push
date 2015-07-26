@@ -39,7 +39,7 @@ import org.ddpush.im.v1.node.PushMessage;
  */
 
 public class PushTask extends FutureTask<Integer> {
-	private final ChannelHandlerContext ctx;
+	private ChannelHandlerContext ctx;
 	private final ByteBuf data;
 
 	public PushTask(ChannelHandlerContext ctx, ByteBuf data) {
@@ -68,6 +68,7 @@ public class PushTask extends FutureTask<Integer> {
 			ctx.writeAndFlush(resp);
 		} finally {
 			resp.release();
+			ctx = null;
 		}
 	}
 }
