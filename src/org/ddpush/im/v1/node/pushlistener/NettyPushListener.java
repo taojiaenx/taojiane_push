@@ -108,7 +108,7 @@ public class NettyPushListener implements Runnable {
 		pushMessageWorkerExector = new PushMessageWorkerExector();
 	}
 	
-  public void execInqueue(final Runnable command) {
+  public void execEvent(final Runnable command) {
 	   pushMessageWorkerExector.execute(command);
    }
  /*  public void execInqueue(final Runnable command, final int id) {
