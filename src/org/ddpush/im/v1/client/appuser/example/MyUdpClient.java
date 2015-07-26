@@ -19,6 +19,8 @@ limitations under the License.
 */
 package org.ddpush.im.v1.client.appuser.example;
 
+import java.util.concurrent.TimeUnit;
+
 import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.client.appuser.Message;
 import org.ddpush.im.v1.client.appuser.UDPClientBase;
@@ -46,7 +48,7 @@ public class MyUdpClient extends UDPClientBase {
 		if(message.getData() == null || message.getData().length == 0){
 			System.out.println("msg has no data");
 		}
-		System.out.println(StringUtil.convert(this.uuid)+"---"+StringUtil.convert(message.getData()));
+		//System.out.println(StringUtil.convert(this.uuid)+"---"+StringUtil.convert(message.getData()));
 
 	}
 
@@ -65,10 +67,16 @@ public class MyUdpClient extends UDPClientBase {
 			MyUdpClient myUdpClient = new MyUdpClient(uuid,3,ip,port);
 			myUdpClient.setHeartbeatInterval(50);
 			myUdpClient.start();
+			System.out.println("start");
+			TimeUnit.SECONDS.sleep(30);
 			
-			final byte[] clientUUID = StringUtil.md5Byte("陶加恩");
-
-				new Thread(new send0x20Task(ip,pushPort,clientUUID, ("test " + 1).getBytes("utf-8"))).start();
+			final byte[] clientUUID = StringUtil.md5Byte("0");
+			for(int j = 0; j < 10; ++j) {
+             for(int i = 0; i < 10000; ++i) {
+				new Thread(new send0x20Task(ip,pushPort,clientUUID, ("testfewfwefewfewfewfewfewfewfwefwe " + 1).getBytes("utf-8"))).start();
+             }
+             TimeUnit.SECONDS.sleep(60);
+			}
 
 			synchronized(myUdpClient){
 				myUdpClient.wait();
