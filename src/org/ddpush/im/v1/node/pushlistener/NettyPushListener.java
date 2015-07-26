@@ -45,7 +45,7 @@ public class NettyPushListener implements Runnable {
 			.getPropertyInt("PUSH_LISTENER_SOCKET_TIMEOUT");
 	static int port = PropertyUtil.getPropertyInt("PUSH_LISTENER_PORT");
 	static int BACK_LOG = PropertyUtil.getPropertyInt("BACK_LOG");
-	static int QUEUE_MASK = (1 << PropertyUtil.getPropertyInt("BACK_LOG")) - 1;
+	static int QUEUE_MASK = (1 << PropertyUtil.getPropertyInt("QUEUE_MASK")) - 1;
 	
 	private int pushListenerWorkerNum = PropertyUtil.getPropertyInt("PUSH_LISTENER_WORKER_THREAD");
 	private int minTimeoutThread = PropertyUtil.getPropertyInt("MIN_TIMEOUT_ThREAD");
@@ -56,11 +56,13 @@ public class NettyPushListener implements Runnable {
 	ServerBootstrap serverBootstarp = null;
 	EventLoopGroup bossGroup = null;
 	EventLoopGroup workerGroup = null;
+	PushMessageWorkerExector pushMessageWorkerExector= null;
 
 	protected ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(minTimeoutThread, new TimeOutThreadFactory());
 
 	public void init() throws Exception {
 		System.out.println(QUEUE_MASK);
+		initExecutor();
 		initChannel();
 	}
 
@@ -109,15 +111,20 @@ public class NettyPushListener implements Runnable {
 	 * 处理器
 	 */
 	public void initExecutor() {
-		
+		pushMessageWorkerExector = new PushMessageWorkerExector(queue_num);
 	}
 	
-   public void execInqueue(final int queueID) {
-	   
+   public void execInqueue(final Runnable command, final Object attr) {
+	   pushMessageWorkerExector.execute(command, attr);
    }
-
-	private void stopExecutor() {
-
+   
+   private void stopExecutor(){
+		try{
+			if ( pushMessageWorkerExector != null ) pushMessageWorkerExector.shutdownNow();//ignore left overs
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		pushMessageWorkerExector= null;
 	}
 
 	private void closeSelector() {

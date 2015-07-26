@@ -5,6 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.ThreadFactory;
 
 
 public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
@@ -26,7 +27,7 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		msg.retain();
 		final FutureTask<Integer> f = new PushTask(ctx, msg);
 	    listener.solveTimeout(f);
-		ctx.executor().execute(f);
+		listener.execInqueue(f, ctx.channel());
 	}
 
 }
@@ -53,3 +54,4 @@ class TaskTimeoutSolver implements Runnable {
 		solveTimeout();
 	}
 }
+
