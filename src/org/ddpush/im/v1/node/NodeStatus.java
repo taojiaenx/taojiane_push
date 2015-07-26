@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
 
 import org.ddpush.im.util.StringUtil;
 
@@ -37,6 +38,7 @@ public class NodeStatus {
 	private static ConcurrentHashMap<String, ClientStatMachine> nodeStat;
 	
 	private static final int file_min_bytes_per_object = 77;
+
 	
 	private NodeStatus(){
 		nodeStat = new ConcurrentHashMap<String,ClientStatMachine>(10000000,0.75f,16);
