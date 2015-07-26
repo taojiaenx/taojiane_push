@@ -45,9 +45,11 @@ public class NettyPushListener implements Runnable {
 			.getPropertyInt("PUSH_LISTENER_SOCKET_TIMEOUT");
 	static int port = PropertyUtil.getPropertyInt("PUSH_LISTENER_PORT");
 	static int BACK_LOG = PropertyUtil.getPropertyInt("BACK_LOG");
+	static int QUEUE_MASK = (1 << PropertyUtil.getPropertyInt("BACK_LOG")) - 1;
 	
-	private int minThreads = PropertyUtil.getPropertyInt("PUSH_LISTENER_MIN_THREAD");
+	private int pushListenerWorkerNum = PropertyUtil.getPropertyInt("PUSH_LISTENER_WORKER_THREAD");
 	private int minTimeoutThread = PropertyUtil.getPropertyInt("MIN_TIMEOUT_ThREAD");
+	private int queue_num = QUEUE_MASK + 1;
 	
 
 	ServerSocketChannel channel = null;
@@ -58,12 +60,13 @@ public class NettyPushListener implements Runnable {
 	protected ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(minTimeoutThread, new TimeOutThreadFactory());
 
 	public void init() throws Exception {
+		System.out.println(QUEUE_MASK);
 		initChannel();
 	}
 
 	public void initChannel() throws Exception {
 		bossGroup = new NioEventLoopGroup();
-		workerGroup = new NioEventLoopGroup(minThreads, new WorkerGroupThreadFactory());
+		workerGroup = new NioEventLoopGroup(pushListenerWorkerNum, new WorkerGroupThreadFactory());
 		serverBootstarp = new ServerBootstrap().group(bossGroup, workerGroup)
 				.channel(NioServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
@@ -101,6 +104,17 @@ public class NettyPushListener implements Runnable {
 		stopExecutor();
 		closeSelector();
 	}
+	
+	/**
+	 * 处理器
+	 */
+	public void initExecutor() {
+		
+	}
+	
+   public void execInqueue(final int queueID) {
+	   
+   }
 
 	private void stopExecutor() {
 

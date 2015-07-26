@@ -131,8 +131,6 @@ public class IMServer {
 	}
 	
 	public void start() throws Exception{
-		//事先启动NodeStatus
-		NodeStatus.getInstance();
 		System.out.println("working dir: "+System.getProperty("user.dir"));
 		init();
 		
