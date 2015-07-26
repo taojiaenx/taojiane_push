@@ -79,11 +79,7 @@ public class PushMessageWorkerExector extends AbstractExecutorService {
 	 * @param attr 配置队列ID的对象
 	 */
 	public void execute(Runnable command, Object attr) {
-		try {
 			execute(command, getQueueId(attr));
-		} catch (Exception ignore) {
-			// do something
-		}
 	}
 
 	/**
@@ -92,14 +88,11 @@ public class PushMessageWorkerExector extends AbstractExecutorService {
 	 * @param queueId
 	 * @throws Exception
 	 */
-	private void execute(Runnable command, final int queueId) throws Exception {
-		if (workerNum <= queueId) {
-			throw new Exception("illeagal id");
-		}
-		executorServices[queueId].execute(command);
+	public void execute(final Runnable command, final int queueId){
+		executorServices[queueId & idmask].execute(command);
 	}
 
-	private int getQueueId(Object command) {
+	private int getQueueId(final Object command) {
 		return command.hashCode() & idmask;
 	}
 
