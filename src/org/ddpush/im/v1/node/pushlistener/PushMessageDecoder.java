@@ -1,9 +1,9 @@
 package org.ddpush.im.v1.node.pushlistener;
 
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+
 import org.ddpush.im.v1.node.Constant;
 import org.ddpush.im.v1.node.PushMessage;
-
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
 public class PushMessageDecoder extends LengthFieldBasedFrameDecoder{
 
