@@ -26,19 +26,16 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 			throws Exception {
 		msg.retain();
 		final FutureTask<Integer> f = new PushTask(ctx, msg);
-	    listener.solveTimeout(f);
+	    listener.solveTimeout(new TaskTimeoutSolver(f));
 		listener.execInqueue(f, ctx.channel());
 	}
 
 }
 
 class TaskTimeoutSolver implements Runnable {
-	private final ChannelHandlerContext ctx;
 	private final FutureTask<Integer> taskFuture;
 
-	public TaskTimeoutSolver(final ChannelHandlerContext ctx,
-			final FutureTask<Integer> taskFuture) {
-		this.ctx = ctx;
+	public TaskTimeoutSolver(final FutureTask<Integer> taskFuture) {
 		this.taskFuture = taskFuture;
 	}
 
