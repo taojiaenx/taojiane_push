@@ -24,7 +24,10 @@ public class PushMessageWorkerExector extends AbstractExecutorService {
 	private final int idmask;
 
 	public PushMessageWorkerExector(final int workerNum) {
-		executorServices = new ExcectorQueue[workerNum];
+		executorServices = new AbstractExecutorService[workerNum];
+		for (int i = 0; i < executorServices.length; ++i) {
+			executorServices[i] = new ExcectorQueue();
+		}
 		this.workerNum = workerNum;
 		this.idmask = workerNum - 1;
 	}

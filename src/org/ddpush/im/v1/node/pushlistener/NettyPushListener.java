@@ -28,17 +28,12 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
 import java.nio.channels.ServerSocketChannel;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.ddpush.im.util.PropertyUtil;
-import org.ddpush.im.util.StringUtil;
 
 public class NettyPushListener implements Runnable {
 	static int sockTimout = 1000 * PropertyUtil
@@ -61,7 +56,6 @@ public class NettyPushListener implements Runnable {
 	protected ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(minTimeoutThread, new TimeOutThreadFactory());
 
 	public void init() throws Exception {
-		System.out.println(QUEUE_MASK);
 		initExecutor();
 		initChannel();
 	}
