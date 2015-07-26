@@ -13,6 +13,7 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	public PushTaskHandler(final NettyPushListener listener) {
 		this.listener = listener;
 	}
+	
 
 	@Override
 	protected void channelRead0(final ChannelHandlerContext ctx, ByteBuf msg)
@@ -39,7 +40,6 @@ class TaskTimeoutSolver implements Runnable {
 		
 		if (!taskFuture.isDone()) {
 			taskFuture.cancel(false);
-			ctx.close();
 		}
 	}
 

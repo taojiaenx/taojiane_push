@@ -68,7 +68,7 @@ public class MyUdpClient extends UDPClientBase {
 			myUdpClient.setHeartbeatInterval(50);
 			myUdpClient.start();
 			System.out.println("start");
-			TimeUnit.SECONDS.sleep(30);
+			//TimeUnit.SECONDS.sleep(30);
 			
 			final byte[] clientUUID = StringUtil.md5Byte("0");
 			for(int j = 0; j < 10; ++j) {
