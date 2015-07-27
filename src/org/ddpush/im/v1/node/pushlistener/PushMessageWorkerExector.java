@@ -1,5 +1,7 @@
 package org.ddpush.im.v1.node.pushlistener;
 
+import io.netty.util.concurrent.Future;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.AbstractExecutorService;
@@ -72,6 +74,8 @@ class  ExcectorQueuePolicy implements RejectedExecutionHandler {
      * @throws RejectedExecutionException always.
      */
     public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-        // do somethig
+        if (r instanceof Future) {
+        	((Future) r).cancel(false);
+        }
     }
 }
