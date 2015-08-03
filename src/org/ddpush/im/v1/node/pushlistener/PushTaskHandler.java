@@ -18,7 +18,9 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
             throws Exception {
+    	ctx.disconnect();
     	ctx.close();
+    	//cause.printStackTrace();
     }
 
 	@Override

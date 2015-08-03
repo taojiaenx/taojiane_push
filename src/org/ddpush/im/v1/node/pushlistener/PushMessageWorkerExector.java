@@ -20,7 +20,7 @@ import org.ddpush.im.util.PropertyUtil;
  *
  */
 public class PushMessageWorkerExector  extends ThreadPoolExecutor {
-	private static ExcectorQueuePolicy defaultRejectionHandler = new ExcectorQueuePolicy();
+	private static DefaultExcectorQueuePolicy defaultRejectionHandler = new DefaultExcectorQueuePolicy();
 	private static ExcectorQueueThreadFactory defaultThreadFactory = new ExcectorQueueThreadFactory();
 	private static int MAX_QUEUE_LENGTH = PropertyUtil
 			.getPropertyInt("EXECTOR_QUEUE_LIMIT");
@@ -59,23 +59,4 @@ class ExcectorQueueThreadFactory implements ThreadFactory {
 		return new Thread(r,"ExcectorQueueThread-"+ r.hashCode());
 	}
 	
-}
-class  ExcectorQueuePolicy implements RejectedExecutionHandler {
-    /**
-     * Creates an {@code AbortPolicy}.
-     */
-    public ExcectorQueuePolicy() { }
-
-    /**
-     * Always throws RejectedExecutionException.
-     *
-     * @param r the runnable task requested to be executed
-     * @param e the executor attempting to execute this task
-     * @throws RejectedExecutionException always.
-     */
-    public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-        if (r instanceof Future) {
-        	((Future) r).cancel(false);
-        }
-    }
 }

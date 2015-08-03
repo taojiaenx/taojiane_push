@@ -37,13 +37,12 @@ public class send0x20Task implements Runnable{
 			boolean result;
 			pusher = new Pusher(serverIp,port, 1000*5);
 			result = pusher.push0x20Message(uuid,msg);
+			System.out.println("push ok");
 		}catch(Exception e){
-			e.printStackTrace();
 		}finally{
 			if(pusher != null){
 				try{pusher.close();}catch(Exception e){};
 			}
 		}
-		System.out.println("push ok");
 	}
 }

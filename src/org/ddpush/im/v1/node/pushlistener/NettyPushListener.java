@@ -25,7 +25,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 
 import java.nio.channels.ServerSocketChannel;
@@ -41,19 +40,22 @@ public class NettyPushListener implements Runnable {
 	static int port = PropertyUtil.getPropertyInt("PUSH_LISTENER_PORT");
 	static int BACK_LOG = PropertyUtil.getPropertyInt("BACK_LOG");
 	static int QUEUE_MASK = (1 << PropertyUtil.getPropertyInt("QUEUE_MASK")) - 1;
-	
-	private int pushListenerWorkerNum = PropertyUtil.getPropertyInt("PUSH_LISTENER_WORKER_THREAD");
-	private int minTimeoutThread = PropertyUtil.getPropertyInt("MIN_TIMEOUT_ThREAD");
-//	private int queue_num = QUEUE_MASK + 1;
-	
+
+	private int pushListenerWorkerNum = PropertyUtil
+			.getPropertyInt("PUSH_LISTENER_WORKER_THREAD");
+	private int minTimeoutThread = PropertyUtil
+			.getPropertyInt("MIN_TIMEOUT_ThREAD");
+	// private int queue_num = QUEUE_MASK + 1;
 
 	ServerSocketChannel channel = null;
 	ServerBootstrap serverBootstarp = null;
 	EventLoopGroup bossGroup = null;
 	EventLoopGroup workerGroup = null;
-	PushMessageWorkerExector pushMessageWorkerExector= null;
+	PushMessageWorkerExector pushMessageWorkerExector = null;
 
-	protected ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(minTimeoutThread, new TimeOutThreadFactory());
+	protected ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(
+			minTimeoutThread, new TimeOutThreadFactory(),
+			new DefaultExcectorQueuePolicy());
 
 	public void init() throws Exception {
 		initExecutor();
@@ -62,16 +64,19 @@ public class NettyPushListener implements Runnable {
 
 	public void initChannel() throws Exception {
 		bossGroup = new NioEventLoopGroup();
-		workerGroup = new NioEventLoopGroup(pushListenerWorkerNum, new WorkerGroupThreadFactory());
+		workerGroup = new NioEventLoopGroup(pushListenerWorkerNum,
+				new WorkerGroupThreadFactory());
 		serverBootstarp = new ServerBootstrap().group(bossGroup, workerGroup)
-				.channel(NioServerSocketChannel.class)
+				.channel(PushListenerServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
 				.childHandler(new ChannelInitializer<SocketChannel>() {
 
 					@Override
 					protected void initChannel(SocketChannel ch)
 							throws Exception {
-						ch.pipeline().addLast("PushMessageDecoder-" + ch.hashCode(), new PushMessageDecoder());
+						ch.pipeline().addLast(
+								"PushMessageDecoder-" + ch.hashCode(),
+								new PushMessageDecoder());
 						ch.pipeline().addLast(
 								"processPushTask-" + ch.hashCode(),
 								new PushTaskHandler(NettyPushListener.this));
@@ -100,54 +105,58 @@ public class NettyPushListener implements Runnable {
 		stopExecutor();
 		closeSelector();
 	}
-	
+
 	/**
 	 * 处理器
 	 */
 	public void initExecutor() {
 		pushMessageWorkerExector = new PushMessageWorkerExector();
 	}
-	
-  public void execEvent(final Runnable command) {
-	   pushMessageWorkerExector.execute(command);
-   }
- /*  public void execInqueue(final Runnable command, final int id) {
-	   pushMessageWorkerExector.execute(command, id);
-   }*/
-   
-   private void stopExecutor(){
-		try{
-			if ( pushMessageWorkerExector != null ) pushMessageWorkerExector.shutdownNow();//ignore left overs
-		}catch(Exception e){
+
+	public void execEvent(final Runnable command) {
+		pushMessageWorkerExector.execute(command);
+	}
+
+	/*
+	 * public void execInqueue(final Runnable command, final int id) {
+	 * pushMessageWorkerExector.execute(command, id); }
+	 */
+
+	private void stopExecutor() {
+		try {
+			if (pushMessageWorkerExector != null)
+				pushMessageWorkerExector.shutdownNow();// ignore left overs
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		pushMessageWorkerExector= null;
+		pushMessageWorkerExector = null;
 	}
 
 	private void closeSelector() {
 		bossGroup.shutdownGracefully();
 		workerGroup.shutdownGracefully();
 	}
-	
+
 	public void solveTimeout(Runnable command) {
-		timer.schedule(command,
-				NettyPushListener.sockTimout, TimeUnit.MILLISECONDS);
+		timer.schedule(command, NettyPushListener.sockTimout,
+				TimeUnit.MILLISECONDS);
 	}
 }
+
 class TimeOutThreadFactory implements ThreadFactory {
 
 	@Override
 	public Thread newThread(Runnable r) {
-		return new Thread(r,"PuhsListener-TimeOutThread-"+ r.hashCode());
+		return new Thread(r, "PuhsListener-TimeOutThread-" + r.hashCode());
 	}
-	
+
 }
 
 class WorkerGroupThreadFactory implements ThreadFactory {
 
 	@Override
 	public Thread newThread(Runnable r) {
-		return new Thread(r,"PuhsListener-WorkerGroupThread-"+ r.hashCode());
+		return new Thread(r, "PuhsListener-WorkerGroupThread-" + r.hashCode());
 	}
-	
+
 }
