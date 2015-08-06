@@ -5,30 +5,30 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.ThreadFactory;
-
 
 public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	protected final NettyPushListener listener;
-	
+
 	public PushTaskHandler(final NettyPushListener listener) {
 		this.listener = listener;
 	}
-	
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-            throws Exception {
-    	ctx.disconnect();
-    	ctx.close();
-    	//cause.printStackTrace();
-    }
+
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
+			throws Exception {
+		if (ctx.channel().isActive()) {
+			ctx.disconnect();
+			ctx.close();
+		}
+		// cause.printStackTrace();
+	}
 
 	@Override
 	protected void channelRead0(final ChannelHandlerContext ctx, ByteBuf msg)
 			throws Exception {
 		msg.retain();
 		final FutureTask<Integer> f = new PushTask(ctx, msg);
-	    listener.solveTimeout(new TaskTimeoutSolver(f));
+		listener.solveTimeout(new TaskTimeoutSolver(f));
 		listener.execEvent(f);
 	}
 
@@ -42,7 +42,7 @@ class TaskTimeoutSolver implements Runnable {
 	}
 
 	private void solveTimeout() {
-		
+
 		if (!taskFuture.isDone()) {
 			taskFuture.cancel(false);
 		}
@@ -53,4 +53,3 @@ class TaskTimeoutSolver implements Runnable {
 		solveTimeout();
 	}
 }
-
