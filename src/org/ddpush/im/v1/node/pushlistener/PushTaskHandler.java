@@ -6,6 +6,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.internal.SystemPropertyUtil;
 
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	protected final NettyPushListener listener;
@@ -29,7 +30,7 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 			throws Exception {
 		msg.retain();
 		final FutureTask<Integer> f = new PushTask(ctx, msg);
-		listener.solveTimeout(new TaskTimeoutSolver(f));
+		ctx.executor().schedule(new TaskTimeoutSolver(f),NettyPushListener.sockTimout, TimeUnit.MILLISECONDS);
 		listener.execEvent(f);
 	}
 

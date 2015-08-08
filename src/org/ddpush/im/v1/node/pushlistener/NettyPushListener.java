@@ -55,9 +55,6 @@ public class NettyPushListener implements Runnable {
 	EventLoopGroup workerGroup = null;
 	PushMessageWorkerExector pushMessageWorkerExector = null;
 
-	protected ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(
-			minTimeoutThread, new TimeOutThreadFactory(),
-			new DefaultExcectorQueuePolicy());
 
 	public void init() throws Exception {
 		initExecutor();
@@ -139,10 +136,6 @@ public class NettyPushListener implements Runnable {
 		workerGroup.shutdownGracefully();
 	}
 
-	public void solveTimeout(Runnable command) {
-		timer.schedule(command, NettyPushListener.sockTimout,
-				TimeUnit.MILLISECONDS);
-	}
 }
 
 class TimeOutThreadFactory implements ThreadFactory {
