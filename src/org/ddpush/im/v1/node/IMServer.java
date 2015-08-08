@@ -72,6 +72,7 @@ public class IMServer {
 	}
 	
 	public void init() throws Exception{
+		initSystem();
 		initPushListener();
 		initConsole();
 		initUdpConnector();
@@ -79,6 +80,12 @@ public class IMServer {
 		initWorkers();
 		initCleaner();
 		
+	}
+	/**
+	 * 系统参数配置
+	 */
+	public void initSystem() {
+		System.setProperty("io.netty.recycler.maxCapacity.defaultem", "256");
 	}
 	
 	public void initConsole() throws Exception{

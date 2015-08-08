@@ -61,9 +61,9 @@ public class PushTask extends FutureTask<Integer> {
 				data.release();
 			}
 		}
-		final ByteBuf resp = Unpooled.copiedBuffer(new byte[] { res });
-		resp.retain();
 		if (ctx.channel().isActive()) {
+			final ByteBuf resp = Unpooled.copiedBuffer(new byte[] { res });
+			resp.retain();
 			try {
 				ctx.writeAndFlush(resp);
 			} finally {

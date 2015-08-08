@@ -19,6 +19,8 @@ limitations under the License.
 */
 package org.ddpush.im.v1.client.appuser.example;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.ddpush.im.util.StringUtil;
@@ -71,10 +73,10 @@ public class MyUdpClient extends UDPClientBase {
 			TimeUnit.SECONDS.sleep(30);
 			
 			final byte[] clientUUID = StringUtil.md5Byte("0");
+			ExecutorService pool = Executors.newFixedThreadPool(256);
 			for(int j = 0; j < 60; ++j) {
              for(int i = 0; i < 5000; ++i) {
-				new Thread(new send0x20Task(ip,pushPort,clientUUID, ("testfewfwefewfewfewfewfewfewfwefwe " + 1).getBytes("utf-8"))).start();
-				TimeUnit.MILLISECONDS.sleep(1);
+            	 pool.execute(new send0x20Task(ip,pushPort,clientUUID, ("testfewfwefewfewfewfewfewfewfwefweaaaaaaaaaaaaaaaaaaaaaaaaaaaaafewfewfewfewfwfewfhewjfijewfweifjewoijfoijewf " + 1).getBytes("utf-8")));
              }
 			}
 

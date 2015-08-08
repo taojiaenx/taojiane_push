@@ -3,6 +3,7 @@ package org.ddpush.im.v1.node.pushlistener;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.internal.SystemPropertyUtil;
 
 import java.util.concurrent.FutureTask;
 

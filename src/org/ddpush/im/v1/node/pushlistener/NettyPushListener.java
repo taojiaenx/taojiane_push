@@ -37,6 +37,8 @@ import org.ddpush.im.util.PropertyUtil;
 public class NettyPushListener implements Runnable {
 	static int sockTimout = 1000 * PropertyUtil
 			.getPropertyInt("PUSH_LISTENER_SOCKET_TIMEOUT");
+	static int sockTimeoutSeconds = PropertyUtil
+			.getPropertyInt("PUSH_LISTENER_SOCKET_TIMEOUT");
 	static int port = PropertyUtil.getPropertyInt("PUSH_LISTENER_PORT");
 	static int BACK_LOG = PropertyUtil.getPropertyInt("BACK_LOG");
 	static int QUEUE_MASK = (1 << PropertyUtil.getPropertyInt("QUEUE_MASK")) - 1;
@@ -81,7 +83,7 @@ public class NettyPushListener implements Runnable {
 								"processPushTask-" + ch.hashCode(),
 								new PushTaskHandler(NettyPushListener.this));
 						ch.pipeline().addLast("WritTimeout-" + ch.hashCode(),
-								new WriteTimeoutHandler(sockTimout));
+								new WriteTimeoutHandler(sockTimeoutSeconds));
 					}
 				});
 
