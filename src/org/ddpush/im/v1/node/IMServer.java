@@ -85,7 +85,7 @@ public class IMServer {
 	 * 系统参数配置
 	 */
 	public void initSystem() {
-		System.setProperty("io.netty.recycler.maxCapacity.defaultem", "256");
+		System.setProperty("io.netty.recycler.maxCapacity.default", "256");
 	}
 	
 	public void initConsole() throws Exception{
