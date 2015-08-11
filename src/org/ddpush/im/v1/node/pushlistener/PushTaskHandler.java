@@ -2,6 +2,8 @@ package org.ddpush.im.v1.node.pushlistener;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandler;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.internal.SystemPropertyUtil;
 
@@ -22,8 +24,23 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 			ctx.disconnect();
 			ctx.close();
 		}
-		// cause.printStackTrace();
+		 cause.printStackTrace();
 	}
+
+	/**
+     * Calls {@link ChannelHandlerContext#fireChannelInactive()} to forward
+     * to the next {@link ChannelInboundHandler} in the {@link ChannelPipeline}.
+     *
+     * Sub-classes may override this method to change behavior.
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    	ctx.disconnect();
+		if (ctx.channel().isActive()) {
+			ctx.close();
+		}
+        ctx.fireChannelInactive();
+    }
 
 	@Override
 	protected void channelRead0(final ChannelHandlerContext ctx, ByteBuf msg)
