@@ -24,6 +24,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 import org.ddpush.im.v1.node.ClientStatMachine;
@@ -39,7 +40,7 @@ import org.ddpush.im.v1.node.PushMessage;
 
 public class PushTask extends FutureTask<Integer> {
 	private ChannelHandlerContext ctx;
-	private final ByteBuf data;
+	private ByteBuf data;
 
 	public PushTask(ChannelHandlerContext ctx, ByteBuf data) {
 		super(new ProcessDataCallable(data));
@@ -50,27 +51,29 @@ public class PushTask extends FutureTask<Integer> {
 	@Override
 	protected void done() {
 		byte res = 0;
+		ByteBuf resp = null;
 		try {
 			get();
 		} catch (Exception e) {
 			res = 1;
-		} catch (Throwable t) {
+		} catch (Throwable e) {
 			res = -1;
-		} finally {
-			if (data != null) {
-				data.release();
-			}
 		}
-		if (ctx.channel().isActive()) {
-			final ByteBuf resp = Unpooled.copiedBuffer(new byte[] { res });
+		resp = Unpooled.copiedBuffer(new byte[] { res });
+		if (resp != null) {
 			resp.retain();
-			try {
-				ctx.writeAndFlush(resp);
-			} finally {
-				resp.release();
-			}
+			ctx.writeAndFlush(resp);
+			resp.release();
+			resp = null;
 		}
 		ctx = null;
+		if (data != null) {
+			try {
+				data.release();
+			} catch (Exception ignore) {
+			}
+			data = null;
+		}
 	}
 }
 

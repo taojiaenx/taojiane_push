@@ -50,7 +50,7 @@ public class MyUdpClient extends UDPClientBase {
 		if(message.getData() == null || message.getData().length == 0){
 			System.out.println("msg has no data");
 		}
-		//System.out.println(StringUtil.convert(this.uuid)+"---"+StringUtil.convert(message.getData()));
+		System.out.println(StringUtil.convert(this.uuid)+"---"+StringUtil.convert(message.getData()));
 
 	}
 
