@@ -24,12 +24,13 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 import org.ddpush.im.v1.node.ClientStatMachine;
 import org.ddpush.im.v1.node.NodeStatus;
 import org.ddpush.im.v1.node.PushMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 修改过的pushTask
@@ -39,6 +40,7 @@ import org.ddpush.im.v1.node.PushMessage;
  */
 
 public class PushTask extends FutureTask<Integer> {
+	private static Logger logger = LoggerFactory.getLogger(PushTask.class);
 	private ChannelHandlerContext ctx;
 	private ByteBuf data;
 
@@ -55,8 +57,10 @@ public class PushTask extends FutureTask<Integer> {
 		try {
 			get();
 		} catch (Exception e) {
+			logger.error("处理消息返回1{}", e.getMessage());
 			res = 1;
 		} catch (Throwable e) {
+			logger.error("处理消息返回-1{}", e.getMessage());
 			res = -1;
 		}
 		resp = Unpooled.copiedBuffer(new byte[] { res });
@@ -71,6 +75,7 @@ public class PushTask extends FutureTask<Integer> {
 			try {
 				data.release();
 			} catch (Exception ignore) {
+				logger.error("释放byteBuffer错误");
 			}
 			data = null;
 		}
@@ -78,7 +83,6 @@ public class PushTask extends FutureTask<Integer> {
 }
 
 class ProcessDataCallable implements Callable<Integer> {
-
 	private final ByteBuf data;
 
 	public ProcessDataCallable(final ByteBuf data) {
@@ -109,11 +113,7 @@ class ProcessDataCallable implements Callable<Integer> {
 				}
 				nodeStat.putClientStat(uuid, csm);
 			} else {
-				try {
-					csm.onPushMessage(pm);
-				} catch (Exception e) {
-				}
-				;
+				csm.onPushMessage(pm);
 			}
 		} catch (Throwable e) {
 			throw e;
