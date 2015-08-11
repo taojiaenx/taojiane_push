@@ -24,7 +24,7 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 			ctx.disconnect();
 			ctx.close();
 		}
-		 cause.printStackTrace();
+		ctx.fireExceptionCaught(cause);
 	}
 
 	/**

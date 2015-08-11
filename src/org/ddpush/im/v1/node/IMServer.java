@@ -19,6 +19,10 @@ limitations under the License.
 */
 package org.ddpush.im.v1.node;
 
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
+import io.netty.util.internal.logging.Slf4JLoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,6 +31,7 @@ import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.ddpush.im.v1.node.tcpconnector.NIOTcpConnector;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
+import org.slf4j.impl.Log4jLoggerFactory;
 
 public class IMServer {
 	
@@ -85,6 +90,7 @@ public class IMServer {
 	 * 系统参数配置
 	 */
 	public void initSystem() {
+		InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
 		System.setProperty("io.netty.recycler.maxCapacity.default", "1");
 	}
 	
