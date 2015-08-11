@@ -68,9 +68,9 @@ public class PushTask extends FutureTask<Integer> {
 				ctx.writeAndFlush(resp);
 			} finally {
 				resp.release();
-				ctx = null;
 			}
 		}
+		ctx = null;
 	}
 }
 
