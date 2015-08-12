@@ -19,7 +19,6 @@ limitations under the License.
 */
 package org.ddpush.im.v1.node;
 
-import io.netty.util.internal.logging.InternalLogger;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 import io.netty.util.internal.logging.Slf4JLoggerFactory;
 
@@ -31,9 +30,11 @@ import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.ddpush.im.v1.node.tcpconnector.NIOTcpConnector;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
-import org.slf4j.impl.Log4jLoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class IMServer {
+	private static Logger logger = LoggerFactory.getLogger(IMServer.class);
 	
 	public static IMServer server;
 
@@ -91,7 +92,7 @@ public class IMServer {
 	 */
 	public void initSystem() {
 		InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
-		System.setProperty("io.netty.recycler.maxCapacity.default", "1");
+		//System.setProperty("io.netty.recycler.maxCapacity.default", "1");
 	}
 	
 	public void initConsole() throws Exception{
@@ -102,7 +103,7 @@ public class IMServer {
 	}
 	
 	public void initUdpConnector() throws Exception{
-		System.out.println("start connector...");
+		logger.info("start connector...");
 		udpConnector = new UdpConnector();
 		udpConnector.start();
 	}
@@ -120,7 +121,7 @@ public class IMServer {
 	}
 	
 	public void initWorkers(){
-		System.out.println("start "+workerNum+" workers...");
+		logger.info("start {} workers...", workerNum);
 		for(int i = 0; i < workerNum; i++){
 			Messenger worker = new Messenger(udpConnector, nodeStatus);
 			workerList.add(worker);
@@ -144,7 +145,7 @@ public class IMServer {
 	}
 	
 	public void start() throws Exception{
-		System.out.println("working dir: "+System.getProperty("user.dir"));
+		logger.info("working dir: "+System.getProperty("user.dir"));
 		init();
 		
 		final Thread mainT = Thread.currentThread();
@@ -152,17 +153,17 @@ public class IMServer {
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			public void run(){
 				stoped = true;
-				System.out.println("shut down server... ");
+				logger.info("shut down server... ");
 				try{
 					mainT.join();
-					System.out.println("server is down, bye ");
+					logger.info("server is down, bye ");
 				}catch(Exception e){
-					e.printStackTrace();
+					logger.error("服务器关闭错误");
 				}
 			}
 		});
 		this.startTime = System.currentTimeMillis();
-		System.out.println("server is up ");
+		logger.info("server is up ");
 		while(stoped == false){
 			try{
 				synchronized(this){
@@ -184,7 +185,7 @@ public class IMServer {
 		}
 		Runtime rt = Runtime.getRuntime();
 		if((rt.totalMemory()-rt.freeMemory())/(double)rt.maxMemory() > percent){
-			System.out.println("run auto clean...");
+			logger.info("run auto clean...");
 			cleaner.wakeup();
 		}
 	}
@@ -215,7 +216,7 @@ public class IMServer {
 			try{
 				workerList.get(i).stop();
 			}catch(Exception e){
-				e.printStackTrace();
+				logger.error("启动worker错误");
 			}
 		}
 	}
@@ -240,7 +241,7 @@ public class IMServer {
 		try{
 			clearnThread.interrupt();
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.error("缓存清除器执行错误");
 		}
 	}
 	

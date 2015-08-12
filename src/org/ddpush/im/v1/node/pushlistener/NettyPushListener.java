@@ -33,8 +33,11 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import org.ddpush.im.util.PropertyUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NettyPushListener implements Runnable {
+	private static Logger logger = LoggerFactory.getLogger(NettyPushListener.class);
 	static int sockTimout = 1000 * PropertyUtil
 			.getPropertyInt("PUSH_LISTENER_SOCKET_TIMEOUT");
 	static int sockTimeoutSeconds = PropertyUtil
@@ -86,8 +89,8 @@ public class NettyPushListener implements Runnable {
 
 		serverBootstarp.bind(port);
 
-		System.out.println("Netty TCP Push Listener nio provider: "
-				+ serverBootstarp.getClass().getCanonicalName());
+		logger.info("Netty TCP Push Listener nio provider: {}",
+				serverBootstarp.getClass().getCanonicalName());
 	}
 
 	@Override

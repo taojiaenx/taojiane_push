@@ -10,6 +10,9 @@ import io.netty.util.internal.SystemPropertyUtil;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	protected final NettyPushListener listener;
 
@@ -17,28 +20,6 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		this.listener = listener;
 	}
 
-	/*@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-			throws Exception {
-		if (ctx.channel().isActive()) {
-			ctx.close();
-		}
-		ctx.fireExceptionCaught(cause);
-	}*/
-
-	/**
-     * Calls {@link ChannelHandlerContext#fireChannelInactive()} to forward
-     * to the next {@link ChannelInboundHandler} in the {@link ChannelPipeline}.
-     *
-     * Sub-classes may override this method to change behavior.
-     */
-   /* @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		if (ctx.channel().isActive()) {
-			ctx.close();
-		}
-        ctx.fireChannelInactive();
-    }*/
 
 	@Override
 	protected void channelRead0(final ChannelHandlerContext ctx, ByteBuf msg)
@@ -52,6 +33,7 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 }
 
 class TaskTimeoutSolver implements Runnable {
+	private static Logger logger = LoggerFactory.getLogger(TaskTimeoutSolver.class);
 	private final FutureTask<Integer> taskFuture;
 
 	public TaskTimeoutSolver(final FutureTask<Integer> taskFuture) {
@@ -59,8 +41,8 @@ class TaskTimeoutSolver implements Runnable {
 	}
 
 	private void solveTimeout() {
-
 		if (!taskFuture.isDone()) {
+			logger.warn("超时任务！");
 			taskFuture.cancel(false);
 		}
 	}
