@@ -51,7 +51,6 @@ public class PushListenerServerSocketChannel extends NioServerSocketChannel {
 		private NioServerSocketChannelConfig(NioServerSocketChannel channel,
 				ServerSocket javaSocket) {
 			super(channel, javaSocket);
-			this.setMaxMessagesPerRead(1);
 		}
 
 		@Override
