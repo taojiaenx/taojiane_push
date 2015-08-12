@@ -63,12 +63,14 @@ public class PushTask extends FutureTask<Integer> {
 			logger.error("处理消息返回-1{}", e.getMessage());
 			res = -1;
 		}
-		resp = Unpooled.copiedBuffer(new byte[] { res });
-		if (resp != null) {
-			resp.retain();
-			ctx.writeAndFlush(resp);
-			resp.release();
-			resp = null;
+		if (ctx != null && ctx.channel().isActive()) {
+			resp = Unpooled.copiedBuffer(new byte[] { res });
+			if (resp != null) {
+				resp.retain();
+				ctx.writeAndFlush(resp);
+				resp.release();
+				resp = null;
+			}
 		}
 		ctx = null;
 		if (data != null) {
