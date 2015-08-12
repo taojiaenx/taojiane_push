@@ -17,14 +17,14 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		this.listener = listener;
 	}
 
-	@Override
+	/*@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
 			throws Exception {
 		if (ctx.channel().isActive()) {
 			ctx.close();
 		}
 		ctx.fireExceptionCaught(cause);
-	}
+	}*/
 
 	/**
      * Calls {@link ChannelHandlerContext#fireChannelInactive()} to forward
@@ -32,13 +32,13 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
      *
      * Sub-classes may override this method to change behavior.
      */
-    @Override
+   /* @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		if (ctx.channel().isActive()) {
 			ctx.close();
 		}
         ctx.fireChannelInactive();
-    }
+    }*/
 
 	@Override
 	protected void channelRead0(final ChannelHandlerContext ctx, ByteBuf msg)
