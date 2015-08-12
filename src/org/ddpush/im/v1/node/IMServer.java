@@ -92,7 +92,7 @@ public class IMServer {
 	 */
 	public void initSystem() {
 		InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
-		//System.setProperty("io.netty.recycler.maxCapacity.default", "1");
+		System.setProperty("io.netty.recycler.maxCapacity.default", PropertyUtil.getProperty("io.netty.recycler.maxCapacity.default"));
 	}
 	
 	public void initConsole() throws Exception{
