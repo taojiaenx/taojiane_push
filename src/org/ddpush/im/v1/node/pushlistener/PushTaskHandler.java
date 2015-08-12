@@ -21,7 +21,6 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
 			throws Exception {
 		if (ctx.channel().isActive()) {
-			ctx.disconnect();
 			ctx.close();
 		}
 		ctx.fireExceptionCaught(cause);
@@ -35,7 +34,6 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-    	ctx.disconnect();
 		if (ctx.channel().isActive()) {
 			ctx.close();
 		}
