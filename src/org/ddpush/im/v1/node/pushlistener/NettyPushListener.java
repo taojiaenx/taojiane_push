@@ -33,6 +33,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import org.ddpush.im.util.PropertyUtil;
+import org.ddpush.im.v1.node.DDPushMessageDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +79,7 @@ public class NettyPushListener implements Runnable {
 							throws Exception {
 						ch.pipeline().addLast(
 								"PushMessageDecoder-" + ch.hashCode(),
-								new PushMessageDecoder());
+								new DDPushMessageDecoder());
 						ch.pipeline().addLast(
 								"processPushTask-" + ch.hashCode(),
 								new PushTaskHandler(NettyPushListener.this));
