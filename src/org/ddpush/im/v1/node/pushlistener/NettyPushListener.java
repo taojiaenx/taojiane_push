@@ -98,7 +98,7 @@ public class NettyPushListener implements Runnable {
 		try {
 			init();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("pushListener 初始化错误");
 			System.exit(1);
 		}
 	}
