@@ -6,8 +6,12 @@ import java.nio.channels.DatagramChannel;
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.ClientMessage;
 import org.ddpush.im.v1.node.ServerMessage;
+import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UdpConnector {
+	private static Logger logger = LoggerFactory.getLogger(UdpConnector.class);
 	
 	protected DatagramChannel antenna;//天线
 	
@@ -31,7 +35,6 @@ public class UdpConnector {
 	}
 	
 	public void init(){
-		
 	}
 	
 	public void start() throws Exception{
@@ -40,13 +43,13 @@ public class UdpConnector {
 		}
 		antenna = DatagramChannel.open();
 		antenna.socket().bind(new InetSocketAddress(port));
-		System.out.println("udp connector port:"+port);
+		logger.info("udp connector port:{}", port);
 		//non-blocking
 		antenna.configureBlocking(false);
 		antenna.socket().setReceiveBufferSize(1024*1024*PropertyUtil.getPropertyInt("CLIENT_UDP_BUFFER_RECEIVE"));
 		antenna.socket().setSendBufferSize(1024*1024*PropertyUtil.getPropertyInt("CLIENT_UDP_BUFFER_SEND"));
-		System.out.println("udp connector recv buffer size:"+antenna.socket().getReceiveBufferSize());
-		System.out.println("udp connector send buffer size:"+antenna.socket().getSendBufferSize());
+		logger.info("udp connector recv buffer size:{}", antenna.socket().getReceiveBufferSize());
+		logger.info("udp connector send buffer size:{}", antenna.socket().getSendBufferSize());
 		
 		
 		this.receiver = new Receiver(antenna);
