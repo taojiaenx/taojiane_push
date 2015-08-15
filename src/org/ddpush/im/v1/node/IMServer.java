@@ -29,6 +29,7 @@ import org.ddpush.im.util.DateTimeUtil;
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.ddpush.im.v1.node.tcpconnector.NIOTcpConnector;
+import org.ddpush.im.v1.node.udpconnector.Messenger;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
