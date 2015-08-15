@@ -29,7 +29,7 @@ import org.ddpush.im.util.DateTimeUtil;
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.ddpush.im.v1.node.tcpconnector.NIOTcpConnector;
-import org.ddpush.im.v1.node.udpconnector.Messenger;
+import org.ddpush.im.v1.node.udpconnector.UDPMessenger;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class IMServer {
 	
 	private NodeStatus nodeStatus = NodeStatus.getInstance();
 	
-	private ArrayList<Messenger> workerList = new ArrayList<Messenger>();
+	private ArrayList<UDPMessenger> workerList = new ArrayList<UDPMessenger>();
 	
 	private Thread clearnThread = null;
 	private ClientStatMachineCleaner cleaner = null;
@@ -124,7 +124,7 @@ public class IMServer {
 	public void initWorkers(){
 		logger.info("start {} workers...", workerNum);
 		for(int i = 0; i < workerNum; i++){
-			Messenger worker = new Messenger(udpConnector, nodeStatus);
+			UDPMessenger worker = new UDPMessenger(udpConnector, nodeStatus);
 			workerList.add(worker);
 			Thread t = new Thread(worker, "IMServer-worker-"+i);
 			worker.setHostThread(t);

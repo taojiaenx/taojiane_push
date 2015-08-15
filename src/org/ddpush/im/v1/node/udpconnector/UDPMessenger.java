@@ -26,7 +26,7 @@ import org.ddpush.im.v1.node.ClientStatMachine;
 import org.ddpush.im.v1.node.NodeStatus;
 import org.ddpush.im.v1.node.ServerMessage;
 
-public class Messenger implements Runnable {
+public class UDPMessenger implements Runnable {
 	
 	private UdpConnector connector;
 	private NodeStatus nodeStat;//this is very large and dynamic
@@ -35,7 +35,7 @@ public class Messenger implements Runnable {
 	boolean started = false;
 	boolean stoped = false;
 	
-	public Messenger(UdpConnector connector, NodeStatus nodeStat){
+	public UDPMessenger(UdpConnector connector, NodeStatus nodeStat){
 		this.connector = connector;
 		this.nodeStat = nodeStat;
 	}
