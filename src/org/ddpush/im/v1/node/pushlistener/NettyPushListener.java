@@ -87,7 +87,7 @@ public class NettyPushListener implements Runnable {
 					}
 				});
 
-		serverBootstarp.bind(port);
+		serverBootstarp.bind(port).sync();
 
 		logger.info("Netty TCP Push Listener nio provider: {}",
 				serverBootstarp.getClass().getCanonicalName());
