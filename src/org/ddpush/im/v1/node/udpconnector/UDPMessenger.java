@@ -23,10 +23,14 @@ import java.util.ArrayList;
 
 import org.ddpush.im.v1.node.ClientMessage;
 import org.ddpush.im.v1.node.ClientStatMachine;
+import org.ddpush.im.v1.node.IMServer;
 import org.ddpush.im.v1.node.NodeStatus;
 import org.ddpush.im.v1.node.ServerMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UDPMessenger implements Runnable {
+	private static Logger logger = LoggerFactory.getLogger(UDPMessenger.class);
 	
 	private UdpConnector connector;
 	private NodeStatus nodeStat;//this is very large and dynamic
@@ -70,7 +74,6 @@ public class UDPMessenger implements Runnable {
 			}
 			return;
 		}
-		
 		this.deliverMessage(m);
 		
 	}

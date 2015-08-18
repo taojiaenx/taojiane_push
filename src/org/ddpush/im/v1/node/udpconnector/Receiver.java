@@ -1,112 +1,82 @@
 package org.ddpush.im.v1.node.udpconnector;
 
-import java.net.SocketAddress;
-import java.net.SocketTimeoutException;
-import java.nio.ByteBuffer;
-import java.nio.channels.DatagramChannel;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.socket.DatagramPacket;
+import io.netty.util.CharsetUtil;
+
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.ddpush.im.v1.node.ClientMessage;
+import org.ddpush.im.v1.node.Constant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class Receiver implements Runnable{
-	
-	protected DatagramChannel channel;
-	
-	protected int bufferSize = 1024;
-	
-	protected boolean stoped = false;
-	protected ByteBuffer buffer;
-	private SocketAddress address;
+public class Receiver extends SimpleChannelInboundHandler<DatagramPacket> {
+	private static Logger logger = LoggerFactory.getLogger(Receiver.class);
+
+	protected Channel channel;
 
 	protected AtomicLong queueIn = new AtomicLong(0);
 	protected AtomicLong queueOut = new AtomicLong(0);
 	protected ConcurrentLinkedQueue<ClientMessage> mq = new ConcurrentLinkedQueue<ClientMessage>();
-	
-	public Receiver(DatagramChannel channel){
-		this.channel = channel;
-	}
-	
-	public void init(){
-		buffer = ByteBuffer.allocate(this.bufferSize);
-	}
-	
-	public void stop(){
-		this.stoped = true;
-	}
-	
-	public void run(){
-		while(!this.stoped){
-			try{
-				//synchronized(enQueSignal){
-					processMessage();
-				//	if(mq.isEmpty() == true){
-				//		enQueSignal.wait();
-				//	}
-				//}
-			}catch(Exception e){
-				e.printStackTrace();
-			}catch(Throwable t){
-				t.printStackTrace();
-			}
-		}
-	}
-	
-	protected void processMessage() throws Exception{
-		address = null;
-		buffer.clear();
-		try{
-			address = this.channel.receive(buffer);
-		}catch(SocketTimeoutException timeout){
-			
-		}
-		if(address == null){
-			try{
-				Thread.sleep(1);
-			}catch(Exception e){
-				
-			}
-			return;
-		}
-		
-		buffer.flip();
-		byte[] swap = new byte[buffer.limit() - buffer.position()];
-		System.arraycopy(buffer.array(), buffer.position(), swap, 0, swap.length);
 
-		ClientMessage m = new ClientMessage(address,swap);
-		
+	public Receiver(Channel antenna) {
+		this.channel = antenna;
+	}
+
+	public void stop() {
+	}
+
+	protected void processMessage(ChannelHandlerContext ctx, DatagramPacket msg)
+			throws Exception {
+		byte[] swap = null;
+		swap = new byte[msg.content().readableBytes()];
+		final int readerIndex = msg.content().readerIndex();
+		msg.content().getBytes(readerIndex, swap);
+		ClientMessage m = new ClientMessage(msg.sender(), swap);
+		logger.debug("data is {} {}", (m.getDataLength() + Constant.CLIENT_MESSAGE_MIN_LENGTH), swap.length);
+		swap = null;
 		enqueue(m);
-		//System.out.println(DateTimeUtil.getCurDateTime()+" r:"+StringUtil.convert(m.getData())+" from:"+m.getSocketAddress().toString());
-
 	}
-	
-	protected boolean enqueue(ClientMessage message){
+
+	protected boolean enqueue(ClientMessage message) {
 		boolean result = mq.add(message);
-		if(result == true){
+		if (result == true) {
 			queueIn.addAndGet(1);
 		}
 		return result;
 	}
-	
-	protected ClientMessage dequeue(){
+
+	protected ClientMessage dequeue() {
 		ClientMessage m = mq.poll();
-		if(m != null){
+		if (m != null) {
 			queueOut.addAndGet(1);
 		}
 		return m;
 	}
-	
+
 	public ClientMessage receive() {
 
 		ClientMessage m = null;
-		while(true){
+		while (true) {
 			m = dequeue();
-			if(m == null){
+			if (m == null) {
 				return null;
 			}
-			if(m.checkFormat() == true){//检查包格式是否合法，为了网络快速响应，在这里检查，不在接收线程检查
+			if (m.checkFormat() == true) {// 检查包格式是否合法，为了网络快速响应，在这里检查，不在接收线程检查
 				return m;
 			}
 		}
 	}
+
+	@Override
+	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg)
+			throws Exception {
+		processMessage(ctx, msg);
+
+	}
+
 }

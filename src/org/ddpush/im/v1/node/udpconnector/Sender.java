@@ -1,6 +1,13 @@
 package org.ddpush.im.v1.node.udpconnector;
 
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.channel.Channel;
+import io.netty.channel.socket.DatagramPacket;
+
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -9,82 +16,60 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.Constant;
 import org.ddpush.im.v1.node.ServerMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class Sender implements Runnable{
-	protected DatagramChannel channel;
+public class Sender{
+	private static Logger logger = LoggerFactory.getLogger(Sender.class);
+	final ByteBufAllocator allocator = new PooledByteBufAllocator(true);
+	protected Channel channel;
 	protected AtomicLong queueIn = new AtomicLong(0);
 	protected AtomicLong queueOut = new AtomicLong(0);
 	
-	protected int bufferSize = Constant.PUSH_MSG_HEADER_LEN+PropertyUtil.getPropertyInt("PUSH_MSG_MAX_CONTENT_LEN");
 	
 	protected boolean stoped = false;
-	protected ByteBuffer buffer;
 	
-	protected Object enQueSignal = new Object();
 	
-	protected ConcurrentLinkedQueue<ServerMessage> mq = new ConcurrentLinkedQueue<ServerMessage>();
-	public Sender(DatagramChannel channel){
-		this.channel = channel;
+	public Sender(Channel antenna){
+		this.channel = antenna;
 	}
 	
 	public void init(){
-		buffer = ByteBuffer.allocate(bufferSize);
 	}
 	
 	public void stop(){
 		this.stoped = true;
 	}
 	
-	public void run(){
-		while(!this.stoped){
-			try{
-				synchronized(enQueSignal){
-					while(mq.isEmpty() == true && stoped == false){
-						try{
-							enQueSignal.wait(1);
-						}catch(InterruptedException e){
-							
-						}
-						//System.out.println("sender wake up");
-					}
-					processMessage();
-					
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}catch(Throwable t){
-				t.printStackTrace();
+	
+	protected void processMessage(final ServerMessage pendingMessage)
+			throws Exception {
+		ByteBuf data = allocator.ioBuffer(pendingMessage.getData().length);
+		data.readBytes(pendingMessage.getData());
+		pendingMessage.getData();
+		try {
+			channel.writeAndFlush(new DatagramPacket(data,
+					(InetSocketAddress) pendingMessage.getSocketAddress()));
+		} catch(Exception e) {
+			throw e;
+		} finally {
+			if (data != null) {
+				data.release();
 			}
 		}
 	}
 	
-	protected void processMessage() throws Exception{
-		buffer.clear();
-		ServerMessage pendingMessage = dequeue();
-		if(pendingMessage == null){
-			//Thread.yield();
-			return;
-		}
-		buffer.put(pendingMessage.getData());
-		buffer.flip();
-		channel.send(buffer, pendingMessage.getSocketAddress());
-		//System.out.println(DateTimeUtil.getCurDateTime()+" s:"+StringUtil.convert(pendingMessage.getData())+" to  :"+pendingMessage.getSocketAddress().toString());
-	}
-	
-	protected boolean enqueue(ServerMessage message){
-		boolean result = mq.add(message);
-		if(result == true){
-			queueIn.addAndGet(1);
+	protected boolean enqueue(ServerMessage message) {
+		boolean result = false;
+		queueIn.addAndGet(1);
+		try {
+			processMessage(message);
+			queueOut.addAndGet(1);
+			result = true;
+		} catch (Exception e) {
+			logger.error("向发送客户端发送推送消息错误");
 		}
 		return result;
-	}
-	
-	protected ServerMessage dequeue(){
-		ServerMessage m = mq.poll();
-		if(m != null){
-			queueOut.addAndGet(1);
-		}
-		return m;
 	}
 	
 	public boolean send(ServerMessage message){

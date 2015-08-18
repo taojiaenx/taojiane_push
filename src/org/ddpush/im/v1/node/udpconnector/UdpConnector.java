@@ -1,7 +1,13 @@
 package org.ddpush.im.v1.node.udpconnector;
 
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.DatagramChannel;
+import io.netty.channel.socket.nio.NioDatagramChannel;
+
 import java.net.InetSocketAddress;
-import java.nio.channels.DatagramChannel;
 
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.ClientMessage;
@@ -13,13 +19,13 @@ import org.slf4j.LoggerFactory;
 public class UdpConnector {
 	private static Logger logger = LoggerFactory.getLogger(UdpConnector.class);
 	
-	protected DatagramChannel antenna;//天线
+	protected Channel antenna = null;//天线
 	
 	protected Receiver receiver;
 	protected Sender sender;
+	EventLoopGroup group = new NioEventLoopGroup();
+	Bootstrap b = null;
 	
-	protected Thread receiverThread;
-	protected Thread senderThread;
 	
 	boolean started = false;
 	boolean stoped = false;
@@ -41,42 +47,23 @@ public class UdpConnector {
 		if(antenna != null){
 			throw new Exception("antenna is not null, may have run before");
 		}
-		antenna = DatagramChannel.open();
-		antenna.socket().bind(new InetSocketAddress(port));
-		logger.info("udp connector port:{}", port);
-		//non-blocking
-		antenna.configureBlocking(false);
-		antenna.socket().setReceiveBufferSize(1024*1024*PropertyUtil.getPropertyInt("CLIENT_UDP_BUFFER_RECEIVE"));
-		antenna.socket().setSendBufferSize(1024*1024*PropertyUtil.getPropertyInt("CLIENT_UDP_BUFFER_SEND"));
-		logger.info("udp connector recv buffer size:{}", antenna.socket().getReceiveBufferSize());
-		logger.info("udp connector send buffer size:{}", antenna.socket().getSendBufferSize());
-		
-		
+			
+		logger.info("udp connector port");	
 		this.receiver = new Receiver(antenna);
-		this.receiver.init();
 		this.sender = new Sender(antenna);
 		this.sender.init();
 		
-		this.senderThread = new Thread(sender,"AsynUdpConnector-sender");
-		this.receiverThread = new Thread(receiver,"AsynUdpConnector-receiver");
-		this.receiverThread.start();
-		this.senderThread.start();
+		
+		b = new Bootstrap();
+	    b.group(group).channel(NioDatagramChannel.class).handler(receiver);
+	    antenna = b.bind(port).channel();
+		logger.info("udp connector port:{}", port);	
+		
 	}
 	public void stop() throws Exception{
 		receiver.stop();
 		sender.stop();
-		try{
-			receiverThread.join();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try{
-			senderThread.join();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try{antenna.socket().close();}catch(Exception e){}
-		try{antenna.close();}catch(Exception e){}
+		group.shutdownGracefully();
 	}
 	
 	public long getInqueueIn(){

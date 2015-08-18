@@ -26,10 +26,13 @@ import java.util.ArrayList;
 
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.tcpconnector.MessengerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /*
  * uuid终端状态机
  */
 public class ClientStatMachine {
+	private static Logger logger = LoggerFactory.getLogger(ClientStatMachine.class);
 	
 	public static final int CMD_0x00 = 0;//心跳包
 	public static final int CMD_0x01 = 1;//登录包 

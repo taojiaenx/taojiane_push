@@ -85,6 +85,7 @@ public class PushTask extends FutureTask<Integer> {
 }
 
 class ProcessDataCallable implements Callable<Integer> {
+	private static Logger logger = LoggerFactory.getLogger(ProcessDataCallable.class);
 	private final ByteBuf data;
 
 	public ProcessDataCallable(final ByteBuf data) {
