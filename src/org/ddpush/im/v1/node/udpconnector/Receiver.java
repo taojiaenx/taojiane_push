@@ -17,15 +17,11 @@ import org.slf4j.LoggerFactory;
 public class Receiver extends SimpleChannelInboundHandler<DatagramPacket> {
 	private static Logger logger = LoggerFactory.getLogger(Receiver.class);
 
-	protected Channel channel;
 
 	protected AtomicLong queueIn = new AtomicLong(0);
 	protected AtomicLong queueOut = new AtomicLong(0);
 	protected ConcurrentLinkedQueue<ClientMessage> mq = new ConcurrentLinkedQueue<ClientMessage>();
 
-	public Receiver(Channel antenna) {
-		this.channel = antenna;
-	}
 
 	public void stop() {
 	}
@@ -37,7 +33,6 @@ public class Receiver extends SimpleChannelInboundHandler<DatagramPacket> {
 		final int readerIndex = msg.content().readerIndex();
 		msg.content().getBytes(readerIndex, swap);
 		ClientMessage m = new ClientMessage(msg.sender(), swap);
-		logger.debug("data is {} {}", (m.getDataLength() + Constant.CLIENT_MESSAGE_MIN_LENGTH), swap.length);
 		swap = null;
 		enqueue(m);
 	}

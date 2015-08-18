@@ -49,14 +49,14 @@ public class UdpConnector {
 		}
 			
 		logger.info("udp connector port");	
-		this.receiver = new Receiver(antenna);
-		this.sender = new Sender(antenna);
-		this.sender.init();
+		this.receiver = new Receiver();
 		
 		
 		b = new Bootstrap();
 	    b.group(group).channel(NioDatagramChannel.class).handler(receiver);
 	    antenna = b.bind(port).channel();
+		this.sender = new Sender(antenna);
+		this.sender.init();
 		logger.info("udp connector port:{}", port);	
 		
 	}

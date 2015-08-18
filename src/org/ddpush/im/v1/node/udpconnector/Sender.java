@@ -45,9 +45,9 @@ public class Sender{
 	protected void processMessage(final ServerMessage pendingMessage)
 			throws Exception {
 		ByteBuf data = allocator.ioBuffer(pendingMessage.getData().length);
-		data.readBytes(pendingMessage.getData());
-		pendingMessage.getData();
+		data.retain();
 		try {
+			data.writeBytes(pendingMessage.getData());
 			channel.writeAndFlush(new DatagramPacket(data,
 					(InetSocketAddress) pendingMessage.getSocketAddress()));
 		} catch(Exception e) {
@@ -67,7 +67,7 @@ public class Sender{
 			queueOut.addAndGet(1);
 			result = true;
 		} catch (Exception e) {
-			logger.error("向发送客户端发送推送消息错误");
+			logger.error("向发送客户端发送推送消息错误", e);
 		}
 		return result;
 	}
