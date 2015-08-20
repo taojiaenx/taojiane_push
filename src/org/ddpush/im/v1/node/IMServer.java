@@ -94,6 +94,7 @@ public class IMServer {
 	public void initSystem() {
 		InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
 		System.setProperty("io.netty.recycler.maxCapacity.default", PropertyUtil.getProperty("io.netty.recycler.maxCapacity.default"));
+		System.setProperty("io.netty.leakDetectionLevel", "paranoid");
 	}
 	
 	public void initConsole() throws Exception{

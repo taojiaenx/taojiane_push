@@ -66,9 +66,7 @@ public class PushTask extends FutureTask<Integer> {
 		if (ctx != null && ctx.channel().isActive()) {
 			resp = Unpooled.copiedBuffer(new byte[] { res });
 			if (resp != null) {
-				resp.retain();
 				ctx.writeAndFlush(resp);
-				resp.release();
 				resp = null;
 			}
 		}

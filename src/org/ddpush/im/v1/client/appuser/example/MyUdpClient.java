@@ -50,7 +50,13 @@ public class MyUdpClient extends UDPClientBase {
 		if(message.getData() == null || message.getData().length == 0){
 			System.out.println("msg has no data");
 		}
-		System.out.println(StringUtil.convert(this.uuid)+"---"+StringUtil.convert(message.getData()));
+		String str = null;
+		try{
+			str = new String(message.getData(),5,message.getContentLength(), "UTF-8");
+		}catch(Exception e){
+			str = StringUtil.convert(message.getData(),5,message.getContentLength());
+		}
+		System.out.println(StringUtil.convert(this.uuid)+"---"+str);
 
 	}
 
@@ -76,7 +82,7 @@ public class MyUdpClient extends UDPClientBase {
 			ExecutorService pool = Executors.newFixedThreadPool(256);
 			for(int j = 0; j < 60; ++j) {
              for(int i = 0; i < 5000; ++i) {
-            	 pool.execute(new send0x20Task(ip,pushPort,clientUUID, ("testfewfwefewfewfewfewfewfewfwefweaaaaaaaaaaaaaaaaaaaaaaaaaaaaafewfewfewfewfwfewfhewjfijewfweifjewoijfoijewf " + 1).getBytes("utf-8")));
+            	 pool.execute(new send0x20Task(ip,pushPort,clientUUID, ("生中出生中出生中出yeah生中出生中出生中出yeah 生中出生中出生中出yeah 生中出生中出生中出yeah  " + 1).getBytes("utf-8")));
              }
 			}
 

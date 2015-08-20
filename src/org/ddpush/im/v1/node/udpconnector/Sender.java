@@ -1,9 +1,9 @@
 package org.ddpush.im.v1.node.udpconnector;
 
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.socket.DatagramPacket;
 
@@ -19,46 +19,35 @@ import org.ddpush.im.v1.node.ServerMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Sender{
+public class Sender {
 	private static Logger logger = LoggerFactory.getLogger(Sender.class);
-	final ByteBufAllocator allocator = new PooledByteBufAllocator(true);
 	protected Channel channel;
 	protected AtomicLong queueIn = new AtomicLong(0);
 	protected AtomicLong queueOut = new AtomicLong(0);
-	
-	
+
 	protected boolean stoped = false;
-	
-	
-	public Sender(Channel antenna){
+
+	public Sender(Channel antenna) {
 		this.channel = antenna;
 	}
-	
-	public void init(){
+
+	public void init() {
 	}
-	
-	public void stop(){
+
+	public void stop() {
 		this.stoped = true;
 	}
-	
-	
+
 	protected void processMessage(final ServerMessage pendingMessage)
 			throws Exception {
-		ByteBuf data = allocator.ioBuffer(pendingMessage.getData().length);
-		data.retain();
-		try {
-			data.writeBytes(pendingMessage.getData());
+		ByteBuf data = Unpooled.copiedBuffer(pendingMessage.getData());
+		if (data != null) {
 			channel.writeAndFlush(new DatagramPacket(data,
 					(InetSocketAddress) pendingMessage.getSocketAddress()));
-		} catch(Exception e) {
-			throw e;
-		} finally {
-			if (data != null) {
-				data.release();
-			}
+			data = null;
 		}
 	}
-	
+
 	protected boolean enqueue(ServerMessage message) {
 		boolean result = false;
 		queueIn.addAndGet(1);
@@ -71,8 +60,8 @@ public class Sender{
 		}
 		return result;
 	}
-	
-	public boolean send(ServerMessage message){
+
+	public boolean send(ServerMessage message) {
 		return enqueue(message);
 	}
 }
