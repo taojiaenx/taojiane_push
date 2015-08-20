@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.DDPushMessageDecoder;
+import org.ddpush.im.v1.node.ThreadFactoryWithName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +69,7 @@ public class NettyPushListener implements Runnable {
 	public void initChannel() throws Exception {
 		bossGroup = new NioEventLoopGroup();
 		workerGroup = new NioEventLoopGroup(pushListenerWorkerNum,
-				new WorkerGroupThreadFactory());
+				new ThreadFactoryWithName(NettyPushListener.class));
 		serverBootstarp = new ServerBootstrap().group(bossGroup, workerGroup)
 				.channel(PushListenerServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
@@ -138,20 +139,3 @@ public class NettyPushListener implements Runnable {
 
 }
 
-class TimeOutThreadFactory implements ThreadFactory {
-
-	@Override
-	public Thread newThread(Runnable r) {
-		return new Thread(r, "PuhsListener-TimeOutThread-" + r.hashCode());
-	}
-
-}
-
-class WorkerGroupThreadFactory implements ThreadFactory {
-
-	@Override
-	public Thread newThread(Runnable r) {
-		return new Thread(r, "PuhsListener-WorkerGroupThread-" + r.hashCode());
-	}
-
-}

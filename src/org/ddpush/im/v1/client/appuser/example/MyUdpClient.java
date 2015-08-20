@@ -62,7 +62,7 @@ public class MyUdpClient extends UDPClientBase {
 	
 	public static void main(String[] args){
 		try{
-			final String ip = "10.0.0.65";
+			final String ip = "10.0.0.76";
 			final int port = 9966;
 			final int pushPort = 9999;
 			byte[] uuid = StringUtil.md5Byte("0");

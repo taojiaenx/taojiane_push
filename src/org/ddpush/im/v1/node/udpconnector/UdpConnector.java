@@ -12,18 +12,21 @@ import java.net.InetSocketAddress;
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.ClientMessage;
 import org.ddpush.im.v1.node.ServerMessage;
+import org.ddpush.im.v1.node.ThreadFactoryWithName;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UdpConnector {
 	private static Logger logger = LoggerFactory.getLogger(UdpConnector.class);
+	private int udpConnectorNum = PropertyUtil
+			.getPropertyInt("UDP_CONNECTOR_NUM");
 	
 	protected Channel antenna = null;//天线
 	
 	protected Receiver receiver;
 	protected Sender sender;
-	EventLoopGroup group = new NioEventLoopGroup();
+	EventLoopGroup group = new NioEventLoopGroup(udpConnectorNum, new ThreadFactoryWithName(UdpConnector.class));
 	Bootstrap b = null;
 	
 	
