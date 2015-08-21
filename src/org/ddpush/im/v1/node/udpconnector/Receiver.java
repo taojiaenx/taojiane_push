@@ -1,16 +1,13 @@
 package org.ddpush.im.v1.node.udpconnector;
 
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
-import io.netty.util.CharsetUtil;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.ddpush.im.v1.node.ClientMessage;
-import org.ddpush.im.v1.node.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

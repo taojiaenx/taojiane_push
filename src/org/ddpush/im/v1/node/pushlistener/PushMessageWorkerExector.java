@@ -23,7 +23,7 @@ public class PushMessageWorkerExector  extends ThreadPoolExecutor {
 			.getPropertyInt("EXECTOR_MAX_THREAD");
 
 	public PushMessageWorkerExector () {
-		super(minThread, maxThread, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(
+		super(minThread, maxThread, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(
 				MAX_QUEUE_LENGTH), defaultThreadFactory, defaultRejectionHandler);
 	}
 }
