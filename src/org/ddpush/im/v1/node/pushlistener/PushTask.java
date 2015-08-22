@@ -19,10 +19,7 @@ limitations under the License.
  */
 package org.ddpush.im.v1.node.pushlistener;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;

@@ -1,20 +1,14 @@
 package org.ddpush.im.v1.node.pushlistener;
 
 import io.netty.buffer.ByteBuf;
-
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandler;
-import io.netty.channel.ChannelPipeline;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.util.internal.SystemPropertyUtil;
 
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 import org.ddpush.im.v1.node.PushMessage;
 import org.ddpush.im.v1.node.TaskTimeoutSolver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	protected final NettyPushListener listener;

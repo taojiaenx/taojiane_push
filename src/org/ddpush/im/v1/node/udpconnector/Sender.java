@@ -1,20 +1,9 @@
 package org.ddpush.im.v1.node.udpconnector;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
-import io.netty.channel.socket.DatagramPacket;
 
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.DatagramChannel;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.ddpush.im.util.PropertyUtil;
-import org.ddpush.im.v1.node.Constant;
 import org.ddpush.im.v1.node.ServerMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
