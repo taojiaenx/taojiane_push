@@ -40,12 +40,8 @@ public class Sender {
 
 	protected void processMessage(final ServerMessage pendingMessage)
 			throws Exception {
-		ByteBuf data = Unpooled.copiedBuffer(pendingMessage.getData());
-		if (data != null) {
-			channel.writeAndFlush(new DatagramPacket(data,
-					(InetSocketAddress) pendingMessage.getSocketAddress()));
-			data = null;
-		}
+			channel.writeAndFlush(pendingMessage);
+
 	}
 
 	protected boolean enqueue(ServerMessage message) {

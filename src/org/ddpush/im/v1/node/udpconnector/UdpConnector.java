@@ -2,18 +2,23 @@ package org.ddpush.im.v1.node.udpconnector;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.DatagramChannel;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioDatagramChannel;
+import io.netty.handler.timeout.WriteTimeoutHandler;
 
 import java.net.InetSocketAddress;
 
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.ClientMessage;
+import org.ddpush.im.v1.node.DDPushMessageDecoder;
 import org.ddpush.im.v1.node.ServerMessage;
 import org.ddpush.im.v1.node.ThreadFactoryWithName;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
+import org.ddpush.im.v1.node.pushlistener.PushTaskHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +61,14 @@ public class UdpConnector {
 		
 		
 		b = new Bootstrap();
-	    b.group(group).channel(NioDatagramChannel.class).handler(receiver);
+	    b.group(group).channel(NioDatagramChannel.class).handler(new ChannelInitializer<NioDatagramChannel>() {
+
+			@Override
+			protected void initChannel(NioDatagramChannel ch)
+					throws Exception {
+				ch.pipeline().addLast(receiver.getClass().getName() + " "+ receiver.hashCode(), receiver);
+				ch.pipeline().addLast(UDPWriteHandler.class.getName() + " " + System.currentTimeMillis(), new UDPWriteHandler());
+			}});
 	    antenna = b.bind(port).channel();
 		this.sender = new Sender(antenna);
 		this.sender.init();
