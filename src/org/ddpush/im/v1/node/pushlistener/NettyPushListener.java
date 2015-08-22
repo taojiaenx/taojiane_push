@@ -135,7 +135,6 @@ public class NettyPushListener implements Runnable {
 	 */
 	private class PushListenerChannelInitializer extends
 			ChannelInitializer<SocketChannel> {
-		private final DDPushMessageDecoder ddPushMessageDecoder = new DDPushMessageDecoder();
 		private final PushTaskHandler pushTaskHandler = new PushTaskHandler(
 				NettyPushListener.this);
 		private final PushResponseHandler pushResponseHandler = new PushResponseHandler();
@@ -143,7 +142,7 @@ public class NettyPushListener implements Runnable {
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
 			ch.pipeline().addLast("PushMessageDecoder-" + ch.hashCode(),
-					ddPushMessageDecoder);
+					new DDPushMessageDecoder());
 			ch.pipeline().addLast("processPushTask-" + ch.hashCode(),
 					pushTaskHandler);
 			ch.pipeline().addLast("WritTimeout-" + ch.hashCode(),
