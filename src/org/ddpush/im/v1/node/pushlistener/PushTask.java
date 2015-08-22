@@ -39,18 +39,34 @@ import org.slf4j.LoggerFactory;
 
 public class PushTask extends FutureTask<Integer> {
 	private static Logger logger = LoggerFactory.getLogger(PushTask.class);
-	private Channel channel;
+			
 
-	public PushTask(Channel channel, PushMessage data) {
-		super(new ProcessDataCallable(data));
-		this.channel = channel;
+	public PushTask(final Channel channel, final PushMessage data) {
+		super(new ProcessDataCallable(channel, data));
 	}
 
 	@Override
 	protected void done() {
+	}
+}
+
+class ProcessDataCallable implements Callable<Integer> {
+	private static Logger logger = LoggerFactory
+			.getLogger(ProcessDataCallable.class);
+	private PushMessage data;
+	private Channel channel;
+
+	public ProcessDataCallable(final Channel channel, final PushMessage data) {
+		this.channel = channel;
+		this.data = data;
+	}
+
+	@Override
+	public Integer call() throws Exception {
+
 		Byte res = 0;
 		try {
-			get();
+			processReq();
 		} catch (Exception e) {
 			logger.error("处理消息返回1{}", e.getMessage());
 			res = 1;
@@ -59,28 +75,15 @@ public class PushTask extends FutureTask<Integer> {
 			res = -1;
 		}
 		if (channel != null && channel.isActive()) {
-				channel.writeAndFlush(res);
+			channel.writeAndFlush(res);
 		}
 		channel = null;
-	}
-}
-
-class ProcessDataCallable implements Callable<Integer> {
-	private static Logger logger = LoggerFactory.getLogger(ProcessDataCallable.class);
-	private PushMessage data;
-
-	public ProcessDataCallable(final PushMessage data) {
-		this.data = data;
-	}
-
-	@Override
-	public Integer call() throws Exception {
-		processReq();
 		return 0;
 	}
 
 	private void processReq() throws Exception {
-		if (data == null) return;
+		if (data == null)
+			return;
 		try {
 			NodeStatus nodeStat = NodeStatus.getInstance();
 			String uuid = data.getUuidHexString();
