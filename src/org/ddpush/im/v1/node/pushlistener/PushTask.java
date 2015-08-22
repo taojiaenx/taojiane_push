@@ -21,6 +21,7 @@ package org.ddpush.im.v1.node.pushlistener;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.concurrent.Callable;
@@ -41,11 +42,11 @@ import org.slf4j.LoggerFactory;
 
 public class PushTask extends FutureTask<Integer> {
 	private static Logger logger = LoggerFactory.getLogger(PushTask.class);
-	private ChannelHandlerContext ctx;
+	private Channel channel;
 
-	public PushTask(ChannelHandlerContext ctx, PushMessage data) {
+	public PushTask(Channel channel, PushMessage data) {
 		super(new ProcessDataCallable(data));
-		this.ctx = ctx;
+		this.channel = channel;
 	}
 
 	@Override
@@ -60,10 +61,10 @@ public class PushTask extends FutureTask<Integer> {
 			logger.error("处理消息返回-1{}", e.getMessage());
 			res = -1;
 		}
-		if (ctx != null && ctx.channel().isActive()) {
-				ctx.writeAndFlush(res);
+		if (channel != null && channel.isActive()) {
+				channel.writeAndFlush(res);
 		}
-		ctx = null;
+		channel = null;
 	}
 }
 
