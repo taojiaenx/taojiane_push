@@ -25,7 +25,8 @@ public class PushTaskHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		msg.getBytes(readerIndex, byteData);
 		PushMessage pm = new PushMessage(byteData);
 		byteData = null;
-		final FutureTask<Integer> f = new PushTask(ctx.channel(), pm);
+		final FutureTask<Integer> f = new PushTask(new ProcessDataCallable(
+				ctx.channel(), pm));
 		ctx.executor().schedule(new TaskTimeoutSolver(f),
 				NettyPushListener.sockTimout, TimeUnit.MILLISECONDS);
 		listener.execEvent(f);

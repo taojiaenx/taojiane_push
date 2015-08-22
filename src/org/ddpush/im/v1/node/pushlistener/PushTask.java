@@ -39,14 +39,16 @@ import org.slf4j.LoggerFactory;
 
 public class PushTask extends FutureTask<Integer> {
 	private static Logger logger = LoggerFactory.getLogger(PushTask.class);
-			
+	private final ProcessDataCallable processDataCallable;
 
-	public PushTask(final Channel channel, final PushMessage data) {
-		super(new ProcessDataCallable(channel, data));
+	public PushTask(ProcessDataCallable processDataCallable) {
+		super(processDataCallable);
+		this.processDataCallable = processDataCallable;
 	}
 
 	@Override
 	protected void done() {
+		processDataCallable.clear();
 	}
 }
 
@@ -77,30 +79,27 @@ class ProcessDataCallable implements Callable<Integer> {
 		if (channel != null && channel.isActive()) {
 			channel.writeAndFlush(res);
 		}
-		channel = null;
 		return 0;
 	}
 
+	void clear() {
+		data = null;
+		channel = null;
+	}
+
 	private void processReq() throws Exception {
-		if (data == null)
-			return;
-		try {
-			NodeStatus nodeStat = NodeStatus.getInstance();
-			String uuid = data.getUuidHexString();
-			ClientStatMachine csm = nodeStat.getClientStat(uuid);
-			if (csm == null) {//
-				csm = ClientStatMachine.newByPushReq(data);
-				if (csm == null) {
-					throw new Exception("can not new state machine");
-				}
-				nodeStat.putClientStat(uuid, csm);
-			} else {
-				csm.onPushMessage(data);
+		if (data == null) return;
+		NodeStatus nodeStat = NodeStatus.getInstance();
+		String uuid = data.getUuidHexString();
+		ClientStatMachine csm = nodeStat.getClientStat(uuid);
+		if (csm == null) {//
+			csm = ClientStatMachine.newByPushReq(data);
+			if (csm == null) {
+				throw new Exception("can not new state machine");
 			}
-		} catch (Throwable e) {
-			throw e;
-		} finally {
-			data = null;
+			nodeStat.putClientStat(uuid, csm);
+		} else {
+			csm.onPushMessage(data);
 		}
 
 	}
