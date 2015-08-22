@@ -41,7 +41,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NettyPushListener implements Runnable {
-	private static Logger logger = LoggerFactory.getLogger(NettyPushListener.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(NettyPushListener.class);
 	static int sockTimout = 1000 * PropertyUtil
 			.getPropertyInt("PUSH_LISTENER_SOCKET_TIMEOUT");
 	static int sockTimeoutSeconds = PropertyUtil
@@ -52,8 +53,7 @@ public class NettyPushListener implements Runnable {
 
 	private int pushListenerWorkerNum = PropertyUtil
 			.getPropertyInt("PUSH_LISTENER_WORKER_THREAD");
-	private int minTimeoutThread = PropertyUtil
-			.getPropertyInt("MIN_TIMEOUT_ThREAD");
+	private ChannelInitializer<SocketChannel> pushListenerChannelInitializer = new PushListenerChannelInitializer();
 	// private int queue_num = QUEUE_MASK + 1;
 
 	ServerSocketChannel channel = null;
@@ -61,7 +61,6 @@ public class NettyPushListener implements Runnable {
 	EventLoopGroup bossGroup = null;
 	EventLoopGroup workerGroup = null;
 	PushMessageWorkerExector pushMessageWorkerExector = null;
-
 
 	public void init() throws Exception {
 		initExecutor();
@@ -72,32 +71,19 @@ public class NettyPushListener implements Runnable {
 		bossGroup = new NioEventLoopGroup();
 		workerGroup = new NioEventLoopGroup(pushListenerWorkerNum,
 				new ThreadFactoryWithName(NettyPushListener.class));
-		serverBootstarp = new ServerBootstrap().group(bossGroup, workerGroup)
+		serverBootstarp = new ServerBootstrap()
+				.group(bossGroup, workerGroup)
 				.channel(NioServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
 				.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-				.childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-				.childHandler(new ChannelInitializer<SocketChannel>() {
-
-					@Override
-					protected void initChannel(SocketChannel ch)
-							throws Exception {
-						ch.pipeline().addLast(
-								"PushMessageDecoder-" + ch.hashCode(),
-								new DDPushMessageDecoder());
-						ch.pipeline().addLast(
-								"processPushTask-" + ch.hashCode(),
-								new PushTaskHandler(NettyPushListener.this));
-						ch.pipeline().addLast("WritTimeout-" + ch.hashCode(),
-								new WriteTimeoutHandler(sockTimeoutSeconds));
-						ch.pipeline().addLast("WriteByteEncoder-" + ch.hashCode(), new PushResponseHandler());
-					}
-				});
+				.childOption(ChannelOption.ALLOCATOR,
+						PooledByteBufAllocator.DEFAULT)
+				.childHandler(pushListenerChannelInitializer);
 
 		serverBootstarp.bind(port).sync();
 
-		logger.info("Netty TCP Push Listener nio provider: {}",
-				serverBootstarp.getClass().getCanonicalName());
+		logger.info("Netty TCP Push Listener nio provider: {}", serverBootstarp
+				.getClass().getCanonicalName());
 	}
 
 	@Override
@@ -126,7 +112,6 @@ public class NettyPushListener implements Runnable {
 		pushMessageWorkerExector.execute(command);
 	}
 
-
 	private void stopExecutor() {
 		try {
 			if (pushMessageWorkerExector != null)
@@ -142,5 +127,31 @@ public class NettyPushListener implements Runnable {
 		workerGroup.shutdownGracefully();
 	}
 
-}
+	/**
+	 * channe初始化
+	 * 
+	 * @author taojiaen
+	 *
+	 */
+	private class PushListenerChannelInitializer extends
+			ChannelInitializer<SocketChannel> {
+		private final DDPushMessageDecoder ddPushMessageDecoder = new DDPushMessageDecoder();
+		private final PushTaskHandler pushTaskHandler = new PushTaskHandler(
+				NettyPushListener.this);
+		private final PushResponseHandler pushResponseHandler = new PushResponseHandler();
 
+		@Override
+		protected void initChannel(SocketChannel ch) throws Exception {
+			ch.pipeline().addLast("PushMessageDecoder-" + ch.hashCode(),
+					ddPushMessageDecoder);
+			ch.pipeline().addLast("processPushTask-" + ch.hashCode(),
+					pushTaskHandler);
+			ch.pipeline().addLast("WritTimeout-" + ch.hashCode(),
+					new WriteTimeoutHandler(sockTimeoutSeconds));
+			ch.pipeline().addLast(pushResponseHandler);
+
+		}
+
+	}
+
+}
