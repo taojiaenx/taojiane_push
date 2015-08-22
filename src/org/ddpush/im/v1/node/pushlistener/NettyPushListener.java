@@ -20,11 +20,13 @@ limitations under the License.
 package org.ddpush.im.v1.node.pushlistener;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 
 import java.nio.channels.ServerSocketChannel;
@@ -71,8 +73,10 @@ public class NettyPushListener implements Runnable {
 		workerGroup = new NioEventLoopGroup(pushListenerWorkerNum,
 				new ThreadFactoryWithName(NettyPushListener.class));
 		serverBootstarp = new ServerBootstrap().group(bossGroup, workerGroup)
-				.channel(PushListenerServerSocketChannel.class)
+				.channel(NioServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
+				.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+				.childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
 				.childHandler(new ChannelInitializer<SocketChannel>() {
 
 					@Override
@@ -86,6 +90,7 @@ public class NettyPushListener implements Runnable {
 								new PushTaskHandler(NettyPushListener.this));
 						ch.pipeline().addLast("WritTimeout-" + ch.hashCode(),
 								new WriteTimeoutHandler(sockTimeoutSeconds));
+						ch.pipeline().addLast("WriteByteEncoder-" + ch.hashCode(), new PushResponseHandler());
 					}
 				});
 

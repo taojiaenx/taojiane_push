@@ -42,18 +42,15 @@ import org.slf4j.LoggerFactory;
 public class PushTask extends FutureTask<Integer> {
 	private static Logger logger = LoggerFactory.getLogger(PushTask.class);
 	private ChannelHandlerContext ctx;
-	private ByteBuf data;
 
-	public PushTask(ChannelHandlerContext ctx, ByteBuf data) {
+	public PushTask(ChannelHandlerContext ctx, PushMessage data) {
 		super(new ProcessDataCallable(data));
 		this.ctx = ctx;
-		this.data = data;
 	}
 
 	@Override
 	protected void done() {
-		byte res = 0;
-		ByteBuf resp = null;
+		Byte res = 0;
 		try {
 			get();
 		} catch (Exception e) {
@@ -64,29 +61,17 @@ public class PushTask extends FutureTask<Integer> {
 			res = -1;
 		}
 		if (ctx != null && ctx.channel().isActive()) {
-			resp = Unpooled.copiedBuffer(new byte[] { res });
-			if (resp != null) {
-				ctx.writeAndFlush(resp);
-				resp = null;
-			}
+				ctx.writeAndFlush(res);
 		}
 		ctx = null;
-		if (data != null) {
-			try {
-				data.release();
-			} catch (Exception ignore) {
-				logger.error("释放byteBuffer错误");
-			}
-			data = null;
-		}
 	}
 }
 
 class ProcessDataCallable implements Callable<Integer> {
 	private static Logger logger = LoggerFactory.getLogger(ProcessDataCallable.class);
-	private final ByteBuf data;
+	private PushMessage data;
 
-	public ProcessDataCallable(final ByteBuf data) {
+	public ProcessDataCallable(final PushMessage data) {
 		this.data = data;
 	}
 
@@ -97,30 +82,24 @@ class ProcessDataCallable implements Callable<Integer> {
 	}
 
 	private void processReq() throws Exception {
-		PushMessage pm = null;
-		byte[] byteData = null;
+		if (data == null) return;
 		try {
-			byteData = new byte[data.readableBytes()];
-			final int readerIndex = data.readerIndex();
-			data.getBytes(readerIndex, byteData);
-			pm = new PushMessage(byteData);
 			NodeStatus nodeStat = NodeStatus.getInstance();
-			String uuid = pm.getUuidHexString();
+			String uuid = data.getUuidHexString();
 			ClientStatMachine csm = nodeStat.getClientStat(uuid);
 			if (csm == null) {//
-				csm = ClientStatMachine.newByPushReq(pm);
+				csm = ClientStatMachine.newByPushReq(data);
 				if (csm == null) {
 					throw new Exception("can not new state machine");
 				}
 				nodeStat.putClientStat(uuid, csm);
 			} else {
-				csm.onPushMessage(pm);
+				csm.onPushMessage(data);
 			}
 		} catch (Throwable e) {
 			throw e;
 		} finally {
-			pm = null;
-			byteData = null;
+			data = null;
 		}
 
 	}
