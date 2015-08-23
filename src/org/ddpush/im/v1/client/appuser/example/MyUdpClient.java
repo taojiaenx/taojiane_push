@@ -80,7 +80,7 @@ public class MyUdpClient extends UDPClientBase {
 			
 			final byte[] clientUUID = StringUtil.md5Byte("0");
 			ExecutorService pool = Executors.newFixedThreadPool(256);
-			for(int j = 0; j < 60; ++j) {
+			for(int j = 0; j < 600; ++j) {
              for(int i = 0; i < 5000; ++i) {
             	 pool.execute(new send0x20Task(ip,pushPort,clientUUID, ("生中出生中出生中出yeah生中出生中出生中出yeah 生中出生中出生中出yeah 生中出生中出生中出yeah  " + 1).getBytes("utf-8")));
              }

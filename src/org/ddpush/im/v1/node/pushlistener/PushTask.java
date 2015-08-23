@@ -55,12 +55,12 @@ public class PushTask extends FutureTask<Integer> {
 class ProcessDataCallable implements Callable<Integer> {
 	private static Logger logger = LoggerFactory
 			.getLogger(ProcessDataCallable.class);
-	private PushMessage data;
+	private PushMessage pm;
 	private Channel channel;
 
 	public ProcessDataCallable(final Channel channel, final PushMessage data) {
 		this.channel = channel;
-		this.data = data;
+		this.pm = data;
 	}
 
 	@Override
@@ -83,25 +83,32 @@ class ProcessDataCallable implements Callable<Integer> {
 	}
 
 	void clear() {
-		data = null;
+		pm = null;
 		channel = null;
 	}
 
 	private void processReq() throws Exception {
-		if (data == null) return;
+		PushMessage serverMessage = pm;
+		// 已经被cancel就不执行
+		if (serverMessage == null) return;
 		NodeStatus nodeStat = NodeStatus.getInstance();
-		String uuid = data.getUuidHexString();
+		String uuid = serverMessage.getUuidHexString();
 		ClientStatMachine csm = nodeStat.getClientStat(uuid);
-		if (csm == null) {//
-			csm = ClientStatMachine.newByPushReq(data);
-			if (csm == null) {
-				throw new Exception("can not new state machine");
+		try {
+			if (csm == null) {//
+				csm = ClientStatMachine.newByPushReq(serverMessage);
+				if (csm == null) {
+					throw new Exception("can not new state machine");
+				}
+				nodeStat.putClientStat(uuid, csm);
+			} else {
+				csm.onPushMessage(serverMessage);
 			}
-			nodeStat.putClientStat(uuid, csm);
-		} else {
-			csm.onPushMessage(data);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			serverMessage = null;
 		}
-
 	}
 
 }
