@@ -22,9 +22,11 @@ package org.ddpush.im.v1.node;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 import io.netty.util.internal.logging.Slf4JLoggerFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.ddpush.im.util.DateTimeUtil;
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
@@ -35,7 +37,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class IMServer {
-	private static Logger logger = LoggerFactory.getLogger(IMServer.class);
 	
 	public static IMServer server;
 
@@ -92,6 +93,7 @@ public class IMServer {
 	 * 系统参数配置
 	 */
 	public void initSystem() {
+		PropertyConfigurator.configure("Log4j.properties");
 		InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
 		System.setProperty("io.netty.recycler.maxCapacity.default", PropertyUtil.getProperty("io.netty.recycler.maxCapacity.default"));
 		System.setProperty("io.netty.leakDetectionLevel", "paranoid");
@@ -105,7 +107,7 @@ public class IMServer {
 	}
 	
 	public void initUdpConnector() throws Exception{
-		logger.info("start connector...");
+		System.out.println("start connector...");
 		udpConnector = new UdpConnector();
 		udpConnector.start();
 	}
@@ -123,7 +125,7 @@ public class IMServer {
 	}
 	
 	public void initWorkers(){
-		logger.info("start {} workers...", workerNum);
+		System.out.println("start " + workerNum + " workers...");
 		for(int i = 0; i < workerNum; i++){
 			UDPMessenger worker = new UDPMessenger(udpConnector, nodeStatus);
 			workerList.add(worker);
@@ -147,7 +149,7 @@ public class IMServer {
 	}
 	
 	public void start() throws Exception{
-		logger.info("working dir: "+System.getProperty("user.dir"));
+		System.out.println("working dir: "+System.getProperty("user.dir"));
 		init();
 		
 		final Thread mainT = Thread.currentThread();
@@ -155,17 +157,17 @@ public class IMServer {
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			public void run(){
 				stoped = true;
-				logger.info("shut down server... ");
+				System.out.println("shut down server... ");
 				try{
 					mainT.join();
-					logger.info("server is down, bye ");
+					System.out.println("server is down, bye ");
 				}catch(Exception e){
-					logger.error("服务器关闭错误");
+					System.out.println("服务器关闭错误");
 				}
 			}
 		});
 		this.startTime = System.currentTimeMillis();
-		logger.info("server is up ");
+        System.out.println("server is up ");
 		while(stoped == false){
 			try{
 				synchronized(this){
@@ -187,7 +189,7 @@ public class IMServer {
 		}
 		Runtime rt = Runtime.getRuntime();
 		if((rt.totalMemory()-rt.freeMemory())/(double)rt.maxMemory() > percent){
-			logger.info("run auto clean...");
+			System.out.println("run auto clean...");
 			cleaner.wakeup();
 		}
 	}
@@ -218,7 +220,7 @@ public class IMServer {
 			try{
 				workerList.get(i).stop();
 			}catch(Exception e){
-				logger.error("启动worker错误");
+				System.out.println("启动worker错误");
 			}
 		}
 	}
@@ -243,7 +245,7 @@ public class IMServer {
 		try{
 			clearnThread.interrupt();
 		}catch(Exception e){
-			logger.error("缓存清除器执行错误");
+			System.out.println("缓存清除器执行错误");
 		}
 	}
 	
