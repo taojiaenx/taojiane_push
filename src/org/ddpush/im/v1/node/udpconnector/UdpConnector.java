@@ -3,6 +3,7 @@ package org.ddpush.im.v1.node.udpconnector;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
@@ -71,9 +72,11 @@ public class UdpConnector {
 								new UDPWriteHandler());
 					}
 				});
-		antenna = b.bind(port).channel();
+		ChannelFuture f = b.bind(port);
+		antenna = f.channel();
 		this.sender = new Sender(antenna);
 		this.sender.init();
+		f.sync();
 		logger.info("udp connector port:{}", port);
 
 	}
