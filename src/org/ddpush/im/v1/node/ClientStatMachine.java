@@ -260,6 +260,7 @@ public class ClientStatMachine {
 		}
 	}
 	
+	
 	private void push0x10() throws Exception{
 		if(this.hasMessage0x10 == false){
 			return;
