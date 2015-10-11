@@ -1,5 +1,8 @@
 package org.ddpush.im.util;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.util.UUID;
 
@@ -110,4 +113,33 @@ public class StringUtil {
         return (sb.toString());
 
     }
+    
+	/**
+	 * @param ip
+	 * @return 有符号的整形数；当ip>128.0.0.0时为负数；
+	 * @throws UnknownHostException
+	 * @author wenc
+	 */
+	public static Long ip2Long(String ip) throws UnknownHostException   {
+		InetAddress address = InetAddress.getByName(ip);// 在给定主机名的情况下确定主机的 IP 址。
+		byte[] bytes = address.getAddress();// 返回此 InetAddress 对象的原始 IP 地址
+		int result = byte2int(bytes[0]) | byte2int(bytes[1]) | byte2int(bytes[2]) | byte2int(bytes[3]); 
+		return int2long(result);
+	}
+
+	public static long int2long(int i) {
+		long l = i & 0x7fffffffL;
+		if (i < 0) {
+			l |= 0x080000000L;
+		}
+		return l;
+	}
+
+	public static int byte2int(byte b) {
+		int l = b & 0x07f;
+		if (b < 0) {
+			l |= 0x80;
+		}
+		return l;
+	}
 }

@@ -36,6 +36,8 @@ import org.ddpush.im.v1.node.udpconnector.UdpConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ddpush.dao.DbHelper;
+
 public class IMServer {
 	
 	public static IMServer server;
@@ -91,12 +93,14 @@ public class IMServer {
 	}
 	/**
 	 * 系统参数配置
+	 * @throws Exception 
 	 */
-	public void initSystem() {
+	public void initSystem() throws Exception {
 		PropertyConfigurator.configure("Log4j.properties");
 		InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
 		System.setProperty("io.netty.recycler.maxCapacity.default", PropertyUtil.getProperty("io.netty.recycler.maxCapacity.default"));
 		System.setProperty("io.netty.leakDetectionLevel", "paranoid");
+		DbHelper.init();
 	}
 	
 	public void initConsole() throws Exception{

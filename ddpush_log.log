@@ -1,0 +1,726 @@
+2015 八月 27 20:13:33,713 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 27 20:13:33,762 INFO  org.ddpush.im.v1.node.IMServer start connector...
+ main2015 八月 27 20:13:33,793 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ IMServer-push-listener2015 八月 27 20:13:33,849 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 27 20:13:33,850 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 27 20:13:33,851 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 27 20:13:33,853 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 27 20:13:33,854 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 27 20:13:33,856 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 27 20:13:33,856 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 27 20:13:33,857 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 27 20:13:33,858 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 27 20:13:33,861 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 27 20:13:33,861 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 27 20:13:33,862 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 27 20:13:33,864 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 27 20:13:33,865 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 27 20:13:33,978 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 27 20:13:33,978 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 27 20:13:34,062 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 27 20:13:34,146 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 27 20:13:34,146 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 27 20:13:34,147 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 27 20:13:34,147 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 27 20:13:34,147 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 27 20:13:34,148 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 27 20:13:34,148 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 27 20:13:34,149 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 27 20:13:34,149 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 27 20:13:34,149 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 27 20:13:34,253 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x32e69655bca4e566 (took 49 ms)
+ IMServer-push-listener2015 八月 27 20:13:34,417 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 27 20:13:34,417 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 27 20:13:34,476 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 27 20:13:34,510 INFO  org.ddpush.im.v1.node.IMServer start 3 workers...
+ main2015 八月 27 20:13:34,525 INFO  org.ddpush.im.v1.node.IMServer server is up 
+ main2015 八月 27 20:13:34,959 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 27 20:13:34,961 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 27 20:13:34,976 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap
+ IMServer-push-listener2015 八月 27 20:22:46,533 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 27 20:23:08,925 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 27 20:23:08,994 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 27 20:23:09,027 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 27 20:23:09,028 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 27 20:23:09,029 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 27 20:23:09,031 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 27 20:23:09,032 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 27 20:23:09,033 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 27 20:23:09,033 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 27 20:23:09,034 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 27 20:23:09,035 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 27 20:23:09,037 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 27 20:23:09,038 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 27 20:23:09,039 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 27 20:23:09,040 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 27 20:23:09,041 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 27 20:23:09,146 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 27 20:23:09,146 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 27 20:23:09,221 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 27 20:23:09,316 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 27 20:23:09,317 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 27 20:23:09,317 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 27 20:23:09,317 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 27 20:23:09,318 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 27 20:23:09,318 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 27 20:23:09,318 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 27 20:23:09,319 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 27 20:23:09,319 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 27 20:23:09,319 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 27 20:23:09,442 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xa509468ae8e316f0 (took 58 ms)
+ IMServer-push-listener2015 八月 27 20:23:09,603 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 27 20:23:09,619 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 27 20:23:09,682 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 27 20:23:10,138 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 27 20:23:10,141 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 27 20:23:10,153 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap
+ IMServer-push-listener2015 八月 27 20:24:20,057 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 27 20:24:20,100 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 27 20:29:47,743 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 27 20:29:47,796 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 27 20:29:47,831 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 27 20:29:47,831 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 27 20:29:47,831 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 27 20:29:47,831 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 27 20:29:47,831 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 27 20:29:47,846 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 27 20:29:47,950 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 27 20:29:47,950 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 27 20:29:48,036 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 27 20:29:48,163 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 27 20:29:48,163 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 27 20:29:48,164 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 27 20:29:48,164 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 27 20:29:48,164 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 27 20:29:48,165 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 27 20:29:48,165 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 27 20:29:48,165 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 27 20:29:48,166 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 27 20:29:48,166 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 27 20:29:48,285 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xb3386443a540b350 (took 56 ms)
+ IMServer-push-listener2015 八月 27 20:29:48,456 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 27 20:29:48,456 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 27 20:29:48,517 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 27 20:29:48,961 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 27 20:29:48,965 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 27 20:29:48,983 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap
+ IMServer-push-listener2015 八月 27 20:29:53,236 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 27 20:29:53,288 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 27 20:33:47,244 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 27 20:33:47,316 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ IMServer-push-listener2015 八月 27 20:33:47,352 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 27 20:33:47,354 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 27 20:33:47,355 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 27 20:33:47,356 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 27 20:33:47,357 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 27 20:33:47,358 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 27 20:33:47,358 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 27 20:33:47,358 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 27 20:33:47,359 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 27 20:33:47,362 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 27 20:33:47,362 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 27 20:33:47,363 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 27 20:33:47,364 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 27 20:33:47,365 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 27 20:33:47,461 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 27 20:33:47,462 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 27 20:33:47,543 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 27 20:33:47,634 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 27 20:33:47,635 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 27 20:33:47,635 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 27 20:33:47,635 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 27 20:33:47,636 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 27 20:33:47,636 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 27 20:33:47,636 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 27 20:33:47,636 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 27 20:33:47,637 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 27 20:33:47,637 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 27 20:33:47,753 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xcb0c24576322d106 (took 54 ms)
+ IMServer-push-listener2015 八月 27 20:33:47,896 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 27 20:33:47,896 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 27 20:33:47,964 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 27 20:33:48,448 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 27 20:33:48,450 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 27 20:33:48,463 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 27 20:33:59,743 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 27 20:33:59,788 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 30 11:47:14,695 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 11:47:14,796 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 11:47:14,845 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 11:47:14,848 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 11:47:14,849 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 11:47:14,850 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 11:47:14,851 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 11:47:14,854 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 11:47:14,854 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 11:47:14,855 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 11:47:14,856 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 11:47:14,860 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 11:47:14,861 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 11:47:14,862 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 11:47:14,864 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 11:47:14,864 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 11:47:15,017 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 30 11:47:15,018 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 30 11:47:15,136 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 11:47:15,254 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 11:47:15,255 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 11:47:15,255 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 11:47:15,256 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 11:47:15,256 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 11:47:15,257 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 11:47:15,257 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 11:47:15,258 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 11:47:15,258 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 11:47:15,259 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 11:47:15,412 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x225b82023d61b5f2 (took 75 ms)
+ main2015 八月 30 11:47:15,623 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 11:47:15,623 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 11:47:15,729 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 11:47:16,431 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 11:47:16,436 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 11:47:16,456 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 11:47:38,956 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 11:47:39,051 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 11:47:39,113 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 30 11:47:39,115 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 30 11:47:39,116 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 30 11:47:39,117 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 30 11:47:39,119 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 30 11:47:39,121 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 30 11:47:39,121 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 30 11:47:39,122 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 30 11:47:39,123 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 30 11:47:39,129 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 30 11:47:39,130 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 30 11:47:39,131 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 30 11:47:39,134 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 30 11:47:39,134 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 30 11:47:39,261 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 11:47:39,262 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 11:47:39,369 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 11:47:39,472 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 11:47:39,473 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 11:47:39,473 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 11:47:39,474 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 11:47:39,474 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 11:47:39,474 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 11:47:39,475 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 11:47:39,475 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 11:47:39,475 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 11:47:39,475 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 11:47:39,597 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x681bb370128ba6e6 (took 67 ms)
+ IMServer-push-listener2015 八月 30 11:47:39,989 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 11:47:39,990 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 11:47:40,142 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 11:47:40,957 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 11:47:40,959 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 11:47:40,983 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 11:47:46,537 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 11:47:46,592 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 12:24:03,427 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 12:39:22,926 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 12:39:23,005 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 12:39:23,038 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 30 12:39:23,038 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 30 12:39:23,038 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 30 12:39:23,038 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 30 12:39:23,038 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 30 12:39:23,048 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 30 12:39:23,158 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 30 12:39:23,158 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 30 12:39:23,240 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 12:39:23,330 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 12:39:23,493 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x18d5948624d75297 (took 74 ms)
+ main2015 八月 30 12:39:23,706 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 12:39:23,706 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 12:39:23,786 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 12:39:24,373 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 12:39:24,375 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 12:39:24,390 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 12:39:34,411 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 12:39:34,463 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 12:43:45,743 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 12:43:45,834 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 12:43:45,945 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 12:43:45,969 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 12:43:45,996 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 12:43:45,998 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 12:43:46,000 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 12:43:46,005 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 12:43:46,006 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 12:43:46,006 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 12:43:46,010 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 12:43:46,045 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 12:43:46,045 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 12:43:46,046 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 12:43:46,050 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 12:43:46,051 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 12:43:46,279 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 12:43:46,279 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 12:43:46,442 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 12:43:46,607 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ IMServer-push-listener2015 八月 30 12:43:46,607 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ IMServer-push-listener2015 八月 30 12:43:46,609 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ IMServer-push-listener2015 八月 30 12:43:46,610 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ IMServer-push-listener2015 八月 30 12:43:46,610 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ IMServer-push-listener2015 八月 30 12:43:46,611 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ IMServer-push-listener2015 八月 30 12:43:46,611 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ IMServer-push-listener2015 八月 30 12:43:46,612 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ IMServer-push-listener2015 八月 30 12:43:46,612 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ IMServer-push-listener2015 八月 30 12:43:46,613 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ IMServer-push-listener2015 八月 30 12:43:46,849 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x961062768793f48e (took 76 ms)
+ IMServer-push-listener2015 八月 30 12:43:47,117 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 12:43:47,117 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 12:43:47,242 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 12:43:47,925 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 12:43:47,927 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 12:43:47,943 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 12:43:54,435 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 12:43:54,487 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 12:44:35,937 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 12:44:36,053 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 30 12:44:36,083 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 30 12:44:36,093 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 30 12:44:36,093 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 30 12:44:36,093 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 30 12:44:36,093 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 30 12:44:36,093 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 30 12:44:36,193 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 12:44:36,193 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 12:44:36,273 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 12:44:36,363 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 12:44:36,493 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x9b8997a526d88de8 (took 53 ms)
+ IMServer-push-listener2015 八月 30 12:44:36,653 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 12:44:36,653 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 12:44:36,763 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 12:44:37,309 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 12:44:37,311 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 12:44:37,325 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 12:44:47,319 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 30 12:44:47,371 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 30 12:45:18,090 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 12:45:18,190 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 12:45:18,230 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 12:45:18,240 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 12:45:18,240 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 12:45:18,240 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 12:45:18,240 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 12:45:18,240 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 12:45:18,240 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 12:45:18,350 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 12:45:18,350 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 12:45:18,424 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 12:45:18,514 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 12:45:18,641 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xc898e091457ccc3c (took 58 ms)
+ IMServer-push-listener2015 八月 30 12:45:18,821 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 12:45:18,821 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 12:45:18,897 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 12:45:19,464 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 12:45:19,467 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 12:45:19,482 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 12:45:27,583 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-15936508772015 八月 30 12:45:27,635 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-15936508772015 八月 30 13:14:36,498 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 13:14:36,592 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ IMServer-push-listener2015 八月 30 13:14:36,620 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 13:14:36,620 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 13:14:36,620 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 13:14:36,620 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 13:14:36,630 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 13:14:36,640 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 13:14:36,640 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 13:14:36,740 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 30 13:14:36,740 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 30 13:14:36,830 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 13:14:36,920 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 13:14:36,920 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 13:14:36,920 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 13:14:36,920 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 13:14:36,930 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 13:14:36,930 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 13:14:36,930 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 13:14:36,930 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 13:14:36,930 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 13:14:36,930 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 13:14:37,040 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xcd5cef4b92984127 (took 48 ms)
+ IMServer-push-listener2015 八月 30 13:14:37,220 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 13:14:37,220 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 13:14:37,320 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 13:14:38,066 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 13:14:38,069 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 13:14:38,085 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 13:14:50,937 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 30 13:14:50,986 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 30 13:45:58,210 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 13:45:58,290 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 13:45:58,330 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 30 13:45:58,330 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 30 13:45:58,330 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 30 13:45:58,330 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 30 13:45:58,330 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 30 13:45:58,340 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 30 13:45:58,444 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 13:45:58,444 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 13:45:58,524 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 13:45:58,625 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 13:45:58,745 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x30f431d7a8160bc3 (took 55 ms)
+ IMServer-push-listener2015 八月 30 13:45:58,915 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 13:45:58,915 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 13:45:58,995 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 13:45:59,513 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 13:45:59,516 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 13:45:59,530 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 13:46:06,086 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 13:46:06,146 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 13:47:02,777 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 13:47:02,857 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ IMServer-push-listener2015 八月 30 13:47:02,887 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 13:47:02,887 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 13:47:02,887 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 13:47:02,887 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 13:47:02,897 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 13:47:03,007 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 13:47:03,007 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 13:47:03,087 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 13:47:03,177 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 13:47:03,307 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xf808e6d02b4fac8a (took 47 ms)
+ IMServer-push-listener2015 八月 30 13:47:03,467 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 13:47:03,467 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 13:47:03,537 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 13:47:04,071 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 13:47:04,074 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 13:47:04,087 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 13:47:57,680 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 13:47:57,731 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 13:50:59,426 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 13:50:59,506 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 13:50:59,547 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 30 13:50:59,557 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 30 13:50:59,567 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 30 13:50:59,567 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 30 13:50:59,567 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 30 13:50:59,567 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 30 13:50:59,567 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 30 13:50:59,677 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 30 13:50:59,677 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 30 13:50:59,757 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 13:50:59,853 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 13:50:59,863 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 13:51:00,018 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xc6831c6ffd93cf58 (took 71 ms)
+ IMServer-push-listener2015 八月 30 13:51:00,284 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 13:51:00,284 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 13:51:00,374 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 13:51:00,928 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 13:51:00,930 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 13:51:00,948 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 13:51:26,704 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 30 13:51:26,757 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-9298541562015 八月 30 14:04:19,148 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 14:04:19,242 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 14:04:19,288 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ main2015 八月 30 14:04:19,289 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ main2015 八月 30 14:04:19,291 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ main2015 八月 30 14:04:19,292 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ main2015 八月 30 14:04:19,294 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ main2015 八月 30 14:04:19,296 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ main2015 八月 30 14:04:19,296 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ main2015 八月 30 14:04:19,297 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ main2015 八月 30 14:04:19,298 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ main2015 八月 30 14:04:19,301 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ main2015 八月 30 14:04:19,301 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ main2015 八月 30 14:04:19,302 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ main2015 八月 30 14:04:19,303 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ main2015 八月 30 14:04:19,304 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ main2015 八月 30 14:04:19,412 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 14:04:19,422 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 14:04:19,525 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 14:04:19,632 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 14:04:19,633 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 14:04:19,633 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 14:04:19,633 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 14:04:19,634 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 14:04:19,634 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 14:04:19,635 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 14:04:19,635 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 14:04:19,635 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 14:04:19,636 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 14:04:19,757 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x4ff4dd8d3037e396 (took 56 ms)
+ IMServer-push-listener2015 八月 30 14:04:19,971 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 14:04:19,972 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 14:04:20,087 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 14:04:20,722 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 14:04:20,725 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 14:04:20,741 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 14:04:51,452 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 14:04:51,517 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 14:15:30,442 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 14:15:30,555 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 30 14:15:30,610 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 14:15:30,613 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 14:15:30,614 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 14:15:30,615 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 14:15:30,616 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 14:15:30,619 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 14:15:30,620 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 14:15:30,620 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 14:15:30,622 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 14:15:30,624 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 14:15:30,625 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 14:15:30,626 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 14:15:30,627 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 14:15:30,628 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 14:15:30,800 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 30 14:15:30,801 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 30 14:15:30,905 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 14:15:31,019 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 14:15:31,019 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 14:15:31,020 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 14:15:31,020 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 14:15:31,021 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 14:15:31,021 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 14:15:31,021 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 14:15:31,022 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 14:15:31,022 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 14:15:31,022 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 14:15:31,189 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x63e8a0e86fafc8af (took 73 ms)
+ main2015 八月 30 14:15:31,411 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 14:15:31,413 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 14:15:31,515 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 14:15:32,269 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 14:15:32,271 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 14:15:32,292 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 14:15:40,666 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 14:15:40,737 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 15:20:13,444 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 15:20:13,527 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ IMServer-push-listener2015 八月 30 15:20:13,557 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 15:20:13,557 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 15:20:13,567 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 15:20:13,577 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 15:20:13,577 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 15:20:13,677 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ IMServer-push-listener2015 八月 30 15:20:13,677 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ IMServer-push-listener2015 八月 30 15:20:13,767 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 15:20:13,857 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 15:20:13,977 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0x7c34bc4266eb7d6e (took 56 ms)
+ IMServer-push-listener2015 八月 30 15:20:14,147 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 15:20:14,147 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 15:20:14,237 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 15:20:14,764 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 15:20:14,766 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 15:20:14,784 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 15:20:21,203 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-8203006732015 八月 30 15:20:21,251 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-8203006732015 八月 30 15:28:37,676 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 15:29:32,517 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 30 15:29:32,587 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ IMServer-push-listener2015 八月 30 15:29:32,619 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 30 15:29:32,619 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 30 15:29:32,619 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 30 15:29:32,629 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 30 15:29:32,639 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 30 15:29:32,739 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 30 15:29:32,739 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 30 15:29:32,819 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 30 15:29:32,909 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 30 15:29:32,909 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 30 15:29:32,909 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 30 15:29:32,909 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 30 15:29:32,909 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 30 15:29:32,919 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 30 15:29:32,919 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 30 15:29:32,919 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 30 15:29:32,919 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 30 15:29:32,919 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 30 15:29:33,029 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xc0ac1ed456b5fdcf (took 47 ms)
+ main2015 八月 30 15:29:33,189 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 30 15:29:33,189 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 30 15:29:33,279 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 30 15:29:33,828 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 30 15:29:33,831 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 30 15:29:33,845 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 30 15:29:41,647 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 15:29:41,696 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-10742443552015 八月 30 16:05:59,197 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 31 22:40:30,222 DEBUG io.netty.util.internal.logging.InternalLoggerFactory Using SLF4J as the default logging framework
+ main2015 八月 31 22:40:30,314 DEBUG io.netty.channel.MultithreadEventLoopGroup -Dio.netty.eventLoopThreads: 8
+ main2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Buffer.address: available
+ IMServer-push-listener2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.theUnsafe: available
+ IMServer-push-listener2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent0 sun.misc.Unsafe.copyMemory: available
+ IMServer-push-listener2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent0 java.nio.Bits.unaligned: true
+ IMServer-push-listener2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent Platform: Windows
+ IMServer-push-listener2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent Java version: 7
+ IMServer-push-listener2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noUnsafe: false
+ IMServer-push-listener2015 八月 31 22:40:30,376 DEBUG io.netty.util.internal.PlatformDependent sun.misc.Unsafe: available
+ IMServer-push-listener2015 八月 31 22:40:30,392 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noJavassist: false
+ IMServer-push-listener2015 八月 31 22:40:30,395 DEBUG io.netty.util.internal.PlatformDependent Javassist: unavailable
+ IMServer-push-listener2015 八月 31 22:40:30,395 DEBUG io.netty.util.internal.PlatformDependent You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+ IMServer-push-listener2015 八月 31 22:40:30,396 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.tmpdir: C:\Users\taojiaen\AppData\Local\Temp (java.io.tmpdir)
+ IMServer-push-listener2015 八月 31 22:40:30,399 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.bitMode: 64 (sun.arch.data.model)
+ IMServer-push-listener2015 八月 31 22:40:30,399 DEBUG io.netty.util.internal.PlatformDependent -Dio.netty.noPreferDirect: false
+ IMServer-push-listener2015 八月 31 22:40:30,523 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.noKeySetOptimization: false
+ main2015 八月 31 22:40:30,523 DEBUG io.netty.channel.nio.NioEventLoop -Dio.netty.selectorAutoRebuildThreshold: 512
+ main2015 八月 31 22:40:30,610 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port
+ main2015 八月 31 22:40:30,709 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numHeapArenas: 1
+ main2015 八月 31 22:40:30,709 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.numDirectArenas: 1
+ main2015 八月 31 22:40:30,709 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.pageSize: 8192
+ main2015 八月 31 22:40:30,709 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxOrder: 11
+ main2015 八月 31 22:40:30,709 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.chunkSize: 16777216
+ main2015 八月 31 22:40:30,709 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.tinyCacheSize: 512
+ main2015 八月 31 22:40:30,726 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.smallCacheSize: 256
+ main2015 八月 31 22:40:30,729 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.normalCacheSize: 64
+ main2015 八月 31 22:40:30,729 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+ main2015 八月 31 22:40:30,729 DEBUG io.netty.buffer.PooledByteBufAllocator -Dio.netty.allocator.cacheTrimInterval: 8192
+ main2015 八月 31 22:40:30,882 DEBUG io.netty.util.internal.ThreadLocalRandom -Dio.netty.initialSeedUniquifier: 0xffc7d7a00b2203fb (took 79 ms)
+ IMServer-push-listener2015 八月 31 22:40:31,161 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.allocator.type: unpooled
+ IMServer-push-listener2015 八月 31 22:40:31,161 DEBUG io.netty.buffer.ByteBufUtil -Dio.netty.threadLocalDirectBufferSize: 65536
+ IMServer-push-listener2015 八月 31 22:40:31,283 INFO  org.ddpush.im.v1.node.udpconnector.UdpConnector udp connector port:9966
+ main2015 八月 31 22:40:32,014 DEBUG io.netty.util.NetUtil Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ IMServer-push-listener2015 八月 31 22:40:32,018 DEBUG io.netty.util.NetUtil \proc\sys\net\core\somaxconn: 200 (non-existent)
+ IMServer-push-listener2015 八月 31 22:40:32,042 INFO  org.ddpush.im.v1.node.pushlistener.NettyPushListener Netty TCP Push Listener nio provider: io.netty.bootstrap.ServerBootstrap with 3 workers
+ IMServer-push-listener2015 八月 31 22:40:40,716 DEBUG io.netty.util.Recycler -Dio.netty.recycler.maxCapacity.default: 256
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-15936508772015 八月 31 22:40:40,764 DEBUG io.netty.util.ResourceLeakDetector -Dio.netty.leakDetectionLevel: paranoid
+ org.ddpush.im.v1.node.udpconnector.UdpConnector-1593650877
