@@ -1,8 +1,6 @@
 package com.ddpush.dao;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -197,11 +195,11 @@ public class DbHelper {
 								"insert into broadcast_storer(`broadcast_id`,`broadcast_body`,`lat`,`lon`,`lat_floor`,`lon_floor`,`ipv4`, `create_time`) values(?,?,?,?,?,?,?,?)",
 								new Object[][] { {
 										UUID.randomUUID().toString(),
-										"中出就是现在",
-										Float.valueOf(50.0f),
-										Float.valueOf(33.4f),
-										Integer.valueOf(50),
-										Integer.valueOf(33),
+										"我中出就是现在",
+										50.0f,
+										33.4f,
+										50,
+										33,
 										StringUtil
 												.ip2Long("255.255.255.255"),
 										new Date() } }));
