@@ -120,11 +120,10 @@ public class StringUtil {
 	 * @throws UnknownHostException
 	 * @author wenc
 	 */
-	public static long ip2Long(String ip) throws UnknownHostException   {
+	public static long ip2int(String ip) throws UnknownHostException   {
 		InetAddress address = InetAddress.getByName(ip);// 在给定主机名的情况下确定主机的 IP 址。
 		byte[] bytes = address.getAddress();// 返回此 InetAddress 对象的原始 IP 地址
-		int result = byte2int(bytes[0]) | byte2int(bytes[1]) | byte2int(bytes[2]) | byte2int(bytes[3]); 
-		return int2long(result);
+		return int2long( byte2int(bytes[0])<<24 | byte2int(bytes[1])<<16 | byte2int(bytes[2])<<8 | byte2int(bytes[3])<<1); 
 	}
 
 	public static long int2long(int i) {

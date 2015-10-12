@@ -17,5 +17,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.1.36-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/gson-2.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/gson-2.2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

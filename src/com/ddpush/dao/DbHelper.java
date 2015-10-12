@@ -192,7 +192,7 @@ public class DbHelper {
 		System.out
 				.println(DbHelper
 						.batchExec(
-								"insert into broadcast_storer(`broadcast_id`,`broadcast_body`,`lat`,`lon`,`lat_floor`,`lon_floor`,`ipv4`, `create_time`) values(?,?,?,?,?,?,?,?)",
+								"insert into broadcast_storer(`broadcast_id`,`broadcast_body`,`lat`,`lon`,`lat_floor`,`lon_floor`,`ipv4`) values(?,?,?,?,?,?,?)",
 								new Object[][] { {
 										UUID.randomUUID().toString(),
 										"我中出就是现在",
@@ -201,7 +201,7 @@ public class DbHelper {
 										50,
 										33,
 										StringUtil
-												.ip2Long("255.255.255.255"),
-										new Date() } }));
+												.ip2int("255.255.255.255"),
+										 } }));
 	}
 }
