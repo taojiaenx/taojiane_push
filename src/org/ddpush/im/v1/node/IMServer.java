@@ -29,6 +29,7 @@ import java.util.Date;
 import org.apache.log4j.PropertyConfigurator;
 import org.ddpush.im.util.DateTimeUtil;
 import org.ddpush.im.util.PropertyUtil;
+import org.ddpush.im.v1.node.listener.PushMessageListener;
 import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.ddpush.im.v1.node.tcpconnector.NIOTcpConnector;
 import org.ddpush.im.v1.node.udpconnector.UDPMessenger;
@@ -52,6 +53,10 @@ public class IMServer {
 	private NIOTcpConnector tcpConnector;
 	
 	private NodeStatus nodeStatus = NodeStatus.getInstance();
+	/**
+	 * 推送消息监听器列表
+	 */
+	private ArrayList<PushMessageListener> pushMessageListeners = new ArrayList<>();
 	
 	private ArrayList<UDPMessenger> workerList = new ArrayList<UDPMessenger>();
 	
@@ -138,6 +143,36 @@ public class IMServer {
 			t.setDaemon(true);
 			t.start();
 		}
+	}
+	/**
+	 * <b>concurrent-safe</b>
+	 * 加入消息监听器
+	 * @param listener
+	 */
+	public void addPushMessageListener(final PushMessageListener listener) {
+		synchronized(listener) {
+			if (!pushMessageListeners.contains(listener)) {
+				pushMessageListeners.add(listener);
+			}
+		}
+	}
+	void firePushMessageReceived(final PushMessage message) {
+		for(PushMessageListener listener: pushMessageListeners) {
+			   listener.received(message);
+		}
+	}
+	/**
+	 * <b>concurrent-safe</b>
+	 * 删除消息监听器
+	 * @param listner
+	 */
+	public void removePushMessageListener(final PushMessageListener listner) {
+		synchronized(listner) {
+			pushMessageListeners.remove(listner);
+		}
+	}
+	public void initServices() {
+		
 	}
 	
 	public void initCleaner() throws Exception{

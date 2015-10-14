@@ -3,6 +3,9 @@ package org.ddpush.im.util;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 /**
@@ -12,30 +15,17 @@ import com.google.gson.reflect.TypeToken;
  * 
  */
 public class JsonConvertor {
-    // private static final Logger log = LoggerFactory.getLogger(JsonCovert.class);
-    public final static Type HashMapType = new TypeToken<HashMap>() {}.getType();
+    private static final Logger log = LoggerFactory.getLogger(JsonConvertor.class);
 
-    public static HashMap toHashMap(final String input) {
-        Gson gson = new Gson();
+    public static HashMap toHashMap(final Gson gson, final String input, final Type type)throws Exception {
         HashMap ret;
-        try {
-            ret = (HashMap) gson.fromJson(input, HashMapType);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        ret = (HashMap) gson.fromJson(input, type);
         return ret;
     }
 
-    public static Object toObject(final String input, final Type type) {
-        Gson gson = new Gson();
+    public static Object toObject(Gson gson, final String input, final Type type)throws Exception {
         Object res;
-        try {
-            res = gson.fromJson(input, type);
-        } catch (Exception e) {
-        //    e.printStackTrace();
-            return null;
-        }
+        res = gson.fromJson(input, type);
         return res;
     }
 }

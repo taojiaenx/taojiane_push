@@ -255,10 +255,10 @@ public class ClientStatMachine {
 			message0x20 = new byte[message0x20Len];
 			System.arraycopy(pm.getData(), Constant.PUSH_MSG_HEADER_LEN, message0x20, 0, message0x20Len);
 			push0x20();
-		}else{
-			//do nothing
 		}
+		IMServer.getInstance().firePushMessageReceived(pm);
 	}
+	
 	
 	
 	private void push0x10() throws Exception{
