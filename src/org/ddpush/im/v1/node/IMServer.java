@@ -292,6 +292,9 @@ public class IMServer {
 		pushListener.stop();
 		pushThread.join();
 	}
+	public void stopServices() {
+		
+	}
 	
 	public void saveStatus() throws Exception{
 		nodeStatus.saveToFile();

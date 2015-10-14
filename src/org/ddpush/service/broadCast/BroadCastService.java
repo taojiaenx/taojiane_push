@@ -16,6 +16,7 @@ public class BroadCastService implements Service{
 	@Override
 	public void uninstall() {
 		IMServer.getInstance().removePushMessageListener(Commander.getInstance());
+		Commander.getInstance().shutDowm();
 	}
 
 }

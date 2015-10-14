@@ -32,7 +32,6 @@ public class MysqlStorer implements Runnable, JsonExecutor{
 	}
 	
 	private void storeMessage(final BroadCast broadcast) {
-		
 	}
 
 }

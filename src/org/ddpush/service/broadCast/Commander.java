@@ -1,5 +1,6 @@
 package org.ddpush.service.broadCast;
 
+import org.ddpush.im.util.MultiQueueExecutor;
 import org.ddpush.im.v1.node.PushMessage;
 import org.ddpush.im.v1.node.listener.PushMessageListener;
 import org.slf4j.Logger;
@@ -10,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * @author taojiaen
  *
  */
-public  class Commander implements PushMessageListener {
+public  class Commander extends MultiQueueExecutor implements PushMessageListener {
 	private static Commander signleObject = null;
 	private static Logger log = LoggerFactory.getLogger(Commander.class);
 	/**
