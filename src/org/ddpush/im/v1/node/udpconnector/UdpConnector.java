@@ -11,9 +11,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 
 import org.ddpush.im.util.PropertyUtil;
+import org.ddpush.im.util.ThreadFactoryWithName;
 import org.ddpush.im.v1.node.ClientMessage;
 import org.ddpush.im.v1.node.ServerMessage;
-import org.ddpush.im.v1.node.ThreadFactoryWithName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

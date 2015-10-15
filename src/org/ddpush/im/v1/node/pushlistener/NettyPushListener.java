@@ -32,8 +32,8 @@ import io.netty.handler.timeout.WriteTimeoutHandler;
 import java.nio.channels.ServerSocketChannel;
 
 import org.ddpush.im.util.PropertyUtil;
+import org.ddpush.im.util.ThreadFactoryWithName;
 import org.ddpush.im.v1.node.DDPushMessageDecoder;
-import org.ddpush.im.v1.node.ThreadFactoryWithName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -19,6 +19,10 @@ public class BroadCast {
      * 消息体
      */
 	private String body;
+	/**
+	 * 消息ID
+	 */
+	private String packetID;
 	public BigDecimal getLat() {
 		return lat;
 	}
@@ -36,6 +40,12 @@ public class BroadCast {
 	}
 	public void setBody(String body) {
 		this.body = body;
+	}
+	public String getPacketID() {
+		return packetID;
+	}
+	public void setPacketID(String packetID) {
+		this.packetID = packetID;
 	}
 	
 }
