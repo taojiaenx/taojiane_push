@@ -34,6 +34,9 @@ import org.ddpush.im.v1.node.pushlistener.NettyPushListener;
 import org.ddpush.im.v1.node.tcpconnector.NIOTcpConnector;
 import org.ddpush.im.v1.node.udpconnector.UDPMessenger;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
+import org.ddpush.service.Service;
+import org.ddpush.service.broadCast.BroadCast;
+import org.ddpush.service.broadCast.BroadCastService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,6 +62,11 @@ public class IMServer {
 	private ArrayList<PushMessageListener> pushMessageListeners = new ArrayList<>();
 	
 	private ArrayList<UDPMessenger> workerList = new ArrayList<UDPMessenger>();
+	
+	/**
+	 * Service集合
+	 */
+	Service[] services = new Service[]{new BroadCastService()};
 	
 	private Thread clearnThread = null;
 	private ClientStatMachineCleaner cleaner = null;
@@ -93,6 +101,7 @@ public class IMServer {
 		initUdpConnector();
 		initTcpConnector();
 		initWorkers();
+		initServices();
 		initCleaner();
 		
 	}
@@ -172,7 +181,14 @@ public class IMServer {
 		}
 	}
 	public void initServices() {
-		
+		for (Service service : services) {
+			service.install();
+		}
+	}
+	public void stopServices() {
+		for (Service service : services) {
+			service.uninstall();
+		}
 	}
 	
 	public void initCleaner() throws Exception{
@@ -243,6 +259,7 @@ public class IMServer {
 	
 	protected void quit() throws Exception{
 		try{
+			stopServices();
 			stopWorkers();
 			stopUdpConnector();
 			stopTcpConnector();
@@ -291,9 +308,6 @@ public class IMServer {
 	public void stopPushListener() throws Exception{
 		pushListener.stop();
 		pushThread.join();
-	}
-	public void stopServices() {
-		
 	}
 	
 	public void saveStatus() throws Exception{
