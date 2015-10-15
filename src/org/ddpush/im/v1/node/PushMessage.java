@@ -28,6 +28,10 @@ public final class PushMessage{
 	public static final int DATA_LENGTH_LENGTH = 2;
 	
 	protected byte[] data;
+	/**
+	 * 广播的ip地址
+	 */
+	protected long ipv4;
 	
 	public PushMessage(byte[] data) throws Exception{
 		if(data == null){
@@ -99,5 +103,14 @@ public final class PushMessage{
 		
 		return true;
 	}
+
+	public long getIpv4() {
+		return ipv4;
+	}
+
+	public void setIpv4(long ipv4) {
+		this.ipv4 = ipv4;
+	}
+	
 
 }

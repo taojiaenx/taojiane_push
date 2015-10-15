@@ -60,11 +60,11 @@ public class MultiQueueExecutor {
 	 * @param command
 	 */
 	public void execute(final int plainid, final Runnable command) {
-
+		executeByRealID(solvePlainid(plainid), command);
 	}
 
 	private void executeByRealID(final int runid, final Runnable command) {
-
+		queueArray[runid].execute(command);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class MultiQueueExecutor {
 		if (task == null)
 			throw new NullPointerException();
 		RunnableFuture<T> ftask = newTaskFor(task);
-		executeByRealID(runid, ftask);
+		execute(runid, ftask);
 		return ftask;
 	}
 

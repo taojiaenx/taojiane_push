@@ -24,6 +24,7 @@ import io.netty.channel.Channel;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
+import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.node.ClientStatMachine;
 import org.ddpush.im.v1.node.NodeStatus;
 import org.ddpush.im.v1.node.PushMessage;
@@ -94,6 +95,8 @@ class ProcessDataCallable implements Callable<Integer> {
 		NodeStatus nodeStat = NodeStatus.getInstance();
 		String uuid = serverMessage.getUuidHexString();
 		ClientStatMachine csm = nodeStat.getClientStat(uuid);
+		// 加入ip地址
+		serverMessage.setIpv4(StringUtil.ip2int(channel.remoteAddress().toString()));
 		try {
 			if (csm == null) {//
 				csm = ClientStatMachine.newByPushReq(serverMessage);

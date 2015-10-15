@@ -1,5 +1,6 @@
 package com.ddpush.dao;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Enumeration;
@@ -196,7 +197,7 @@ public class DbHelper {
 								new Object[][] { {
 										UUID.randomUUID().toString(),
 										"我中出就是现在",
-										50.0f,
+										new BigDecimal(50.0f),
 										33.4f,
 										50,
 										33,
