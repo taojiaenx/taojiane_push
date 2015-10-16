@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.log4j.PropertyConfigurator;
 import org.ddpush.im.util.StringUtil;
@@ -170,7 +171,27 @@ public class DbHelper {
      * @param params
      * @return
      */
-    public static List<Object[]> batchQeury(String sql, Object[] params) {
+    @SuppressWarnings("deprecation")
+	public static List<Object> batchQeury(String sql, Object[] params, ResultSetHandler handler) {
+        QueryRunner qr = null;
+        List<Object> ret = null;
+        try {
+            qr = DbHelper.getQueryRunner("data1");
+            ret = qr.query(sql, params, handler);
+            return ret;
+        } catch (Exception e) {
+            log.error("数据库查询出错", e);
+            if(ret != null) ret.clear();
+            return null;
+        }
+    }
+	/**
+	 * 返回list加数组
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public static List<Object[]> batchQeury(String sql, Object[] params) {
         QueryRunner qr = null;
         List<Object[]> ret = null;
         try {

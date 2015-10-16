@@ -1,6 +1,7 @@
 package org.ddpush.service.broadCast;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 /**
  * 广播消息体
  * @author taojiaen
@@ -21,8 +22,14 @@ public class BroadCast {
 	private String body;
 	/**
 	 * 消息ID
+	 * 用户上传时ID是用户自己生成的
+	 * 服务器下发时，ID是服务端，该广播的id
 	 */
-	private String packetID;
+	private String broadCastID;
+	/**
+	 * 客户端上传数据中不用包括
+	 */
+	private Date createDate;
 	public BigDecimal getLat() {
 		return lat;
 	}
@@ -41,11 +48,18 @@ public class BroadCast {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	public String getPacketID() {
-		return packetID;
+	public String getBroadCastID() {
+		return broadCastID;
 	}
-	public void setPacketID(String packetID) {
-		this.packetID = packetID;
+	public void setBroadCastID(String packetID) {
+		this.broadCastID = packetID;
 	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	
 	
 }
