@@ -38,12 +38,14 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 	@Override
 	public void run() {
 		if (message != null) {
+			int res = 0;
 			try {
 				storeMessage((BroadCast) JsonConvertor.toObject(
 						LOCAL_GSON.get(),
 						StringUtil.convert(message), BroadCast.class),
 						message.getIpv4());
 			} catch (Exception e) {
+				res = -1;
 				log.error("广播消息存储失败", e);
 			}
 		}
