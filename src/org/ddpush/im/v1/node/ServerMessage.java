@@ -26,6 +26,8 @@ public final class ServerMessage{
 	protected SocketAddress address;
 	protected byte[] data;
 	
+	public ServerMessage(){}
+	
 	public ServerMessage(SocketAddress address, byte[] data) throws Exception{
 		this.address = address;
 		this.data = data;
