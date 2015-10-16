@@ -1,6 +1,9 @@
 package org.ddpush.service.broadCast.exeutor;
 
+import org.ddpush.im.util.SeverMessageCreator;
+
 import io.netty.util.concurrent.FastThreadLocal;
+
 
 
 import com.google.gson.Gson;
@@ -10,11 +13,12 @@ import com.google.gson.Gson;
  * @author taojiaen
  *
  */
-public interface  JsonExecutor{
+public interface  BaseExecutor{
 	static FastThreadLocal<Gson> LOCAL_GSON = new  FastThreadLocal<Gson>(){
 		@Override
         protected Gson initialValue() {
             return new Gson();
         }
 	};
+	static SeverMessageCreator SERVER_MESSAGE_CREATOR = new SeverMessageCreator();
 }

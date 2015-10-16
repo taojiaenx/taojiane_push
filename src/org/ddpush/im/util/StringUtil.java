@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.util.UUID;
 
+import org.ddpush.im.v1.node.Constant;
 import org.ddpush.im.v1.node.PushMessage;
 
 
@@ -119,9 +120,9 @@ public class StringUtil {
     public static String convert(final PushMessage message) {
     	String str = null;
 		try{
-			str = new String(message.getData(),5,message.getContentLength(), "UTF-8");
+			str = new String(message.getData(),Constant.PUSH_MSG_HEADER_LEN,message.getContentLength(), "UTF-8");
 		}catch(Exception e){
-			str = convert(message.getData(),5,message.getContentLength());
+			str = convert(message.getData(),Constant.PUSH_MSG_HEADER_LEN,message.getContentLength());
 		}
 		return str;
     }

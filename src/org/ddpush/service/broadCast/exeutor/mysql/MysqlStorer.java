@@ -8,7 +8,7 @@ import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.node.PushMessage;
 import org.ddpush.service.broadCast.BroadCast;
 import org.ddpush.service.broadCast.Storer;
-import org.ddpush.service.broadCast.exeutor.JsonExecutor;
+import org.ddpush.service.broadCast.exeutor.BaseExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ import com.ddpush.dao.DbHelper;
  * @author taojiaen
  *
  */
-public class MysqlStorer implements Runnable, JsonExecutor, Storer {
+public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 	private final static Logger log = LoggerFactory
 			.getLogger(MysqlStorer.class);
 	/**
