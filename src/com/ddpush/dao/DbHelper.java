@@ -2,7 +2,6 @@ package com.ddpush.dao;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;

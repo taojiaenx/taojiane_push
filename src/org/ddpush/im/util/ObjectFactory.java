@@ -2,7 +2,6 @@ package org.ddpush.im.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 
 public class ObjectFactory {
 	/**

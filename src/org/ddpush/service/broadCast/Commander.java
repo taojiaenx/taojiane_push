@@ -1,7 +1,5 @@
 package org.ddpush.service.broadCast;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.ddpush.im.util.MultiQueueExecutor;
 import org.ddpush.im.util.ObjectFactory;
 import org.ddpush.im.v1.node.PushMessage;
@@ -16,18 +14,16 @@ import org.slf4j.LoggerFactory;
  *
  */
 public  class Commander extends MultiQueueExecutor implements PushMessageListener {
-	private static Commander signleObject = null;
-	private static Logger log = LoggerFactory.getLogger(Commander.class);
+	static Commander signleObject = null;
+	static Logger log = LoggerFactory.getLogger(Commander.class);
 	/**
 	 * 查询当前范围内的广播
-	 * @return
 	 */
-	private static final int CMD_QUERY = 18;
-	private static final int CMD_STORE = 19;
+	public static final int CMD_QUERY = 18;
+	public static final int CMD_STORE = 19;
 	
 	/**
 	 * 存储器class
-	 * @return
 	 */
 	final Class<? extends Storer> sorterClass;
 

@@ -2,15 +2,11 @@ package org.ddpush.im.util;
 
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 /**
  * 把结构体转换成json格式
@@ -45,8 +41,7 @@ public class JsonCreator {
         return res;
     }
 
-    public static String toJsonWithGson(final Object obj, Type type) {
-        Gson gson = new Gson();
+    public static String toJsonWithGson(final Object obj, Type type, Gson gson) {
         String res;
         try {
             res = gson.toJson(obj, type);

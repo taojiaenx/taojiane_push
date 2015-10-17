@@ -1,10 +1,8 @@
 package org.ddpush.service.broadCast.exeutor;
 
-import org.ddpush.im.util.SeverMessageCreator;
-
 import io.netty.util.concurrent.FastThreadLocal;
 
-
+import org.ddpush.service.broadCast.BroadCastMessageCreator;
 
 import com.google.gson.Gson;
 
@@ -20,5 +18,5 @@ public interface  BaseExecutor{
             return new Gson();
         }
 	};
-	static SeverMessageCreator SERVER_MESSAGE_CREATOR = new SeverMessageCreator();
+	static BroadCastMessageCreator SERVER_MESSAGE_CREATOR = new BroadCastMessageCreator();
 }

@@ -26,6 +26,7 @@ public class BroadCast {
 	 * 服务器下发时，ID是服务端，该广播的id
 	 */
 	private String broadCastID;
+	private String authorUUID;
 	/**
 	 * 客户端上传数据中不用包括
 	 */
@@ -59,6 +60,12 @@ public class BroadCast {
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	public String getAuthorUUID() {
+		return authorUUID;
+	}
+	public void setAuthorUUID(String authorUUID) {
+		this.authorUUID = authorUUID;
 	}
 	
 	
