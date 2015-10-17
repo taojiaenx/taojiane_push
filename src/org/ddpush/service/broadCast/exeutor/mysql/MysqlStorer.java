@@ -39,10 +39,6 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
             return new CommandResponse();
         }
 	};
-	/**
-	 * 为了简化计算，经纬度需要相乘的因子
-	 */
-	private final static BigDecimal POSTION_MASK = new BigDecimal(8192.0);
 	private final static String __INSERT_SQL = "insert into broadcast_storer(`broadcast_id`,`author_uuid`,`broadcast_body`,`lat`,`lon`,`lat_floor`,`lon_floor`,`ipv4`) values(?,?,?,?,?,?,?,?)";
 
 	private PushMessage message;
@@ -102,8 +98,8 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 						broadcast.getBody(),
 						broadcast.getLat().doubleValue(),
 						broadcast.getLon().doubleValue(),
-						broadcast.getLat().multiply(POSTION_MASK).intValue(),
-						broadcast.getLon().multiply(POSTION_MASK).intValue(), 
+						broadcast.getLat().multiply(LAT_MASK).intValue(),
+						broadcast.getLon().multiply(LON_MASK).intValue(), 
 						ipv4 } });
 	}
 	

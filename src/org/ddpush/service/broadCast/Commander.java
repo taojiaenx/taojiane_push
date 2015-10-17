@@ -1,9 +1,12 @@
 package org.ddpush.service.broadCast;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.ddpush.im.util.MultiQueueExecutor;
 import org.ddpush.im.util.ObjectFactory;
 import org.ddpush.im.v1.node.PushMessage;
 import org.ddpush.im.v1.node.listener.PushMessageListener;
+import org.ddpush.service.broadCast.exeutor.mysql.MysqlQueryer;
 import org.ddpush.service.broadCast.exeutor.mysql.MysqlStorer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +29,7 @@ public  class Commander extends MultiQueueExecutor implements PushMessageListene
 	 * 存储器class
 	 */
 	final Class<? extends Storer> sorterClass;
+	final Class<? extends Queryer> queryerClass;
 
 
 	public static Commander getInstance() {
@@ -40,6 +44,7 @@ public  class Commander extends MultiQueueExecutor implements PushMessageListene
 	}
 	private Commander() {
 		this.sorterClass = MysqlStorer.class;
+		this.queryerClass = MysqlQueryer.class;
 	}
 	@Override
 	public void received(PushMessage message) {
@@ -61,8 +66,19 @@ public  class Commander extends MultiQueueExecutor implements PushMessageListene
 	/**
 	 * 广播查询
 	 * @param message
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws NumberFormatException 
 	 */
-	private void queryBroadCast(PushMessage message){};
+	private void queryBroadCast(PushMessage message) throws Exception{
+		final String sign = message.getUuidHexString().substring(message.getUuidHexString().length() - 4).toUpperCase();
+		execute((int)(Long.parseLong(sign, 16)), 
+				(Runnable) ObjectFactory.instantiate(queryerClass, message));
+	};
 	/**
 	 * 广播存储
 	 * @param message

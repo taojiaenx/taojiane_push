@@ -8,19 +8,33 @@ import java.math.BigDecimal;
  *
  */
 public class QueryCommand {
-	private BigDecimal lat;
-	private BigDecimal lon;
-	public BigDecimal getLat() {
+	private double lat;
+	private double lon;
+	private int pageIndx;
+	private int distance;
+	public double getLat() {
 		return lat;
 	}
-	public void setLat(BigDecimal lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
-	public BigDecimal getLon() {
+	public double getLon() {
 		return lon;
 	}
-	public void setLon(BigDecimal lon) {
+	public void setLon(double lon) {
 		this.lon = lon;
+	}
+	public int getPageIndx() {
+		return pageIndx;
+	}
+	public void setPageIndx(int page) {
+		this.pageIndx = page;
+	}
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int distance) {
+		this.distance = distance;
 	}
 	
 }
