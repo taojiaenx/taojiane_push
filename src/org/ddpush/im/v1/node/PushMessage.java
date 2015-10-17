@@ -79,11 +79,11 @@ public final class PushMessage{
 		
 
 		int cmd = getCmd();
-		if(cmd != ClientStatMachine.CMD_0x10
+	/*	if(cmd != ClientStatMachine.CMD_0x10
 				&& cmd != ClientStatMachine.CMD_0x11
 				&& cmd != ClientStatMachine.CMD_0x20){
 			return false;
-		}
+		}*/
 		int dataLen = getContentLength();
 		if(data.length != dataLen + Constant.CLIENT_MESSAGE_MIN_LENGTH){
 			return false;

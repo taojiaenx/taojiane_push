@@ -159,10 +159,9 @@ public class ClientStatMachine {
 			csm.last0x20Time = System.currentTimeMillis();
 			csm.message0x20 = new byte[csm.message0x20Len];
 			System.arraycopy(pm.getData(), Constant.PUSH_MSG_HEADER_LEN, csm.message0x20, 0, csm.message0x20Len);
-		}else{
-			return null;
 		}
 		csm.lastTick = System.currentTimeMillis();
+		IMServer.getInstance().firePushMessageReceived(pm);
 		
 		return csm;
 	}

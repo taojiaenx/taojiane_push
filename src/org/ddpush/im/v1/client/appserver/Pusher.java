@@ -165,7 +165,7 @@ public class Pusher {
 		ByteBuffer.wrap(dataLen).putChar((char)data.length);
 		out.write(version);
 		out.write(appId);
-		out.write(32);
+		out.write(19);
 		out.write(uuid);
 		out.write(dataLen);
 		

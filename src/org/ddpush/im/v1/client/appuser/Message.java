@@ -55,12 +55,12 @@ public final class Message {
 			return false;
 		}
 		int cmd = getCmd();
-		if(cmd != CMD_0x00
+		/*if(cmd != CMD_0x00
 				&& cmd != CMD_0x10
 				&& cmd != CMD_0x11
 				&& cmd != CMD_0x20){
 			return false;
-		}
+		}*/
 		int dataLen = getContentLength();
 		if(data.length != dataLen + SERVER_MESSAGE_MIN_LENGTH){
 			return false;

@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ddpush.dao.DbHelper;
+import com.sun.media.sound.InvalidDataException;
 
 /**
  * mysql广播存储器
@@ -59,6 +60,9 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 				broadCast = (BroadCast) JsonConvertor.toObject(
 						LOCAL_GSON.get(),
 						StringUtil.convert(message), BroadCast.class);
+				if (broadCast == null) {
+					throw new InvalidDataException();
+				}
 				storeMessage(broadCast,
 						message.getIpv4());
 			} catch (Exception e) {
@@ -79,7 +83,7 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 		CommandResponse reponse = COMMAND_RESPONSE.get();
 		reponse.setRes(res);
 		reponse.setPacketID(broadCastID);
-		
+
 		
 		ClientStatMachine csm = NodeStatus.getInstance().getInstance().getClientStat(fromUUIDHex);
 		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(csm.getLastAddr(), 
@@ -95,6 +99,7 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 				new Object[][] { {
 						UUID.randomUUID().toString(),
 						broadcast.getAuthorUUID(),
+						broadcast.getBody(),
 						broadcast.getLat().doubleValue(),
 						broadcast.getLon().doubleValue(),
 						broadcast.getLat().multiply(POSTION_MASK).intValue(),

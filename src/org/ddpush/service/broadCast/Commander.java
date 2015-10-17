@@ -69,7 +69,8 @@ public  class Commander extends MultiQueueExecutor implements PushMessageListene
 	 * @throws Exception
 	 */
 	private void storeBrodadCast(PushMessage message) throws Exception{
-		execute((int)(Long.parseLong(message.getUuidHexString(), 16)), 
+		final String sign = message.getUuidHexString().substring(message.getUuidHexString().length() - 4).toUpperCase();
+		execute((int)(Long.parseLong(sign, 16)), 
 				(Runnable) ObjectFactory.instantiate(sorterClass, message));
 
 	};

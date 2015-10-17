@@ -19,13 +19,21 @@ limitations under the License.
 */
 package org.ddpush.im.v1.client.appuser.example;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.ddpush.im.util.JsonCreator;
 import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.client.appuser.Message;
 import org.ddpush.im.v1.client.appuser.UDPClientBase;
+import org.ddpush.service.broadCast.BroadCast;
+
+import com.google.gson.Gson;
 
 
 public class MyUdpClient extends UDPClientBase {
@@ -68,23 +76,33 @@ public class MyUdpClient extends UDPClientBase {
 	
 	public static void main(String[] args){
 		try{
-			final String ip = "121.42.153.240";
+			final String ip = "127.0.0.1";
 			final int port = 9966;
 			final int pushPort = 9999;
 			byte[] uuid = StringUtil.md5Byte("0");
 			MyUdpClient myUdpClient = new MyUdpClient(uuid,3,ip,port);
 			myUdpClient.setHeartbeatInterval(50);
 			myUdpClient.start();
-			System.out.println("start");
-			TimeUnit.SECONDS.sleep(30);
+		//	TimeUnit.SECONDS.sleep(30);
 			
 			final byte[] clientUUID = StringUtil.md5Byte("0");
+			Random random = new Random();
 			ExecutorService pool = Executors.newFixedThreadPool(256);
-			for(int j = 0; j < 600; ++j) {
-             for(int i = 0; i < 5000; ++i) {
-            	 pool.execute(new send0x20Task(ip,pushPort,clientUUID, ("生中出生中出生中出yeah生中出生中出生中出yeah 生中出生中出生中出yeah 生中出生中出生中出yeah  " + 1).getBytes("utf-8")));
-             }
-			}
+			final BroadCast broadCast = new BroadCast();
+		//	for(int j = 0; j < 600; ++j) {
+          //   for(int i = 0; i < 5000; ++i) {
+     			broadCast.setLat(new BigDecimal(random.nextDouble() * 180 - 90));
+    			broadCast.setLon(new BigDecimal(random.nextDouble() * 360 - 180));
+    			broadCast.setCreateDate(new Date(System.currentTimeMillis()));
+    			broadCast.setBroadCastID(UUID.randomUUID().toString());
+    			broadCast.setBody("尼玛炸了" + 1);
+    			broadCast.setAuthorUUID(StringUtil.convert(myUdpClient.uuid, 0, 13));
+					pool.execute(new send0x20Task(ip, pushPort, clientUUID,
+							JsonCreator.toJsonWithGson(broadCast,
+									BroadCast.class, new Gson()).getBytes(
+									"utf-8")));
+        //     }
+		//	}
 
 			synchronized(myUdpClient){
 				myUdpClient.wait();

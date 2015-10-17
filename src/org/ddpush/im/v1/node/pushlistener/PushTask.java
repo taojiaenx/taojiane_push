@@ -21,6 +21,8 @@ package org.ddpush.im.v1.node.pushlistener;
 
 import io.netty.channel.Channel;
 
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -58,10 +60,17 @@ class ProcessDataCallable implements Callable<Integer> {
 			.getLogger(ProcessDataCallable.class);
 	private PushMessage pm;
 	private Channel channel;
+	private long ipInt  = -1;
 
 	public ProcessDataCallable(final Channel channel, final PushMessage data) {
 		this.channel = channel;
 		this.pm = data;
+		if (channel.remoteAddress() instanceof InetSocketAddress)  {
+			try {
+				this.ipInt = StringUtil.ip2int(((InetSocketAddress) channel.remoteAddress()).getHostName());
+			} catch (UnknownHostException ignore) {
+			}
+		}
 	}
 
 	@Override
@@ -71,10 +80,10 @@ class ProcessDataCallable implements Callable<Integer> {
 		try {
 			processReq();
 		} catch (Exception e) {
-			logger.error("处理消息返回1{}", e.getMessage());
+			logger.error("处理消息返回1{}", e);
 			res = 1;
 		} catch (Throwable e) {
-			logger.error("处理消息返回-1{}", e.getMessage());
+			logger.error("处理消息返回-1{}", e);
 			res = -1;
 		}
 		if (channel != null && channel.isActive()) {
@@ -96,7 +105,11 @@ class ProcessDataCallable implements Callable<Integer> {
 		String uuid = serverMessage.getUuidHexString();
 		ClientStatMachine csm = nodeStat.getClientStat(uuid);
 		// 加入ip地址
-		serverMessage.setIpv4(StringUtil.ip2int(channel.remoteAddress().toString()));
+		if (ipInt >= 0) {
+			InetSocketAddress adress = (InetSocketAddress) channel.remoteAddress();
+			serverMessage.setIpv4(StringUtil.ip2int(adress.getHostName()));
+		}
+
 		try {
 			if (csm == null) {//
 				csm = ClientStatMachine.newByPushReq(serverMessage);
