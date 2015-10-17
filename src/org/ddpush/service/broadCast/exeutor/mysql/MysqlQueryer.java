@@ -1,7 +1,6 @@
 package org.ddpush.service.broadCast.exeutor.mysql;
 
 import java.net.SocketAddress;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.ddpush.im.util.JsonConvertor;
@@ -15,13 +14,10 @@ import org.ddpush.service.broadCast.BroadCast;
 import org.ddpush.service.broadCast.Commander;
 import org.ddpush.service.broadCast.QueryCommand;
 import org.ddpush.service.broadCast.Queryer;
-import org.ddpush.service.broadCast.dao.BroadCastListHandler;
 import org.ddpush.service.broadCast.exeutor.BaseExecutor;
 import org.ddpush.service.broadCast.exeutor.QueryWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.sun.media.sound.InvalidDataException;
 
 public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 	private final static Logger log = LoggerFactory
