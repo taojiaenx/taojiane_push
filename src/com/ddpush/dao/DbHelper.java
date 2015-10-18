@@ -1,13 +1,11 @@
 package com.ddpush.dao;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.sql.DataSource;
@@ -15,8 +13,6 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
-import org.apache.log4j.PropertyConfigurator;
-import org.ddpush.im.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

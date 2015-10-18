@@ -1,6 +1,5 @@
 package org.ddpush.service.broadCast;
 
-import java.math.BigDecimal;
 
 /**
  * 命令体

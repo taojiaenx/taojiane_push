@@ -1,11 +1,9 @@
 package org.ddpush.service.broadCast.dao;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
-import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.ddpush.service.broadCast.BroadCast;
 
 /**
