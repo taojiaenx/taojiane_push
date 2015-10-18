@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import io.netty.util.concurrent.FastThreadLocal;
 
 import org.ddpush.service.broadCast.BroadCastMessageCreator;
+import org.ddpush.service.broadCast.CommandResponse;
 
 import com.google.gson.Gson;
 
@@ -26,4 +27,10 @@ public interface  BaseExecutor{
         }
 	};
 	static BroadCastMessageCreator SERVER_MESSAGE_CREATOR = new BroadCastMessageCreator();
+	final  static FastThreadLocal<CommandResponse> COMMAND_RESPONSE = new  FastThreadLocal<CommandResponse>(){
+		@Override
+        protected CommandResponse initialValue() {
+            return new CommandResponse();
+        }
+	};
 }

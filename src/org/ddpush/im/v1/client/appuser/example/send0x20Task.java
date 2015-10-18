@@ -6,10 +6,10 @@ import java.util.concurrent.TimeUnit;
 import org.ddpush.im.v1.client.appserver.Pusher;
 
 public class send0x20Task implements Runnable{
-	private String serverIp;
-	private int port;
-	private byte[] uuid;
-	private byte[] msg;
+	protected String serverIp;
+	protected int port;
+	protected byte[] uuid;
+	protected byte[] msg;
 	
 	public send0x20Task(String serverIp, int port, byte[] uuid, byte[] msg){
 		this.serverIp = serverIp;

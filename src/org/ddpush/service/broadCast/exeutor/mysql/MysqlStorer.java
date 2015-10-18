@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ddpush.dao.DbHelper;
+import com.google.gson.Gson;
 import com.sun.media.sound.InvalidDataException;
 
 /**
@@ -33,12 +34,6 @@ import com.sun.media.sound.InvalidDataException;
 public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 	private final static Logger log = LoggerFactory
 			.getLogger(MysqlStorer.class);
-	private final  static FastThreadLocal<CommandResponse> COMMAND_RESPONSE = new  FastThreadLocal<CommandResponse>(){
-		@Override
-        protected CommandResponse initialValue() {
-            return new CommandResponse();
-        }
-	};
 	private final static String __INSERT_SQL = "insert into broadcast_storer(`broadcast_id`,`author_uuid`,`broadcast_body`,`lat`,`lon`,`lat_floor`,`lon_floor`,`ipv4`) values(?,?,?,?,?,?,?,?)";
 
 	private PushMessage message;

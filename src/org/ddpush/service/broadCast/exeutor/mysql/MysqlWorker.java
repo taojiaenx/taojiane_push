@@ -15,7 +15,7 @@ import com.sun.media.sound.InvalidDataException;
  *
  */
 public class MysqlWorker implements QueryWorker{
-	private static String _QUERY_SQL = "EXPLAIN PARTITIONS SELECT broadcast_id, author_uuid, broadcast_body, lat, lon, create_time from broadcast_storer where lat_floor >= ? AND lat_floor<=? AND  lon_floor >=? AND  lon_floor<=?   order by id desc limit ?, 10";
+	private static String _QUERY_SQL = "SELECT broadcast_id, author_uuid, broadcast_body, lat, lon, create_time from broadcast_storer where lat_floor >= ? AND lat_floor<=? AND  lon_floor >=? AND  lon_floor<=?   order by id desc limit ?, 10";
 	private final static BroadCastListHandler handler = new BroadCastListHandler();
 	private static int[] LON_RANGE_100 = new int[]{
 		9,

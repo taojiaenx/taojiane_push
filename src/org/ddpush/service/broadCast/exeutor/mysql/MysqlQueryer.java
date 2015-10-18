@@ -6,11 +6,13 @@ import java.util.List;
 import org.ddpush.im.util.JsonConvertor;
 import org.ddpush.im.util.JsonCreator;
 import org.ddpush.im.util.StringUtil;
+import org.ddpush.im.v1.node.ClientStatMachine;
 import org.ddpush.im.v1.node.IMServer;
 import org.ddpush.im.v1.node.NodeStatus;
 import org.ddpush.im.v1.node.PushMessage;
 import org.ddpush.im.v1.node.ServerMessage;
 import org.ddpush.service.broadCast.BroadCast;
+import org.ddpush.service.broadCast.CommandResponse;
 import org.ddpush.service.broadCast.Commander;
 import org.ddpush.service.broadCast.QueryCommand;
 import org.ddpush.service.broadCast.Queryer;
@@ -35,16 +37,20 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 	@Override
 	public void run() {
 		if (message != null) {
-			List<BroadCast> broadCasts = null;
+			List<Object> broadCasts = null;
 			try {
+				final QueryCommand command = (QueryCommand) JsonConvertor
+						.toObject(LOCAL_GSON.get(),
+								StringUtil.convert(message), QueryCommand.class);
 				final SocketAddress adress = NodeStatus.getInstance()
 						.getInstance()
 						.getClientStat(message.getUuidHexString())
 						.getLastAddr();
+				broadCasts = WORKER.executorQuery(command);
+				//发送回应包
+				sendResponse(message.getUuidHexString(), command.getPackageID(), 0, broadCasts.size());
 				
-				for (Object broadCast : WORKER.executorQuery((QueryCommand) JsonConvertor
-						.toObject(LOCAL_GSON.get(),
-								StringUtil.convert(message), QueryCommand.class))) {
+				for (Object broadCast : WORKER.executorQuery(command)) {
 					try {
 						sendBroadCast(adress, (BroadCast) broadCast);
 					} catch (Exception e) {
@@ -63,7 +69,20 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 		message = null;
 	}
 
+	private void sendResponse(final String fromUUIDHex, final String packageID, final int res, final int count) throws Exception {
+		CommandResponse reponse = COMMAND_RESPONSE.get();
+		reponse.setRes(res);
+		reponse.setPacketID(packageID);
+		reponse.setBraodCastCount(count);
 
+		
+		ClientStatMachine csm = NodeStatus.getInstance().getInstance().getClientStat(fromUUIDHex);
+		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(csm.getLastAddr(), 
+				JsonCreator.toJsonWithGson(reponse, CommandResponse.class, LOCAL_GSON.get()), Commander.CMD_STORE);
+		IMServer.getInstance().pushInstanceMessage(message);
+		
+		
+	}
 	private void sendBroadCast(final SocketAddress adress,
 			final BroadCast broadcast) throws Exception {
 		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(adress,

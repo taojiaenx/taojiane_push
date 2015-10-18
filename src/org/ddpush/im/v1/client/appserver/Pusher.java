@@ -181,6 +181,34 @@ public class Pusher {
 		}
 		
 	}
+	public boolean pushQueryMessage(byte[] uuid, byte[] data) throws Exception{
+		this.checkUuidArray(uuid);
+		if(data == null){
+			throw new NullPointerException("data array is null");
+		}
+		if(data.length == 0 || data.length > 500){
+			throw new IllegalArgumentException("data array length illegal, min 1, max 500");
+		}
+		byte[] dataLen = new byte[2];
+		ByteBuffer.wrap(dataLen).putChar((char)data.length);
+		out.write(version);
+		out.write(appId);
+		out.write(18);
+		out.write(uuid);
+		out.write(dataLen);
+		
+		out.write(data);
+		out.flush();
+		
+		byte[] b = new byte[1];
+		in.read(b);
+		if((int)b[0] == 0){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
 	
 	public static void main(String[] args){
 		Pusher pusher = null;

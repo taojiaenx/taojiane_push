@@ -8,6 +8,10 @@ import java.math.BigDecimal;
  *
  */
 public class QueryCommand {
+	/**
+	 * 包ID
+	 */
+	private String packageID;
 	private double lat;
 	private double lon;
 	private int pageIndx;
@@ -35,6 +39,12 @@ public class QueryCommand {
 	}
 	public void setDistance(int distance) {
 		this.distance = distance;
+	}
+	public String getPackageID() {
+		return packageID;
+	}
+	public void setPackageID(String packageID) {
+		this.packageID = packageID;
 	}
 	
 }

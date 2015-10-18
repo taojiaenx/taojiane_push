@@ -32,6 +32,7 @@ import org.ddpush.im.util.StringUtil;
 import org.ddpush.im.v1.client.appuser.Message;
 import org.ddpush.im.v1.client.appuser.UDPClientBase;
 import org.ddpush.service.broadCast.BroadCast;
+import org.ddpush.service.broadCast.QueryCommand;
 
 import com.google.gson.Gson;
 
@@ -90,18 +91,28 @@ public class MyUdpClient extends UDPClientBase {
 			ExecutorService pool = Executors.newFixedThreadPool(256);
 			final BroadCast broadCast = new BroadCast();
 		//	for(int j = 0; j < 600; ++j) {
-          //   for(int i = 0; i < 5000; ++i) {
-     			broadCast.setLat(new BigDecimal(random.nextDouble() * 180 - 90));
+         //    for(int i = 0; i < 500; ++i) {
+     			/*broadCast.setLat(new BigDecimal(random.nextDouble() * 180 - 90));
     			broadCast.setLon(new BigDecimal(random.nextDouble() * 360 - 180));
     			broadCast.setCreateDate(new Date(System.currentTimeMillis()));
     			broadCast.setBroadCastID(UUID.randomUUID().toString());
-    			broadCast.setBody("尼玛炸了" + 1);
+    			broadCast.setBody("尼玛炸了" + i);
     			broadCast.setAuthorUUID(StringUtil.convert(myUdpClient.uuid, 0, 13));
 					pool.execute(new send0x20Task(ip, pushPort, clientUUID,
 							JsonCreator.toJsonWithGson(broadCast,
 									BroadCast.class, new Gson()).getBytes(
+									"utf-8")));*/
+					QueryCommand command = new QueryCommand();
+					command.setPackageID(UUID.randomUUID().toString());
+					command.setLat(52.908);
+					command.setLon(156.356);
+					command.setDistance(100);
+					command.setPageIndx(0);
+					pool.execute(new QueryTask(ip, pushPort, clientUUID,
+							JsonCreator.toJsonWithGson(command,
+									QueryCommand.class, new Gson()).getBytes(
 									"utf-8")));
-        //     }
+           //  }
 		//	}
 
 			synchronized(myUdpClient){
