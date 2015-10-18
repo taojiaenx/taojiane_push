@@ -1,6 +1,8 @@
 package org.ddpush.im.util;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -46,7 +48,7 @@ public class MultiQueueExecutor {
 	 */
 	private void initPoolArray() {
 		for (int i = 0; i < queueArray.length; ++i) {
-			queueArray[i] = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS,
+			queueArray[i] = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,
 					new LinkedBlockingQueue<Runnable>(MAX_QUEUE_LENGTH),
 					new ThreadFactoryWithName(getClass().getName() + "{" + i
 							+ "}"), new DefaultExcectorQueuePolicy());

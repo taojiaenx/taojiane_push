@@ -92,16 +92,16 @@ public class MyUdpClient extends UDPClientBase {
 			final BroadCast broadCast = new BroadCast();
 		//	for(int j = 0; j < 600; ++j) {
          //    for(int i = 0; i < 500; ++i) {
-     			/*broadCast.setLat(new BigDecimal(random.nextDouble() * 180 - 90));
+     			broadCast.setLat(new BigDecimal(random.nextDouble() * 180 - 90));
     			broadCast.setLon(new BigDecimal(random.nextDouble() * 360 - 180));
     			broadCast.setCreateDate(new Date(System.currentTimeMillis()));
     			broadCast.setBroadCastID(UUID.randomUUID().toString());
-    			broadCast.setBody("尼玛炸了" + i);
+    			broadCast.setBody("尼玛炸了" + 10086);
     			broadCast.setAuthorUUID(StringUtil.convert(myUdpClient.uuid, 0, 13));
 					pool.execute(new send0x20Task(ip, pushPort, clientUUID,
 							JsonCreator.toJsonWithGson(broadCast,
 									BroadCast.class, new Gson()).getBytes(
-									"utf-8")));*/
+									"utf-8")));
 					QueryCommand command = new QueryCommand();
 					command.setPackageID(UUID.randomUUID().toString());
 					command.setLat(30.7891030391);

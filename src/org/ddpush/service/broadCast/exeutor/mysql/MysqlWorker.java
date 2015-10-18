@@ -209,7 +209,7 @@ public class MysqlWorker implements QueryWorker{
 
 	@Override
 	public List<Object> executorQuery(QueryCommand query)
-			throws InvalidDataException {
+			throws Exception {
 		if (query.getDistance() != 100 &&
 				query.getDistance() != 200 && query.getDistance() != 300) {
 			throw new InvalidDataException("这个距离不支持" + query.getDistance());

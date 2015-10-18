@@ -1,14 +1,11 @@
 package org.ddpush.service.broadCast.exeutor;
 
-import io.netty.util.concurrent.FastThreadLocal;
+
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.ddpush.service.broadCast.CommandResponse;
 import org.ddpush.service.broadCast.QueryCommand;
-
-import com.sun.media.sound.InvalidDataException;
 
 public interface QueryWorker {
 	/**
@@ -16,5 +13,5 @@ public interface QueryWorker {
 	 */
 	final static BigDecimal LON_MASK  = BaseExecutor.LON_MASK;
 	final static BigDecimal LAT_MASK = BaseExecutor.LAT_MASK;
-	public List<Object> executorQuery(final QueryCommand query)throws InvalidDataException;
+	public List<Object> executorQuery(final QueryCommand query)throws Exception;
 }

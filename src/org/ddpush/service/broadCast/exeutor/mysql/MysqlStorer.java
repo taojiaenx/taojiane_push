@@ -3,6 +3,7 @@ package org.ddpush.service.broadCast.exeutor.mysql;
 import io.netty.util.concurrent.FastThreadLocal;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.UUID;
 
 import org.ddpush.im.util.JsonConvertor;
@@ -84,7 +85,7 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 		
 	}
 
-	private void storeMessage(final BroadCast broadcast, long ipv4) {
+	private void storeMessage(final BroadCast broadcast, long ipv4) throws SQLException {
 		DbHelper.batchExec(
 				__INSERT_SQL,
 				new Object[][] { {

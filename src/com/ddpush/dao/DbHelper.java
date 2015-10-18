@@ -151,17 +151,12 @@ public class DbHelper {
      * @param sql
      * @param params
      * @return
+     * @throws SQLException 
      */
-    public static int batchExec(String sql, Object[][] params) {
+    public static void batchExec(String sql, Object[][] params) throws SQLException {
         QueryRunner qr = null;
-        try {
             qr = DbHelper.getQueryRunner("data1");
             qr.batch(sql, params);
-        } catch (SQLException e) {
-            log.error("数据库修改\\插入语句执行错误", e);
-            return -1;
-        }
-        return 1;
     }
 
     /**
@@ -169,20 +164,15 @@ public class DbHelper {
      * @param sql
      * @param params
      * @return
+     * @throws SQLException 
      */
     @SuppressWarnings("deprecation")
-	public static List<Object> batchQeury(String sql, Object[] params, ResultSetHandler handler) {
+	public static List<Object> batchQeury(String sql, Object[] params, ResultSetHandler handler) throws SQLException {
         QueryRunner qr = null;
         List<Object> ret = null;
-        try {
-            qr = DbHelper.getQueryRunner("data1");
-            ret = qr.query(sql, params, handler);
-            return ret;
-        } catch (Exception e) {
-            log.error("数据库查询出错", e);
-            if(ret != null) ret.clear();
-            return null;
-        }
+         qr = DbHelper.getQueryRunner("data1");
+         ret = qr.query(sql, params, handler);
+        return ret;
     }
 	/**
 	 * 返回list加数组
@@ -205,7 +195,7 @@ public class DbHelper {
     }
     
 	public static void main(String[] args) throws Exception {
-		PropertyConfigurator.configure("Log4j.properties");
+	/*	PropertyConfigurator.configure("Log4j.properties");
 		DbHelper.init();
 		List<Object[]> ret = DbHelper.batchQeury(
 				"select * from broadcast_storer", new Object[0][0]);
@@ -223,6 +213,6 @@ public class DbHelper {
 										33,
 										StringUtil
 												.ip2int("255.255.255.255"),
-										 } }));
+										 } }));*/
 	}
 }

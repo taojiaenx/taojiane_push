@@ -1,6 +1,7 @@
 package org.ddpush.service.broadCast.exeutor.mysql;
 
 import java.net.SocketAddress;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.ddpush.im.util.JsonConvertor;
@@ -20,6 +21,8 @@ import org.ddpush.service.broadCast.exeutor.BaseExecutor;
 import org.ddpush.service.broadCast.exeutor.QueryWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.sun.media.sound.InvalidDataException;
 
 public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 	private final static Logger log = LoggerFactory
@@ -49,19 +52,17 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 						.getLastAddr();
 				try {
 					broadCasts = WORKER.executorQuery(command);
-					res = 0;
 				} catch (Exception e) {
 					res = -1;
-					throw e;
-				} finally {
-					// 发送回应包
-					final int count = broadCasts == null ? 0 : broadCasts
-							.size();
-					sendResponse(message.getUuidHexString(),
-							command.getPackageID(), res, count);
+					log.error("查询执行错误x", e);
 				}
+					// 发送回应包
+			   final int count = broadCasts == null ? 0 : broadCasts
+							.size();
+			    sendResponse(message.getUuidHexString(),
+							command.getPackageID(), res, count);
 
-				for (Object broadCast : WORKER.executorQuery(command)) {
+				for (Object broadCast : broadCasts) {
 					try {
 						sendBroadCast(adress, (BroadCast) broadCast);
 					} catch (Exception e) {
