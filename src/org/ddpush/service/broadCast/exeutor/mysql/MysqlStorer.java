@@ -79,7 +79,7 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 		
 		ClientStatMachine csm = NodeStatus.getInstance().getInstance().getClientStat(fromUUIDHex);
 		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(csm.getLastAddr(), 
-				JsonCreator.toJsonWithGson(reponse, CommandResponse.class, LOCAL_GSON.get()), Commander.CMD_STORE);
+				JsonCreator.toJsonWithGson(reponse, CommandResponse.class, LOCAL_GSON.get()).getBytes("utf-8"), Commander.CMD_STORE);
 		IMServer.getInstance().pushInstanceMessage(message);
 		
 		

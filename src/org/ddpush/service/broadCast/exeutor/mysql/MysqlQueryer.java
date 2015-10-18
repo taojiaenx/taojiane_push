@@ -92,7 +92,7 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 				.getClientStat(fromUUIDHex);
 		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(csm
 				.getLastAddr(), JsonCreator.toJsonWithGson(reponse,
-				CommandResponse.class, LOCAL_GSON.get()), Commander.CMD_STORE);
+				CommandResponse.class, LOCAL_GSON.get()).getBytes("utf-8"), Commander.CMD_STORE);
 		IMServer.getInstance().pushInstanceMessage(message);
 
 	}
@@ -101,7 +101,7 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 			final BroadCast broadcast) throws Exception {
 		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(adress,
 				JsonCreator.toJsonWithGson(broadcast, BroadCast.class,
-						LOCAL_GSON.get()), Commander.CMD_QUERY);
+						LOCAL_GSON.get()).getBytes("utf-8"), Commander.CMD_QUERY);
 		IMServer.getInstance().pushInstanceMessage(message);
 
 	}
