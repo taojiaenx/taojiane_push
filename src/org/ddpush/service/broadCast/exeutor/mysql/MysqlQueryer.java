@@ -83,7 +83,7 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 		CommandResponse reponse = COMMAND_RESPONSE.get();
 		reponse.setRes(res);
 		reponse.setPacketID(packageID);
-		reponse.setBraodCastCount(count);
+		reponse.setBroadCastCount(count);
 
 		ClientStatMachine csm = NodeStatus.getInstance().getInstance()
 				.getClientStat(fromUUIDHex);

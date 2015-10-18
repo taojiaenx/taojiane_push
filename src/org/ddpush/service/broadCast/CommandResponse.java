@@ -15,7 +15,7 @@ public class CommandResponse {
 	 * 执行情况
 	 */
 	private int res;
-	private int braodCastCount;
+	private int broadCastCount;
 	public String getPacketID() {
 		return packetID;
 	}
@@ -28,11 +28,11 @@ public class CommandResponse {
 	public void setRes(int res) {
 		this.res = res;
 	}
-	public int getBraodCastCount() {
-		return braodCastCount;
+	public int getBroadCastCount() {
+		return broadCastCount;
 	}
-	public void setBraodCastCount(int braodCastCount) {
-		this.braodCastCount = braodCastCount;
+	public void setBroadCastCount(int braodCastCount) {
+		this.broadCastCount = braodCastCount;
 	}
 
 }
