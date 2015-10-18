@@ -38,6 +38,7 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 	public void run() {
 		if (message != null) {
 			List<Object> broadCasts = null;
+			int res = 0;
 			try {
 				final QueryCommand command = (QueryCommand) JsonConvertor
 						.toObject(LOCAL_GSON.get(),
@@ -46,10 +47,20 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 						.getInstance()
 						.getClientStat(message.getUuidHexString())
 						.getLastAddr();
-				broadCasts = WORKER.executorQuery(command);
-				//发送回应包
-				sendResponse(message.getUuidHexString(), command.getPackageID(), 0, broadCasts.size());
-				
+				try {
+					broadCasts = WORKER.executorQuery(command);
+					res = 0;
+				} catch (Exception e) {
+					res = -1;
+					throw e;
+				} finally {
+					// 发送回应包
+					final int count = broadCasts == null ? 0 : broadCasts
+							.size();
+					sendResponse(message.getUuidHexString(),
+							command.getPackageID(), res, count);
+				}
+
 				for (Object broadCast : WORKER.executorQuery(command)) {
 					try {
 						sendBroadCast(adress, (BroadCast) broadCast);
@@ -69,20 +80,22 @@ public class MysqlQueryer implements Runnable, BaseExecutor, Queryer {
 		message = null;
 	}
 
-	private void sendResponse(final String fromUUIDHex, final String packageID, final int res, final int count) throws Exception {
+	private void sendResponse(final String fromUUIDHex, final String packageID,
+			final int res, final int count) throws Exception {
 		CommandResponse reponse = COMMAND_RESPONSE.get();
 		reponse.setRes(res);
 		reponse.setPacketID(packageID);
 		reponse.setBraodCastCount(count);
 
-		
-		ClientStatMachine csm = NodeStatus.getInstance().getInstance().getClientStat(fromUUIDHex);
-		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(csm.getLastAddr(), 
-				JsonCreator.toJsonWithGson(reponse, CommandResponse.class, LOCAL_GSON.get()), Commander.CMD_STORE);
+		ClientStatMachine csm = NodeStatus.getInstance().getInstance()
+				.getClientStat(fromUUIDHex);
+		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(csm
+				.getLastAddr(), JsonCreator.toJsonWithGson(reponse,
+				CommandResponse.class, LOCAL_GSON.get()), Commander.CMD_STORE);
 		IMServer.getInstance().pushInstanceMessage(message);
-		
-		
+
 	}
+
 	private void sendBroadCast(final SocketAddress adress,
 			final BroadCast broadcast) throws Exception {
 		ServerMessage message = SERVER_MESSAGE_CREATOR.newServerMessage(adress,

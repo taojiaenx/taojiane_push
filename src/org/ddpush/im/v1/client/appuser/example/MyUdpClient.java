@@ -104,8 +104,8 @@ public class MyUdpClient extends UDPClientBase {
 									"utf-8")));*/
 					QueryCommand command = new QueryCommand();
 					command.setPackageID(UUID.randomUUID().toString());
-					command.setLat(52.908);
-					command.setLon(156.356);
+					command.setLat(30.7891030391);
+					command.setLon(97.8438999442);
 					command.setDistance(100);
 					command.setPageIndx(0);
 					pool.execute(new QueryTask(ip, pushPort, clientUUID,
