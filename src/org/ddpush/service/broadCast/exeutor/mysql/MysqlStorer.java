@@ -1,8 +1,13 @@
 package org.ddpush.service.broadCast.exeutor.mysql;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.ddpush.im.util.JsonConvertor;
 import org.ddpush.im.util.JsonCreator;
 import org.ddpush.im.util.StringUtil;
@@ -94,6 +99,36 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 						broadcast.getLon().multiply(LON_MASK).intValue(), 
 						ipv4 } });
 	}
-	
+	public static void main(String[] args) {
+		PropertyConfigurator.configure("Log4j.properties");
+		try {
+			DbHelper.init();
+		} catch (Exception e1) {
+		}
+		//3689901706
+		final MysqlStorer storer = new MysqlStorer(null);
+		final BroadCast broadcast = new BroadCast();
+		ExecutorService pool = Executors.newFixedThreadPool(32);
+		broadcast.setAuthorUUID("cfcd208495d565ef66e7dff9f9");
+		Random random = new Random();
+		for(int i = 0; i < 1000000; ++i) {
+			broadcast.setBody("啦啦啦啦啦啦"+ i);
+			broadcast.setLat(new BigDecimal(31 + random.nextDouble()));
+			broadcast.setLon(new BigDecimal(121 + random.nextDouble()));
+				pool.execute(new Runnable(){
+
+					@Override
+					public void run() {
+						try {
+							storer.storeMessage(broadcast, 3689901706L);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+				});
+		}
+	}
 
 }

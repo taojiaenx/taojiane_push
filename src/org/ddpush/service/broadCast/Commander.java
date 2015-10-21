@@ -43,6 +43,7 @@ public  class Commander extends MultiQueueExecutor implements PushMessageListene
 		return signleObject;
 	}
 	private Commander() {
+		super(128);
 		this.sorterClass = MysqlStorer.class;
 		this.queryerClass = MysqlQueryer.class;
 	}

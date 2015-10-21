@@ -56,7 +56,8 @@ public class UdpConnector {
 
 		b = new Bootstrap();
 		b.group(group)
-				.channel(NioDatagramChannel.class)
+				.channel(NioDatagramChannel.class).
+				option(ChannelOption.TCP_NODELAY, true)
 				.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
 				.handler(new ChannelInitializer<NioDatagramChannel>() {
 
