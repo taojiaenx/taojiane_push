@@ -78,12 +78,12 @@ public class MyUdpClient extends UDPClientBase {
 
 	public static void main(String[] args) {
 		try {
-			final String ip = "127.0.0.1";
+			final String ip = "121.42.153.240";
 			final int port = 9966;
 			final int pushPort = 9999;
 			byte[] uuid = StringUtil.md5Byte("0");
-			MyUdpClient[] myUdpClients = new MyUdpClient[20];
-			for (int i = 0; i < 20; ++i) {
+			MyUdpClient[] myUdpClients = new MyUdpClient[5];
+			for (int i = 0; i < myUdpClients.length; ++i) {
 				myUdpClients[i] = new MyUdpClient(StringUtil.md5Byte(String.valueOf(i)), 3, ip, port);	
 				myUdpClients[i].setHeartbeatInterval(50);
 				myUdpClients[i].start();
@@ -105,8 +105,8 @@ public class MyUdpClient extends UDPClientBase {
 						broadCast.setBroadCastID(UUID.randomUUID().toString());
 						broadCast.setBody("尼玛炸了" + i);
 						broadCast.setAuthorUUID(StringUtil.convert(
-								myUdpClients[i % 20].uuid, 0, 13));
-						pool.execute(new send0x20Task(ip, pushPort, myUdpClients[i % 20].uuid,
+								myUdpClients[i % 5].uuid, 0, 13));
+						pool.execute(new send0x20Task(ip, pushPort, myUdpClients[i % 5].uuid,
 								JsonCreator.toJsonWithGson(broadCast,
 										BroadCast.class, new Gson()).getBytes(
 										"utf-8")));
@@ -117,7 +117,7 @@ public class MyUdpClient extends UDPClientBase {
 						command.setLon(random.nextDouble() + 121);
 						command.setDistance(100);
 						command.setPageIndx(0);
-						pool.execute(new QueryTask(ip, pushPort, myUdpClients[i % 20].uuid,
+						pool.execute(new QueryTask(ip, pushPort, myUdpClients[i % 5].uuid,
 								JsonCreator.toJsonWithGson(command,
 										QueryCommand.class, new Gson())
 										.getBytes("utf-8")));
