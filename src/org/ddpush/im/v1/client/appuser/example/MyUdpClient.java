@@ -25,16 +25,18 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import org.ddpush.im.util.JsonCreator;
 import org.ddpush.im.util.StringUtil;
+import org.ddpush.im.util.json.DateTimeDeserializer;
+import org.ddpush.im.util.json.DateTimeSerializer;
 import org.ddpush.im.v1.client.appuser.Message;
 import org.ddpush.im.v1.client.appuser.UDPClientBase;
 import org.ddpush.service.broadCast.BroadCast;
 import org.ddpush.service.broadCast.QueryCommand;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class MyUdpClient extends UDPClientBase {
 
@@ -78,6 +80,7 @@ public class MyUdpClient extends UDPClientBase {
 
 	public static void main(String[] args) {
 		try {
+			System.out.println(System.getProperty("file.encoding"));
 			final String ip = "121.42.153.240";
 			final int port = 9966;
 			final int pushPort = 9999;
@@ -95,20 +98,20 @@ public class MyUdpClient extends UDPClientBase {
 			for (int j = 0; j < 600; ++j) {
 				for (int i = 0; i < 500; ++i) {
 					if ((random.nextInt() & 31) == 0) {
+					final Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTimeSerializer()).
+							registerTypeAdapter(Date.class, new DateTimeDeserializer()).create();
 						BroadCast broadCast = new BroadCast();
 						broadCast.setLat(new BigDecimal(
 								random.nextDouble() + 50));
 						broadCast.setLon(new BigDecimal(
 								random.nextDouble() + 121));
-						broadCast.setCreateDate(new Date(System
-								.currentTimeMillis()));
 						broadCast.setBroadCastID(UUID.randomUUID().toString());
 						broadCast.setBody("尼玛炸了" + i);
 						broadCast.setAuthorUUID(StringUtil.convert(
 								myUdpClients[i % 5].uuid, 0, 13));
 						pool.execute(new send0x20Task(ip, pushPort, myUdpClients[i % 5].uuid,
 								JsonCreator.toJsonWithGson(broadCast,
-										BroadCast.class, new Gson()).getBytes(
+										BroadCast.class, gson).getBytes(
 										"utf-8")));
 					} else {
 						QueryCommand command = new QueryCommand();

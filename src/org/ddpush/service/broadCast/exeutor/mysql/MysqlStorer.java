@@ -49,6 +49,7 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 		if (message != null) {
 			BroadCast broadCast = null;
 			int res = 0;
+			String responseID = "";
 			try {
 				broadCast = (BroadCast) JsonConvertor.toObject(
 						LOCAL_GSON.get(),
@@ -56,6 +57,8 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 				if (broadCast == null) {
 					throw new InvalidDataException();
 				}
+				
+				responseID = broadCast.getBroadCastID();
 				storeMessage(broadCast,
 						message.getIpv4());
 			} catch (Exception e) {
@@ -64,7 +67,7 @@ public class MysqlStorer implements Runnable, BaseExecutor, Storer {
 			}
 			
 			try {
-				sendResponse(message.getUuidHexString(), broadCast.getBroadCastID(), res);
+				sendResponse(message.getUuidHexString(), responseID, res);
 			} catch (Exception e) {
 				log.error("回应消息发送失败");
 			}

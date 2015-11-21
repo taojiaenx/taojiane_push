@@ -35,10 +35,15 @@ import org.ddpush.im.v1.node.udpconnector.UDPMessenger;
 import org.ddpush.im.v1.node.udpconnector.UdpConnector;
 import org.ddpush.service.Service;
 import org.ddpush.service.broadCast.BroadCastService;
+import org.ddpush.service.broadCast.exeutor.mysql.MysqlStorer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ddpush.dao.DbHelper;
 
 public class IMServer {
+	private final static Logger log = LoggerFactory
+			.getLogger(IMServer.class);
 	
 	public static IMServer server;
 
@@ -108,6 +113,7 @@ public class IMServer {
 	public void initSystem() throws Exception {
 		PropertyConfigurator.configure("Log4j.properties");
 		InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
+		log.info(System.getProperty("file.encoding"));
 		System.setProperty("io.netty.recycler.maxCapacity.default", PropertyUtil.getProperty("io.netty.recycler.maxCapacity.default"));
 		System.setProperty("io.netty.leakDetectionLevel", "paranoid");
 		DbHelper.init();
