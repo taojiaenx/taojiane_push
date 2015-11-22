@@ -28,11 +28,7 @@ public interface BaseExecutor {
 	static FastThreadLocal<Gson> LOCAL_GSON = new FastThreadLocal<Gson>() {
 		@Override
 		protected Gson initialValue() {
-			final Gson gson = new GsonBuilder()
-					.registerTypeAdapter(Date.class, new DateTimeSerializer())
-					.registerTypeAdapter(Date.class, new DateTimeDeserializer())
-					.setPrettyPrinting().create();
-			return gson;
+			return new Gson();
 		}
 	};
 	static BroadCastMessageCreator SERVER_MESSAGE_CREATOR = new BroadCastMessageCreator();
