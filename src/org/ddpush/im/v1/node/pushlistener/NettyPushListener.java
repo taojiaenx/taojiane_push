@@ -73,9 +73,10 @@ public class NettyPushListener implements Runnable {
 				.channel(NioServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
 				.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+				.option(ChannelOption.TCP_NODELAY, Boolean.valueOf(true))
 				.childOption(ChannelOption.ALLOCATOR,
 						PooledByteBufAllocator.DEFAULT)
-				.childOption(ChannelOption.TCP_NODELAY, true)
+				.childOption(ChannelOption.TCP_NODELAY, Boolean.valueOf(true))
 				.childHandler(pushListenerChannelInitializer);
 
 		serverBootstarp.bind(port).sync();
