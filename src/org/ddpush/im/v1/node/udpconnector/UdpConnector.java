@@ -9,7 +9,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.EpollDatagramChannel;
 import io.netty.channel.epoll.EpollEventLoopGroup;
-import io.netty.channel.socket.nio.NioDatagramChannel;
 
 import org.ddpush.im.util.PropertyUtil;
 import org.ddpush.im.util.ThreadFactoryWithName;
@@ -59,10 +58,10 @@ public class UdpConnector {
 		b.group(group)
 				.channel(EpollDatagramChannel.class)
 				.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-				.handler(new ChannelInitializer<NioDatagramChannel>() {
+				.handler(new ChannelInitializer<EpollDatagramChannel>() {
 
 					@Override
-					protected void initChannel(NioDatagramChannel ch)
+					protected void initChannel(EpollDatagramChannel ch)
 							throws Exception {
 						ch.pipeline().addLast(
 								receiver.getClass().getName() + " "
