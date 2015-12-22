@@ -24,9 +24,9 @@ import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 
 import java.nio.channels.ServerSocketChannel;
@@ -65,18 +65,18 @@ public class NettyPushListener implements Runnable {
 	}
 
 	public void initChannel() throws Exception {
-		bossGroup = new NioEventLoopGroup();
-		workerGroup = new NioEventLoopGroup(pushListenerWorkerNum,
+		bossGroup = new EpollEventLoopGroup();
+		workerGroup = new EpollEventLoopGroup(pushListenerWorkerNum,
 				new ThreadFactoryWithName(NettyPushListener.class));
 		serverBootstarp = new ServerBootstrap()
 				.group(bossGroup, workerGroup)
-				.channel(NioServerSocketChannel.class)
+				.channel(EpollServerSocketChannel.class)
 				.option(ChannelOption.SO_TIMEOUT, sockTimout)
 				.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-				.option(ChannelOption.TCP_NODELAY, Boolean.valueOf(true))
+				.option(ChannelOption.TCP_NODELAY, true)
 				.childOption(ChannelOption.ALLOCATOR,
 						PooledByteBufAllocator.DEFAULT)
-				.childOption(ChannelOption.TCP_NODELAY, Boolean.valueOf(true))
+				.childOption(ChannelOption.TCP_NODELAY, true)
 				.childHandler(pushListenerChannelInitializer);
 
 		serverBootstarp.bind(port).sync();
